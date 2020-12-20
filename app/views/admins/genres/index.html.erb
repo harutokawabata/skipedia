@@ -1,0 +1,64 @@
+<h2>ジャンル関連</h2>
+<div class="container">
+    <div class="row">
+        <ul>
+            <li>ジャンルを追加できます</li>
+            <li>デフォルトにあるジャンルは「マテリアル」「技術」「局面」「動作」です</li>
+            <li>追加や削除はできますが、ユーザーが混乱するので基本的にNGです</li>
+            <li>ジャンルの説明欄に関しては良い表現があれば随時更新していきます</li>
+        </ul>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>ジャンルID</th>
+        			<th>ジャンル名</th>
+        			<th>ジャンル内容説明</th>
+        			<th>編集・削除</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	    <% @genres.each do |genre| %>
+        		<tr>
+        			<th><%= genre.id %></th>
+        			<td><%= genre.name %></td>
+        			<td><%= genre.introduction %></td>
+        			<td>
+        			    <button class="btn btn-primary">編集</button>
+        			    <button class="btn btn-danger">削除</button>
+        			</td>
+        		</tr>
+        		<% end %>
+        	</tbody>
+        </table>
+    </div>
+</div>
+<div class="container form">
+  <div class="row box">
+    <%= form_with model:@genre,url:admins_genres_path, class:"form-horizontal", locak:true do |f| %>
+    <div class="form-group">
+      <label class="col-sm-5 control-label">ジャンル名</label>
+      <div class="col-sm-5">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-5 control-label">ジャンル内容</label>
+      <div class="col-sm-5">
+        <%= f.text_area :introduction, class:"form-control" %><br>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-5 control-label">公開</label>
+      <div class="col-sm-5">
+        <%= f.radio_button :is_active, :true %>
+        <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+        <%= f.radio_button :is_active, :false %>
+        <%= f.label :is_active, "無効", {value: :false, style: "display: inline-block;"} %><br><br>
+        <%= f.submit "変更を保存" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

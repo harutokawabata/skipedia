@@ -43,10 +43,17 @@
       				<!--<li class="active"><a href="#">メニューＢ</a></li>-->
       				<!--<li><a href="#">メニューＣ</a></li>-->
       			</ul>
-      			<p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link">ゲスト</a> さん。</p>
+      			<% if admin_signed_in? %>
+        			<p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link">ゲスト</a> さん。</p>
+      			<% end %>
       		</div>
       	</div>
       </nav>
+      <% if flash[:notice] %>
+      <div class="flash">
+         <%= flash[:notice] %>
+      </div>
+      <% end %>
   </header>
     <%= yield %>
   </body>
