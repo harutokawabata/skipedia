@@ -25,8 +25,8 @@
         			<td><%= genre.name %></td>
         			<td><%= genre.introduction %></td>
         			<td>
-        			    <button class="btn btn-primary">編集</button>
-        			    <button class="btn btn-danger">削除</button>
+        			    <%= link_to "編集", edit_admins_genre_path(genre.id), class:"btn btn-primary" %>
+        			    <%= link_to "削除", admins_genre_path(genre.id), method: :delete, class:"btn btn-danger" %>
         			</td>
         		</tr>
         		<% end %>
