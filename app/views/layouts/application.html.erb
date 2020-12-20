@@ -11,23 +11,42 @@
 
   <body>
     <header>
-    <nav>
-      <ul>
-        <% if user_signed_in? %>
-          <li>ユーザー</li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-        <% elsif admin_signed_in? %>
-          <li>管理者</li>
-          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
-        <% else %>
-          <li>ゲストユーザー</li>
-          <li><%= link_to "新規登録", new_user_registration_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-        <% end %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </ul>
-    </nav>
+      <nav class="navbar navbar-inverse">
+      	<div class="container-fluid">
+      		<div class="navbar-header">
+      			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample7">
+      				<span class="sr-only">Toggle navigation</span>
+      				<span class="icon-bar"></span>
+      				<span class="icon-bar"></span>
+      				<span class="icon-bar"></span>
+      			</button>
+      			<p class="navbar-brand">
+      				<%= link_to 'Skipedia', root_path %>
+      			</p>
+      		</div>
+      		
+      		<div class="collapse navbar-collapse" id="navbarEexample7">
+      			<ul class="nav navbar-nav">
+      			 <% if user_signed_in? %>
+              <li>ユーザー</li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+      			 <% elsif admin_signed_in? %>
+              <li>管理者</li>
+              <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+             <% else %>
+              <li>ゲストユーザー</li>
+              <li><%= link_to "新規登録", new_user_registration_path %></li>
+              <li><%= link_to "ログイン", new_user_session_path %></li>
+             <% end %>
+              <p class="notice"><%= notice %></p>
+              <p class="alert"><%= alert %></p>
+      				<!--<li class="active"><a href="#">メニューＢ</a></li>-->
+      				<!--<li><a href="#">メニューＣ</a></li>-->
+      			</ul>
+      			<p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link">ゲスト</a> さん。</p>
+      		</div>
+      	</div>
+      </nav>
   </header>
     <%= yield %>
   </body>
