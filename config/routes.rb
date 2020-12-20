@@ -11,7 +11,7 @@ devise_for :users, controllers: {
       registrations: 'users/registrations'
     }
 
-    get '/admin' => 'admin/homes#top'
+    get '/admins' => 'admins/homes#top'
     root 'public/homes#top'
       
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

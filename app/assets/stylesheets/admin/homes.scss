@@ -1,3 +1,67 @@
 // Place all the styles related to the admin::homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+////////////////////////////////////////////// ここから管理者（admin側)//////////////////////////////////////////////////////////////////////////////
+.container{
+    width: 1200px;
+}
+
+.row.admin-top {
+    width: 100%;
+    background-color: gray;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.col-xs-4.admin-top{
+    height: 330px;
+    width: 330px;
+    background-color: pink;
+    // margin-right: 10px;
+    text-align: center;
+}
+
+// ////////////////////////////////////////ここまで管理者（admin側）/////////////////////////////////////////////////////////////////////////////
+
+// //////////////////////////////ここからユーザー&public（利用者側）////////////////////////////////////////
+.container.user-top{
+    width: 1200px;
+    height: 350px;
+    text-align: center;
+    background-color: gray;
+    position: relative;
+    // solid: 1px pink;
+}
+
+// .container.user-top.a{
+//     display: flex;
+//     align-items: flex-end;
+// }
+
+.row.user-top-text{
+//   #高さを中央寄席する記載
+}
+
+.row.user-top-btn {
+    width: 100%;
+    // background-color: gray;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    background-color: green;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 30px;
+}
+
+.col-xs-4{
+    // height: 330px;
+    // width: 330px;
+    // background-color: orange;
+    // // margin-right: 10px;
+    // text-align: center;
+}
+
+/////////////////////////////////////////// ここまでユーザー&public（利用者側）///////////////////////////////////
