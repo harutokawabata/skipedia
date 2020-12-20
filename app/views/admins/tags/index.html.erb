@@ -1,0 +1,70 @@
+<h2>タグ関連</h2>
+<div class="container">
+    <div class="row">
+        <ul>
+            <li>タグを追加できます</li>
+            <li>ユーザーは親ジャンルを指定する必要があるので、ジャンル名のタグという読み方が成立するのがベストです</li>
+        </ul>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>タグID</th>
+        			<th>タグ名</th>
+        			<th>タグ容説明</th>
+        			<th>親ジャンル</th>
+        			<th>編集・削除</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	    <% @tags.each do |tag| %>
+        		<tr>
+        			<th><%= tag.id %></th>
+        			<td><%= tag.name %></td>
+        			<td><%= tag.introduction %></td>
+        			<td><%= tag.genre.name %></td>
+        			<td>
+        			    <%# link_to "編集", edit_admins_tag_path(genre.id), class:"btn btn-primary" %>
+        			    <%# link_to "削除", admins_tag_path(genre.id), method: :delete, class:"btn btn-danger" %>
+        			</td>
+        		</tr>
+        		<% end %>
+        	</tbody>
+        </table>
+    </div>
+</div>
+<div class="container form">
+  <div class="row box">
+    <%= form_with model:@tag, url:admins_tags_path, class:"form-horizontal", local:true do |f| %>
+    <div class="form-group">
+      <label class="col-sm-5 control-label">タグ名</label>
+      <div class="col-sm-5">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-5 control-label">タグ内容</label>
+      <div class="col-sm-5">
+        <%= f.text_area :introduction, class:"form-control" %><br>
+      </div>
+    </div>
+    <div class="form-group"  id="exampleFormControlSelect1">
+      <label class="col-sm-5 control-label">親ジャンル選択</label>
+        <div class="col-sm-5">
+                  
+            <select class="form-control" id="exampleFormControlSelect1">
+               <% @genres.each do |genre| %>  
+               <option>
+                  <%= genre.name %> 
+               </option>
+               <% end %>
+            </select>
+          <br>
+        <%= f.submit "投稿する" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
