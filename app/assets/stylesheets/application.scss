@@ -16,8 +16,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.flash {
+.flash-success {
     background-color: orange;
+    color: white;
+    text-align: center;
+}
+.flash-error {
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+.flash-edit {
+    background-color: blue;
     color: white;
     text-align: center;
 }

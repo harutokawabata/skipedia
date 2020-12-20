@@ -1,0 +1,38 @@
+<div class="container">
+  <h3>ジャンル関連</h3>
+    <div class="row">
+        <ul>
+            <li>ジャンルを編集できます</li>
+            <li>デフォルトにあるジャンルは「マテリアル」「技術」「局面」「動作」です</li>
+            <li>編集はできますが、大きく記載内容が変わる場合はユーザーが混乱するので基本的にお勧めしません</li>
+        </ul>
+    </div>
+</div>
+<div class="container form">
+  <div class="row box">
+    <%= form_with model:@genre,url:admins_genre_path, method: :patch, class:"form-horizontal", locak:true do |f| %>
+    <div class="form-group">
+      <label class="col-sm-5 control-label">ジャンル名</label>
+      <div class="col-sm-5">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-5 control-label">ジャンル内容</label>
+      <div class="col-sm-5">
+        <%= f.text_area :introduction, class:"form-control" %><br>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-5 control-label">公開</label>
+      <div class="col-sm-5">
+        <%= f.radio_button :is_active, :true %>
+        <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+        <%= f.radio_button :is_active, :false %>
+        <%= f.label :is_active, "無効", {value: :false, style: "display: inline-block;"} %><br><br>
+        <%= f.submit "変更を保存" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
