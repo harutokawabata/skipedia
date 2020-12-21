@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <h3>イベント一覧ページ</h3>
+        <ul>
+            <li>イベントをできます</li>
+            <li>開催中のイベント名はトップページに表示されます</li>
+            <li>イベントは多すぎると管理ができません。</li>
+        </ul>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>No.</th>
+        			<th>イベント名</th>
+        			<th>イベント詳細</th>
+        			<th>編集・削除</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	    <% @events.each do |event| %>
+        		<tr>
+        			<th><%= event.id %></th>
+        			<td><%= event.name %></td>
+        			<td><%= event.event_detail %></td>
+        			<td>
+        			    <%# link_to "編集", edit_admins_genre_path(genre.id), class:"btn btn-primary" %>
+        			    <%# link_to "削除", admins_genre_path(genre.id), method: :delete, class:"btn btn-danger" %>
+        			</td>
+        		</tr>
+        		<% end %>
+        	</tbody>
+        </table>
+    </div>
+    <div class="row" style="text-align:center;">
+        <%= link_to "イベント登録", new_admins_event_path, class:"btn btn-primary" %>
+    </div>
+</div>
