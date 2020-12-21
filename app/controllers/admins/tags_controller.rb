@@ -22,13 +22,28 @@ class Admins::TagsController < ApplicationController
     end
     
     def edit
-    
+        @tag = Tag.find(params[:id])
+        @genres = Genre.all
     end
     
     def update
+        @tag = Tag.find(params[:id])
+        if @tag.update(tag_params)
+            flash[:notice] = "編集に成功しました"
+            redirect_to admins_tags_path
+        else
+            flash[:notice] = "error"
+        end
     end
     
     def destroy
+        @tag = Tag.find(params[:id])
+        if @tag.destroy
+            flash[:notice] = "削除に成功しました"
+            redirect_to admins_tags_path
+        else
+            flash[:notice] = "error"
+        end
     end
     
     private
