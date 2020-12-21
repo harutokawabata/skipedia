@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 1
+  date: 1
+  start: 1
+  finish: 1
+  entry_fee: 1
+  organizer: MyString
+  event_detail: MyText
+  event_status: 1
+  capacity: 1
+  cancel: false
+  name: MyString
+
+two:
+  customer_id: 1
+  date: 1
+  start: 1
+  finish: 1
+  entry_fee: 1
+  organizer: MyString
+  event_detail: MyText
+  event_status: 1
+  capacity: 1
+  cancel: false
+  name: MyString

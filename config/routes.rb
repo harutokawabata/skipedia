@@ -16,8 +16,9 @@ devise_for :users, controllers: {
     }
     
     namespace :admins do
-      resources :genres, only: [:index, :show, :create, :edit, :update, :destroy]
-      resources :tags, only: [:index, :show, :create, :edit, :update, :destroy]
+      resources :genres, only: [:index, :create, :edit, :update, :destroy]
+      resources :tags, only: [:index, :create, :edit, :update, :destroy]
+      resources :events, only: [:index, :new, :create, :edit, :update, :destroy]
     end
 
     get '/admins' => 'admins/homes#top'
