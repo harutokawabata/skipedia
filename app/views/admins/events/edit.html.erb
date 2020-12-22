@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="row">
+        <h2>イベント編集</h2>
+    </div>
+    <div class="row">
+        
+         <div class="box event-new">
+            <%= form_with model:@event, url:admins_event_path(@event.id), method: :patch, class:"form-horizontal", local:true do |f| %>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">イベント名</label>
+              <div class="col-sm-5">
+                <%= f.text_field :name %>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-5 control-label">開催日</label>
+              <div class="col-sm-5">
+                <%= f.text_field :date %>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-5 control-label">イベント開催時間</label>
+              <div class="col-sm-3">
+                <%= f.text_field :start %>
+              </div>
+              <div class="col-sm-1">
+                <p>〜</p>
+              </div>
+              <div class="col-sm-3">
+                <%= f.text_field :finish %>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-5 control-label">参加費</label>
+              <div class="col-sm-5">
+                <%= f.text_field :entry_fee %>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-5 control-label">募集人数</label>
+              <div class="col-sm-5">
+                <%= f.text_field :capacity %>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-5 control-label">主催者</label>
+              <div class="col-sm-5">
+                <%= f.text_field :organizer %>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-5 control-label">イベント詳細</label>
+              <div class="col-sm-5">
+                <%= f.text_area :event_detail, class:"form-control" %><br>
+              </div>
+            </div>
+            <div class="form-group"  id="exampleFormControlSelect1">
+              <label class="col-sm-5 control-label">開催ステータス</label>
+                <div class="col-sm-5">
+                          
+                    <select class="form-control" id="exampleFormControlSelect1">
+                       <%# @.each do |genre| %>  
+                       <option>
+                           開催中
+                          <%# genre.name %> 
+                       </option>
+                       <option>
+                          準備中  
+                       </option>
+                       <%# end %>
+                    </select>
+                  <br>
+                <%= f.submit "投稿する" %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+        
+        
+    </div>
+</div>

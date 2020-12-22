@@ -20,12 +20,34 @@ class Admins::EventsController < ApplicationController
     end
     
     def edit
+        @event = Event.find(params[:id])
     end
     
     def update
+        @event = Event.find(params[:id])
+        if @event = Event.update(event_params)
+            flash[:notice] = "イベントの編集に成功しました"
+            redirect_to admins_events_path
+        else
+            flash[:notice] = "error"
+            redirect_to admins_events_path
+        end
     end
     
     def destroy
+        @event = Event.find(params[:id])
+        if @event.destroy
+            flash[:notice] = "イベントの削除に成功しました"
+            redirect_to admins_events_path
+        else
+            flash[:notice] = "error"
+            redirect_to admins_events_path
+        end
+        
+    end
+    
+    def show
+        @event = Event.find(params[:id])
     end
     
     private

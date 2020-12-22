@@ -17,17 +17,27 @@
 @import "bootstrap";
 
 .flash-success {
-    background-color: orange;
-    color: white;
-    text-align: center;
-}
-.flash-error {
-    background-color: red;
+    background-color: limegreen;
     color: white;
     text-align: center;
 }
 .flash-edit {
     background-color: blue;
+    color: white;
+    text-align: center;
+}
+.flash-delete {
+    background-color: pink;
+    color: white;
+    text-align: center;
+}
+.flash-update {
+    background-color: yellow;
+    color: white;
+    text-align: center;
+}
+.flash-error {
+    background-color: red;
     color: white;
     text-align: center;
 }

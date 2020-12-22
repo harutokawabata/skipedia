@@ -52,14 +52,7 @@
     <div class="form-group"  id="exampleFormControlSelect1">
       <label class="col-sm-5 control-label">親ジャンル選択</label>
         <div class="col-sm-5">
-                  
-            <select class="form-control" id="exampleFormControlSelect1">
-               <% @genres.each do |genre| %>  
-               <option>
-                  <%= genre.id %>:<%= genre.name %> 
-               </option>
-               <% end %>
-            </select>
+          <%= f.collection_select(:genre_id, Genre.all, :id, :name, {class:"form-control"}, {id:"exampleFormControlSelect1"}) %>
           <br>
         <%= f.submit "投稿する" %>
         </div>

@@ -35,7 +35,7 @@ class Admins::GenresController < ApplicationController
     def destroy
       @genre = Genre.find(params[:id])
       if @genre.destroy
-      flash[:notice] = '削除に成功しました'
+      flash[:notice] = '削除しました'
       redirect_to admins_genres_path
       else
       flash[:notice] = 'error'

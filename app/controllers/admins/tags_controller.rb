@@ -9,9 +9,9 @@ class Admins::TagsController < ApplicationController
     def create
         @tag = Tag.new(tag_params)
         @genres = Genre.all
-        @genres.each do |genre|
-            @tag.genre_id = genre.id
-        end
+        # @genres.each do |genre|
+        #     @tag.genre_id = genre.id
+        # end
         if @tag.save
             flash[:notice] = 'タグの投稿に成功しました'
             redirect_to admins_tags_path
