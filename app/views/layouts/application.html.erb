@@ -38,8 +38,8 @@
               <li><%= link_to "新規登録", new_user_registration_path %></li>
               <li><%= link_to "ログイン", new_user_session_path %></li>
              <% end %>
-              <p class="notice"><%= notice %></p>
-              <p class="alert"><%= alert %></p>
+              <p class="notice"><%# notice %></p>
+              <p class="alert"><%#alert %></p>
       				<!--<li class="active"><a href="#">メニューＢ</a></li>-->
       				<!--<li><a href="#">メニューＣ</a></li>-->
       			</ul>
@@ -49,20 +49,29 @@
       		</div>
       	</div>
       </nav>
+      
       <% if flash[:notice] == '投稿に成功しました' %>
         <div class="flash-success">
            <%= flash[:notice] %>
         </div>
-      <% elsif flash[:notice] == 'error' %>
-        <div class="flash-error">
-           <%= flash[:notice] %>
-        </div>
-      <% elsif flash[:notice] == 'edit' %>
+      <% elsif flash[:notice] == '編集に成功しました' %>
         <div class="flash-edit">
            <%= flash[:notice] %>
         </div>
+      <% elsif flash[:notice] == '削除しました' %>
+        <div class="flash-delete">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == '更新したで！'%>
+        <div class="flash-update">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == 'error'%>
+        <div class="flash-error">
+           <%= flash[:notice] %>
+        </div>
       <% else %>
-        <p>ちょっとなにいってるかわかんない</p>
+        <P></P>
       <% end %>
   </header>
     <%= yield %>

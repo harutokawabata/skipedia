@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="alert alert-danger" role="alert"><strong>エントリー受付中！</strong>：　後〇〇名参加可能です.</div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+        	<!--<thead>-->
+        	<!--	<tr>-->
+        	<!--		<th>イベント名</th>-->
+        	<!--		<th>開催日時</th>-->
+        	<!--		<th>惑星</th>-->
+        	<!--		<th>勝点</th>-->
+        	<!--	</tr>-->
+        	<!--</thead>-->
+        	<tbody>
+        		<tr>
+        			<th>イベント名</th>
+        			<td><%= @event.name %></td>
+        			<th>開催日時</th>
+        			<td>
+        			    <%= @event.date %>
+        			    <%= @event.start %>〜<%= @event.finish %>
+        			</td>
+        		</tr>
+        		<tr>
+        		    <th>参加者</th>
+        		    <td>未実装</td>
+        		    <th>収益金額</th>
+        		    <td><%= @event.entry_fee %></td>
+        		</tr>
+        	</tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+        		    <th style="text-align:center">イベント詳細</th>
+        		</tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><%= @event.event_detail %></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
