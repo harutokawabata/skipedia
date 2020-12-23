@@ -70,6 +70,10 @@
         <div class="flash-error">
            <%= flash[:notice] %>
         </div>
+      <% elsif flash[:notice] == 'BANしました！'%>
+        <div class="flash-error">
+           <%= flash[:notice] %>
+        </div>
       <% else %>
         <P></P>
       <% end %>

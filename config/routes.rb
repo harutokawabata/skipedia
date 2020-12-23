@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  namespace :admins do
+    get 'users/index'
+    get 'users/show'
+  end
   devise_for :admins, controllers: {
       sessions:      'admins/sessions',
       passwords:     'admins/passwords',
@@ -19,7 +23,12 @@ devise_for :users, controllers: {
       resources :genres, only: [:index, :create, :edit, :update, :destroy]
       resources :tags, only: [:index, :create, :edit, :update, :destroy]
       resources :events, only: [:index, :new, :show, :create, :edit, :update, :destroy]
+      resources :users, only: [:index, :edit, :update, :destroy, :show]
+      # get 'users/confirm/:id' => 'admins/users#confirm'
     end
+    
+    # post '/orders/confirm' => 'orders#confirm'
+    get 'admins/users/confirm/:id' => 'admins/users#confirm',  as: 'admins_confirm'
 
     get '/admins' => 'admins/homes#top'
     root 'public/homes#top'

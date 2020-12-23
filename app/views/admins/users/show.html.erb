@@ -1,0 +1,54 @@
+<div class="container">
+    <h3><%= @user.name %>さんの記録詳細</h3>
+    <div class="row">
+        <p><%= @user.name %>のステータス:インフルエンサー　獲得いいね数:32個　ファンの数：23人</p>
+        <p>
+            <%= link_to "BANする", admins_confirm_path(@user.id), class:"btn btn-danger" %>
+        </p>
+    </div>
+    <div class="row">
+        <h3>投稿内容一覧</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>投稿日時</th>
+                    <th>内容</th>
+                    <th>削除</th>
+                </tr>
+            </thead>
+        	<tbody>
+        		<tr>
+        			<th><%= @user.created_at %></th>
+        			<td><%= @user.name %></td>
+        			<td>投稿数未実装</td>
+        			<td>質問数未実装</td>
+        			<td><%= @user.is_deleted %></td>
+        		</tr>
+        	</tbody>
+        </table>
+    </div>
+    <div class="row">
+        <h>質問内容一覧</h>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>投稿日時</th>
+                    <th>内容</th>
+                    <th>削除</th>
+                </tr>
+            </thead>
+        	<tbody>
+        		<tr>
+        			<th><%= @user.id %></th>
+        			<td><%= @user.name %></td>
+        			<td>投稿数未実装</td>
+        			<td>質問数未実装</td>
+        			<td><%= @user.is_deleted %></td>
+        		</tr>
+        	</tbody>
+        </table>
+    </div>
+    <div class="row" style=text-align="center">
+        <%= link_to "質問一覧に戻る", admins_users_path, class:"btn btn-primary" %>
+    </div>
+</div>
