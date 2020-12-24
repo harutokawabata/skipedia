@@ -1,9 +1,21 @@
 Rails.application.routes.draw do
   
-  namespace :admins do
-    get 'users/index'
-    get 'users/show'
+  # namespace :public do
+  #   get 'users/show'
+  #   get 'users/edit'
+  #   get 'users/update'
+  # end
+  # namespace :admins do
+  #   get 'users/index'
+  #   get 'users/show'
+  # end
+  
+  scope module: :public do
+    resource :users, only: [:edit, :show, :update]
+    get '/users/unsubscribe' => 'users#unsubscribe', as: 'users_unsbscribe'
+    patch '/users/withdraw' => 'users#withdraw', as: 'users_withdraw'
   end
+  
   devise_for :admins, controllers: {
       sessions:      'admins/sessions',
       passwords:     'admins/passwords',
@@ -32,6 +44,6 @@ devise_for :users, controllers: {
 
     get '/admins' => 'admins/homes#top'
     root 'public/homes#top'
-      
+    
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -30,6 +30,7 @@
       			 <% if user_signed_in? %>
               <li>ユーザー</li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to "マイページ", users_path %></li>
       			 <% elsif admin_signed_in? %>
               <li>管理者</li>
               <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
@@ -71,6 +72,10 @@
            <%= flash[:notice] %>
         </div>
       <% elsif flash[:notice] == 'BANしました！'%>
+        <div class="flash-error">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == "今までありがとうございました！" %>
         <div class="flash-error">
            <%= flash[:notice] %>
         </div>

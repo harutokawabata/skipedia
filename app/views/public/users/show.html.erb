@@ -1,0 +1,38 @@
+<div class="container">
+    <h3>マイページ</h3>
+    <div class="row">
+        <%= @user.name %>nameは現在nil
+        <p>ステータス：インフルエンサー　獲得いいね数：３２個　フォロワー数：23人</p>
+    </div>
+    
+    <div class="row">
+        <table class="table table-bordered">
+        	<tbody>
+        		<tr>
+        			<th>ユーザーネーム</th>
+        			<td><%= @user.name %></td>
+        			<th>あなたのファン</th>
+        			<td>未実装</td>
+        		</tr>
+        		<tr>
+        			<th>お気に入りの投稿</th>
+        			<td>〇〇件</td>
+        			<th>お気に入りの質問</th>
+        			<td>〇〇件</td>
+        		</tr>
+        		<tr>
+        			<th>最近の投稿</th>
+        			<td colspan="3">3件くらい表示　もっと見る</td>
+        		</tr>
+        		<tr>
+        			<th>最近の質問</th>
+        			<td colspan="3">3件くらい表示　もっと見る</td>
+        		</tr>
+        	</tbody>
+        </table>
+    </div>
+    <div class="row">
+        <%= link_to '会員情報を編集する',  edit_users_path %> 
+        <%= link_to '退会するお',  users_unsbscribe_path %> 
+    </div>
+</div>

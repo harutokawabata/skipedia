@@ -1,29 +1,41 @@
-<h2>Sign up</h2>
-
+<div class="container">
+ <h2>会員登録</h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :名前 %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+  
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
   </div>
+  
+  <div class="field">
+    <%= f.label :合言葉 %><br />
+    <%= f.text_field :watchword, autofocus: true, autocomplete: "watchword" %>
+    <p>パスワードを忘れてしまったときの合言葉です</p>
+  </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :"パスワード（6文字以上）" %><br>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
+    <% end %><br>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :"パスワード(確認用）" %><br>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-
+  <br>
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "会員登録", class:"btn btn-primary" %>
   </div>
 <% end %>
 
 <%= render "users/shared/links" %>
+</div>
