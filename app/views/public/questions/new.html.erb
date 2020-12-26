@@ -1,0 +1,43 @@
+<div class="container">
+    <h3>質問を投稿する</h3>
+    <div class="row">
+        <div class="box event-new">
+            <%= form_with model:@question, url:questions_path, class:"form-horizontal", local:true do |f| %>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">タイトル</label>
+              <div class="col-sm-5">
+                <%= f.text_field :title %>
+              </div>
+            </div>
+            <div class="form-group"  id="exampleFormControlSelect1">
+              <!--<label class="col-sm-5 control-label">ジャンル</label>-->
+                <!--<div class="col-sm-5">-->
+                <!--    <select class="form-control" id="exampleFormControlSelect1">-->
+                       <%# @genres.each do |genre| %>  
+                       <%# @tags.each do |tag| %>  
+                <!--       <option>-->
+                          <%# tag.genre.name %> 
+                <!--       </option>-->
+                       <%# end %>
+                       <%# end %>
+                <!--    </select>-->
+                <!--  <br>-->
+                <!--</div>-->
+              </div>
+            <div class="form-group"  id="exampleFormControlSelect1">
+              <label class="col-sm-5 control-label">タグ</label>
+                <div class="col-sm-5">
+                  <%= f.collection_select :tag_id, Tag.all, :id, :name, include_blank: "選択して下さい" %><br>
+                </div>
+              </div>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">説明</label>
+              <div class="col-sm-5">
+                <%= f.text_area :introduction, class:"form-control" %><br>
+              </div>
+            </div>
+               <%= f.submit "投稿する" %>
+            </div>
+            <% end %>
+         </div>
+</div>

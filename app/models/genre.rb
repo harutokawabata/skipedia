@@ -1,4 +1,5 @@
 class Genre < ApplicationRecord
     has_many :tags, dependent: :destroy
+    # has_many :questions, dependent: :destroy
     validates :name, :introduction, presence: true
 end

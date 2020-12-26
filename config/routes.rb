@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   
   # namespace :public do
+  #   get 'questions/index'
+  #   get 'questions/edit'
+  #   get 'questions/new'
+  #   get 'questions/create'
+  #   get 'questions/update'
+  #   get 'questions/destroy'
+  # end
+  # namespace :public do
   #   get 'users/show'
   #   get 'users/edit'
   #   get 'users/update'
@@ -14,7 +22,11 @@ Rails.application.routes.draw do
     resource :users, only: [:edit, :show, :update]
     get '/users/unsubscribe' => 'users#unsubscribe', as: 'users_unsbscribe'
     patch '/users/withdraw' => 'users#withdraw', as: 'users_withdraw'
+    resources :questions, only: [:index, :edit, :new, :create, :show, :update, :destroy]
+
   end
+  
+
   
   devise_for :admins, controllers: {
       sessions:      'admins/sessions',

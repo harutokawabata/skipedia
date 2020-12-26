@@ -38,10 +38,10 @@ class Public::UsersController < ApplicationController
     params.require(:user).permit(:name, :watchword, :encrypted_password, :popular, :is_deleted, :email, :password)
   end
   
-  def authenticate_user
-    unless logged_in?
-      flash[:error] = "会員登録してください"
-      redirect_to new_user_registration_path # halts request cycle
-    end
-  end
+  # def authenticate_user
+  #   unless logged_in?
+  #     flash[:error] = "会員登録してください"
+  #     redirect_to new_user_registration_path # halts request cycle
+  #   end
+  # end
 end

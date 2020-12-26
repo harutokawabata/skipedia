@@ -1,0 +1,29 @@
+<div class="container">
+    <% if @question.is_active =  false %>
+        <P>回答済みの質問です</p>
+    <% else %>
+        <p>未回答です</p>
+    <% end %>
+    <div class="row">
+        <ul>
+            <li><%= @question.title %></li>
+            <li><%= @question.introduction %></li>
+        </ul>
+    </div>
+    
+    <div class="row">
+    <div class="row">
+        <div class="box event-new">
+            <%= form_with model:@question, url:questions_path, method: :post, class:"form-horizontal", local:true do |f| %>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">回答する</label>
+              <div class="col-sm-5">
+                <%= f.text_field :answer %>
+              </div>
+            </div>
+               <%= f.submit "投稿する" %>
+            </div>
+            <% end %>
+         </div>
+    </div>
+</div>
