@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <p>皆様以下のような内容でお困りのようです</p>
+    <p>回答するとこの一覧から消え去ります。</p>
+    <div class="col-xs-5">
+      <%= link_to "質問する", new_question_path, class:"btn btn_primary" %>
+      <%= link_to "回答済みの質問", new_question_path, class:"btn btn_primary" %>
+      <p>bootstrapが効かない</p>
+    </div>
+    <table class="table table-bordered">
+    	<thead>
+    		<tr>
+    			<th>投稿日</th>
+    			<th>タイトル</th>
+    			<th>内容</th>
+    			<th>お助けする！</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	    <% @questions.each do |question| %>
+    		<tr>
+    			<th><%= question.created_at %></th>
+    			<td><%= question.title %></td>
+    			<td><%= question.introduction %></td>
+    			<td><%= link_to "回答する", question_path(question.id), class:"btn btn-primary" %></td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+    </table>
+  </div>
+</div>

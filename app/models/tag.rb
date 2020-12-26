@@ -1,4 +1,5 @@
 class Tag < ApplicationRecord
     belongs_to :genre
-    validates :genre_id, :name, :introduction, presence: true
+    has_many :questions, dependent: :destroy
+    # validates :genre_id, :name, :introduction, presence: true
 end
