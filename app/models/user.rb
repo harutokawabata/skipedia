@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :posts, dependent: :destroy
+
   #したの記載はnameでログインする時に記載
   # validates :name, uniqueness: true
   # Include default devise modules. Others available are:
