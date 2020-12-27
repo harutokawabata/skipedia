@@ -1,4 +1,10 @@
 ja:
+  emun:
+    event_status:
+      cancel:
+        donot_entry: 未エントリー
+        entry: エントリー済み
+        stop_entry: キャンセル
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"

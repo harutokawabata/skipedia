@@ -1,0 +1,53 @@
+<div class="container">
+    <h2>イベント申し込みページ</h2>
+    <h3>
+        <%# if @event.donot_entry? %>
+        <p>受付中</p>
+        <%# elsif @event.entry? %>
+        <p>申し込み中</p>
+        <%# elsif @event.stop_entry? %>
+        <p>キャンセル済み</p>
+        <%# end %>
+    </h3>
+    <div class="row">
+      <div class="col-xs-2"><p>イベント名</p></div>
+      <div class="col-xs-4"><p><%= @event.name %></p></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2"><p>イベント開催日</p></div>
+      <div class="col-xs-4"><p><%= @event.date %></p></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2"><p>開催時間〜終了時間</p></div>
+      <div class="col-xs-4"><p><%= @event.start %>〜<%= @event.finish %></p></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2"><p>参加費</p></div>
+      <div class="col-xs-4"><p><%= @event.entry_fee %></p></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2"><p>主催者</p></div>
+      <div class="col-xs-4"><p><%= @event.organizer %></p></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2"><p>イベント詳細</p></div>
+      <div class="col-xs-4"><p><%= @event.event_detail %></p></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2"><p>受付人数</p></div>
+      <div class="col-xs-4"><p><%= @event.capacity %></p></div>
+    </div>
+    
+    <div class="row">
+    <% @event.event_statuses.each do |ees| %>
+      <% if ees.cancel == 'donot_entry' %>
+        <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+      <% elsif ees.cancel == 'entry'%>
+        <%= link_to "イベント申し込みをキャンセルする", events_confirm_path(id: @event.id), method: :post, class:"btn btn-danger" %>
+      <% elsif ees.cancel == 'stop_entry'%>
+        <%= link_to "イベント申し込みを再申し込みする", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+      <% end %>
+    <% end %>
+    </div>
+    
+</div>
