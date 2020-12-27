@@ -39,6 +39,7 @@ devise_for :users, controllers: {
       resources :tags, only: [:index, :create, :edit, :update, :destroy]
       resources :events, only: [:index, :new, :show, :create, :edit, :update, :destroy]
       resources :users, only: [:index, :edit, :update, :destroy, :show]
+      resources :post_images, only: [:new, :create, :index, :show]
       # get 'users/confirm/:id' => 'admins/users#confirm'
     end
     
