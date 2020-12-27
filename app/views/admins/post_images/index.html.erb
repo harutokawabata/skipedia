@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <p>aaa</p>
+        <table>
+            <tbody>
+            <% @post_images.each do |pi| %>
+                <tr>
+                    <td><%= pi.name %></td>
+                    <th><%= attachment_image_tag pi, :image, :fill, 800,450, format: 'jpg' %></th>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
