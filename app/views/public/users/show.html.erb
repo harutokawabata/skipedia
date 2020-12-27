@@ -28,6 +28,12 @@
         			<th>最近の質問</th>
         			<td colspan="3">3件くらい表示　もっと見る</td>
         		</tr>
+        		<%# @event_statuses.each do |es| %>
+        		<tr>
+        			<th>申し込み中のイベント</th>
+        			<td colspan="3"><%# es.cancel %>　もっと見る</td>
+        		</tr>
+        		<%# end %>
         	</tbody>
         </table>
     </div>

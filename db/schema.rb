@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_021629) do
+ActiveRecord::Schema.define(version: 2020_12_27_071516) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,8 +25,16 @@ ActiveRecord::Schema.define(version: 2020_12_26_021629) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "event_statuses", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+    t.integer "cancel", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
-    t.integer "customer_id"
+    t.integer "user_id"
     t.integer "date"
     t.integer "start"
     t.integer "finish"
@@ -35,7 +43,6 @@ ActiveRecord::Schema.define(version: 2020_12_26_021629) do
     t.text "event_detail"
     t.integer "event_status"
     t.integer "capacity"
-    t.boolean "cancel"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

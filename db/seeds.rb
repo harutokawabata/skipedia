@@ -10,7 +10,11 @@
 # admin.save
 
 Admin.create(
-   name: 'yamada',
-   email: 'yamada-tarou@gmail.com',
+   # name: 'yamada',
+   # email: 'yamada-tarou@gmail.com',
+   # password: '123456',
+   
+   name: 'tanaka',
+   email: 'tanaka-tarou@gmail.com',
    password: '123456',
 )

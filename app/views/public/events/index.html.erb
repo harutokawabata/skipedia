@@ -1,0 +1,42 @@
+<div class="container">
+    <h2>イベント一覧</h2>
+    <ul>
+        <li>開催中のイベントにエントリーできます</li>
+        <li>参加中のイベントはマイページで確認できます</li>
+        <li>キャンセルはできますが再度申し込みの際は１からのお手続きをお願いします</li>
+    </ul>
+    <div class="row">
+        <table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>No.</th>
+        			<th>イベント名</th>
+        			<th>概要・詳細</th>
+        			<th>参加申請</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	    <!--pp-->
+        	    <% a = 0 %>
+        	    <% @events.each do |event| %>
+        		<tr>
+        			<th><%= a += 1 %></th>
+        			<th><%= event.name %></th>
+        			<td><%= event.event_detail %></td>
+        			<td>
+        			    <% event.event_statuses.each do |ees| %>
+            			    <% if ees.cancel == 'donot_entry' %>
+            			        <%= link_to "詳細確認", event_path(ees.id), class:"btn btn-primary" %>
+            			    <% elsif ees.cancel == 'entry' %>
+            			        <%= link_to "キャンセル", event_path(ees.id), class:"btn btn-primary" %>
+            			    <% elsif ees.cancel == 'stop_entry' %>
+            			        <%= link_to "再エントリー", event_path(ees.id), class:"btn btn-primary" %>
+            			    <% end %>
+        			    <% end %>
+        			</td>
+        		</tr>
+        		<% end %>
+        	</tbody>
+        </table>
+    </div>
+</div>

@@ -10,8 +10,8 @@ class Admins::EventsController < ApplicationController
     
     def create
         @event = Event.new(event_params)
-        if @event.save
-            flash[:notice] = "イベントの追加に成功しました"
+        if @event.save!
+            # flash[:notice] = "イベントの追加に成功しました"
             redirect_to admins_events_path
         else
             flash[:notice] = "error"
@@ -52,6 +52,7 @@ class Admins::EventsController < ApplicationController
     
     private
     def event_params
+        params[:cancel] = 0
         params.require(:event).permit(:name, :date, :start, :finish, :entry_fee, :organizer, :event_detail, :evemt_status, :capacity, :cancel, :customer_id)
     end
 end

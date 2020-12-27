@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
   
+  # namespace :public do
+  #   get 'events/index'
+  #   get 'events/show'
+  #   get 'events/confirm'
+  #   get 'events/withdraw'
+  #   get 'events/cancel'
+  # end
   scope module: :public do
     resource :users, only: [:edit, :show, :update]
     get '/users/unsubscribe' => 'users#unsubscribe', as: 'users_unsbscribe'
     patch '/users/withdraw' => 'users#withdraw', as: 'users_withdraw'
     resources :questions, only: [:index, :edit, :new, :create, :show, :update, :destroy]
     resources :posts, only: [:index, :edit, :new, :create, :show, :update, :destroy]
+    resources :events, only: [:index, :edit, :new, :create, :show, :update, :destroy]
+    post 'events/confirm' => 'events#confirm', as: 'events_confirm'
   end
   
 
