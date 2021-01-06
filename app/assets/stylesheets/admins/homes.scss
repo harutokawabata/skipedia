@@ -16,11 +16,32 @@
 }
 
 .col-xs-4.admin-top{
-    height: 330px;
-    width: 330px;
-    background-color: pink;
-    // margin-right: 10px;
-    text-align: center;
+    // height: 330px;
+    // width: 330px;
+    // background-color: pink;
+    // // margin-right: 10px;
+    // text-align: center;
+    position: relative;
+}
+
+.btn.btn-primary.toppage{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    
+}
+
+.btn.btn-danger.toppage{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    
 }
 
 // ////////////////////////////////////////ここまで管理者（admin側）/////////////////////////////////////////////////////////////////////////////
@@ -50,7 +71,7 @@
     text-align: center;
     display: flex;
     justify-content: space-around;
-    background-color: green;
+    // background-color: green;
     position: absolute;
     bottom: 0;
     margin-bottom: 30px;

@@ -4,6 +4,9 @@ class Admins::HomesController < ApplicationController
  end
  
  def index
+  @posts = Post.all
+  @questions = Question.all
+  @events = Event.all
  end
  
 end

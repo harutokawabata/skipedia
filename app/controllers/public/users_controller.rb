@@ -15,7 +15,11 @@ class Public::UsersController < ApplicationController
   def update
     # @user = User.find(params[:id])
     @user = current_user
-    @user.update!(user_params)
+    if @user.update!(user_params)
+      flash[:notice] = '編集に成功しました'
+    else
+      flash[:notice] = 'error'
+    end
     redirect_to  users_path
   end
   

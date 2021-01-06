@@ -19,7 +19,7 @@ class Public::QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    @question.save!
+    @question.save
     redirect_to questions_path
     #   flash[:notice] = "投稿に成功しました"
     #   redirect_to questions_path

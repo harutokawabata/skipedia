@@ -47,3 +47,128 @@
     color: black;
     text-align: center;
 }
+
+.flash-login {
+    background-color: gold;
+    color: #c8e4ff;
+    text-align: center;
+}
+
+////////////////////////////formのcss////////////////////////////////
+input[type="text"] {
+        width: 340px;
+        height: 40px;
+    }
+input[type="password"] {
+        width: 340px;
+        height: 40px;
+    }
+    
+.textarea{
+    resize: none;
+    width: 340px;
+    height: 100px;
+}
+    
+.w-80 {
+  width: 80% !important;
+  background: linear-gradient(gray, black);
+  color: white;
+}
+
+.row.user-sign-in{
+    display: flex;
+    justify-content: center;
+}
+.row.user-links{
+    display: flex;
+    justify-content: center;
+}
+
+.row.user-links:last-child{
+ margin-bottom: 20px;
+}
+.row.user-links:first-child{
+ margin-top: 20px;
+}
+
+.dropdown select{
+    width: 340px;
+    height: 40px;
+}
+
+/////////////////////////////////枠や見出しのcss/////////////////////////
+.row.question-toparea{
+    margin: 20px;
+    margin-bottom: 30px;
+}
+
+.row.question-box{
+    border: 1px solid #ccc;
+    box-shadow: 10px 10px 6px 1px #ccc;
+}
+
+.question-box-text{
+    padding: 30px ;
+    position: relative;
+}
+
+.tag{
+  background: #5cd;
+  border-radius: 8px 0 0 8px;
+  color: #fff;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 2em 0 3em;
+  position: relative;
+}
+
+.tag::before {
+  border: 10px solid transparent;
+  border-left-color: #5cd;
+  border-right-width: 0;
+  content: '';
+  display: block;
+  height: 0;
+  position: absolute;
+  right: -10px;
+  top: 0;
+  width: 0;
+}
+
+.question-midashi{
+    background: linear-gradient(gray, red);
+    position: absolute;
+    display: inline-block;
+    top: -32px;
+    left: 10px;
+    padding: 0 9px;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    // color: whit;
+}
+
+
+////////////////////////////toppageのcss////////////////////////////////
+.container.user-top{
+  width: 80% !important;
+  background: linear-gradient(gray, white);
+  color: white;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 6px 0px #ccc;
+  text-shadow: 2px 2px 1px black;
+}
+
+.toppage-midashi{
+    background: linear-gradient(yellow, orange);
+    text-align: center;
+}
+
+.w-20 {
+  width: 20% !important;
+  background: linear-gradient(gray, black);
+  color: white;
+  opacity: 0.5;
+}

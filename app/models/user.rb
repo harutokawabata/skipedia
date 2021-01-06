@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :user
+  # belongs_to :user
   has_many :posts, dependent: :destroy
   has_many :event_statuses, dependent: :destroy
   has_many :events,through: :event_statuses
