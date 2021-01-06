@@ -1,5 +1,5 @@
-<h2>ジャンル関連</h2>
 <div class="container">
+  <h2>ジャンル関連</h2>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     <div class="row">
@@ -36,31 +36,71 @@
         </table>
     </div>
 </div>
-<div class="container form">
-  <div class="row box">
-    <%= form_with model:@genre,url:admins_genres_path, class:"form-horizontal", local:true do |f| %>
-    <div class="form-group">
-      <label class="col-sm-5 control-label">ジャンル名</label>
-      <div class="col-sm-5">
-        <%= f.text_field :name %>
+<!--<div class="container form">-->
+<!--  <div class="row box">-->
+<!--    <%# form_with model:@genre,url:admins_genres_path, class:"form-horizontal", local:true do |f| %>-->
+<!--    <div class="form-group">-->
+<!--      <label class="col-sm-5 control-label">ジャンル名</label>-->
+<!--      <div class="col-sm-5">-->
+<!--        <%# f.text_field :name %>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label class="col-sm-5 control-label">ジャンル内容</label>-->
+<!--      <div class="col-sm-5">-->
+<!--        <%# f.text_area :introduction, class:"form-control" %><br>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label class="col-sm-5 control-label">公開</label>-->
+<!--      <div class="col-sm-5">-->
+<!--        <%# f.radio_button :is_active, :true %>-->
+<!--        <%# f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>-->
+<!--        <%# f.radio_button :is_active, :false %>-->
+<!--        <%# f.label :is_active, "無効", {value: :false, style: "display: inline-block;"} %><br><br>-->
+<!--        <%# f.submit "変更を保存" %>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <%# end %>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="container user-sign-in">
+ <div class="row form-title">
+   <h3>ジャンル追加</h3> 
+ </div> 
+  <%= alert %>
+  <%= form_with model:@genre,url:admins_genres_path, class:"form_horizontal", local:true do |f| %>
+  <%# form_with model:@tag, url:admins_tags_path, class: "form_horizontal", local:true do |f| %>
+    <%# render "admins/shared/error_messages", resource: resource %>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ジャンル名", class:'fa' %>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="col-sm-5 control-label">ジャンル内容</label>
-      <div class="col-sm-5">
-        <%= f.text_area :introduction, class:"form-control" %><br>
-      </div>
+    
+    <div class="row user-sign-in">
+      <!--<div class="field">-->
+        <!--<div class="col-xs-12">-->
+          <%= f.text_area :introduction, placeholder: "説明文", class:"textarea" %>
+        <!--</div>-->
+      <!--</div>-->
     </div>
-    <div class="form-group">
-      <label class="col-sm-5 control-label">公開</label>
-      <div class="col-sm-5">
-        <%= f.radio_button :is_active, :true %>
-        <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
-        <%= f.radio_button :is_active, :false %>
-        <%= f.label :is_active, "無効", {value: :false, style: "display: inline-block;"} %><br><br>
-        <%= f.submit "変更を保存" %>
-      </div>
+    
+    <div class="row user-sign-in">
+      <h4>公開設定</h4>
     </div>
-    <% end %>
-  </div>
-</div>
+    
+    <div class="row user-sign-in">
+          <%= f.radio_button :is_active, :true %>
+          <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+          <p>     </p>
+          <%= f.radio_button :is_active, :fales %>
+          <%= f.label :is_active, "無効", {value: :false, style: "display: inline-block;"} %><br>
+    </div>
+
+  <div class="row user-links">
+    <%= f.submit "投稿する", class:"btn btn-secondary btn btn-lg w-80"%>
+<% end %>

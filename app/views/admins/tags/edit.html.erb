@@ -8,37 +8,72 @@
         </ul>
     </div>
 </div>
-<div class="container form">
-  <div class="row box">
-    <%= form_with model:@tag, url:admins_tag_path(@tag.id), method: :patch, class:"form-horizontal", local:true do |f| %>
-    <div class="form-group">
-      <label class="col-sm-5 control-label">タグ名</label>
-      <div class="col-sm-5">
-        <%= f.text_field :name %>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-5 control-label">タグ内容</label>
-      <div class="col-sm-5">
-        <%= f.text_area :introduction, class:"form-control" %><br>
-      </div>
-    </div>
-    <div class="form-group"  id="exampleFormControlSelect1">
-      <label class="col-sm-5 control-label">親ジャンル選択</label>
-        <div class="col-sm-5">
+<!--<div class="container form">-->
+<!--  <div class="row box">-->
+<!--    <%# form_with model:@tag, url:admins_tag_path(@tag.id), method: :patch, class:"form-horizontal", local:true do |f| %>-->
+<!--    <div class="form-group">-->
+<!--      <label class="col-sm-5 control-label">タグ名</label>-->
+<!--      <div class="col-sm-5">-->
+<!--        <%# f.text_field :name %>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label class="col-sm-5 control-label">タグ内容</label>-->
+<!--      <div class="col-sm-5">-->
+<!--        <%# f.text_area :introduction, class:"form-control" %><br>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group"  id="exampleFormControlSelect1">-->
+<!--      <label class="col-sm-5 control-label">親ジャンル選択</label>-->
+<!--        <div class="col-sm-5">-->
                   
-            <select class="form-control" id="exampleFormControlSelect1">
-               <% @genres.each do |genre| %>  
-               <option>
-                  <%= genre.id %>:<%= genre.name %>
-               </option>
-               <% end %>
-            </select>
-          <br>
-        <%= f.submit "更新する" %>
+<!--            <select class="form-control" id="exampleFormControlSelect1">-->
+<!--               <%# @genres.each do |genre| %>  -->
+<!--               <option>-->
+<!--                  <%# genre.id %>:<%# genre.name %>-->
+<!--               </option>-->
+<!--               <%# end %>-->
+<!--            </select>-->
+<!--          <br>-->
+<!--        <%# f.submit "更新する" %>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <%# end %>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="container user-sign-in">
+ <div class="row form-title">
+   <h3>タグ編集</h3> 
+ </div> 
+  <%= alert %>
+  <%= form_with model:@tag, url:admins_tag_path(@tag.id), class: "form_horizontal", local:true do |f| %>
+    <%# render "admins/shared/error_messages", resource: resource %>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "タグ名", class:'fa' %>
         </div>
       </div>
     </div>
-    <% end %>
-  </div>
-</div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_area :introduction, placeholder: "説明文", class:"textarea" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12 dropdown">
+          <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank:"選択してください" %>
+        </div>
+      </div>
+    </div>
+
+  <div class="row user-links">
+    <%= f.submit "更新する", class:"btn btn-secondary btn btn-lg w-80"%>
+<% end %>

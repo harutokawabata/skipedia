@@ -1,26 +1,53 @@
-<h2>管理者トップページ</h2>
 <div class="container">
+ <h2>管理者トップページ</h2>
  <div class="row admin-top">
    <div class="col-xs-4 admin-top">
-    <p>あ</p>
+    <img src="/assets/admins/skipedia-admin-event.jpg" alt="">
+    <%= link_to 'イベント作成', admins_events_path, class:"btn btn-primary toppage" %>
    </div>
    <div class="col-xs-4 admin-top">
-   <p>あ</p>
+    <img src="/assets/admins/skipedia-admin-user.jpg" alt="">
+    <%= link_to '会員一覧', admins_users_path, class:"btn btn-danger toppage" %>
    </div>
    <div class="col-xs-4 admin-top">
-   <p>あ</p>
+    <img src="/assets/admins/skipedia-admin-qanda.jpg" alt="">
+    <%= link_to '質問・投稿一覧', admins_events_path, class:"btn btn-primary toppage" %>
    </div>
  </div>
  <div class="row admin-top">
   <!--10列幅分のボックス-->
-  <div class="col-xs-10 bg-primary">10列</div>
+  <!--<div class="col-xs-10 bg-primary">10列</div>-->
 </div>
 
 <!--行2-->
 <div class="row">
-    <h3>投稿内容合計</h3></br>
-    <p>投稿の郷合計は〇〇件です</p>
-    
+  <div class="col-xs-6">
+    <h3>投稿件数合計</h3></br>
+    <p>投稿の合計は<%= Post.count %>件です</p>
+  </div>
+  <div class="col-xs-6">
+     <!--<img src="/assets/admins/skipedia-admin-event.jpg" alt="">-->
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <h3>質問件数合計</h3>
+    <p>質問の合計は<%= Question.count %>件です</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <h3>開催中のイベント</h3>
+    <p>開催中のイベントは<%= Event.count %>件です</p>
+    <%= Event.all %>
+    <%# @events.each do |event| %>
+    <%# if event.event_status == "" %>
+      <%# event.name %>
+    <%# else %>
+      <p>企画倒れ</p>
+    <%# end %>
+    <%# end %>
+  </div>
 </div>
 
 </div>

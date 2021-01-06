@@ -19,7 +19,7 @@
     	<tbody>
     	    <% @questions.each do |question| %>
     		<tr>
-    			<th><%= question.created_at %></th>
+    			<th><%= l question.created_at, format: :short %></th>
     			<td><%= question.title %></td>
     			<td><%= question.introduction %></td>
     			<td><%= link_to "回答する", question_path(question.id), class:"btn btn-primary" %></td>

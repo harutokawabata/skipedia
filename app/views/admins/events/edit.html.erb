@@ -1,87 +1,180 @@
-<div class="container">
-    <div class="row">
-        <h2>イベント編集</h2>
-    </div>
-    <div class="row">
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <h2>イベント編集</h2>-->
+<!--    </div>-->
+<!--    <div class="row">-->
         
-         <div class="box event-new">
-            <%= form_with model:@event, url:admins_event_path(@event.id), method: :patch, class:"form-horizontal", local:true do |f| %>
-            <div class="form-group">
-              <label class="col-sm-5 control-label">イベント名</label>
-              <div class="col-sm-5">
-                <%= f.text_field :name %>
-              </div>
-            </div>
+<!--         <div class="box event-new">-->
+<!--            <%# form_with model:@event, url:admins_event_path(@event.id), method: :patch, class:"form-horizontal", local:true do |f| %>-->
+<!--            <div class="form-group">-->
+<!--              <label class="col-sm-5 control-label">イベント名</label>-->
+<!--              <div class="col-sm-5">-->
+<!--                <%# f.text_field :name %>-->
+<!--              </div>-->
+<!--            </div>-->
             
-            <div class="form-group">
-              <label class="col-sm-5 control-label">開催日</label>
-              <div class="col-sm-5">
-                <%= f.text_field :date %>
-              </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--              <label class="col-sm-5 control-label">開催日</label>-->
+<!--              <div class="col-sm-5">-->
+<!--                <%# f.text_field :date %>-->
+<!--              </div>-->
+<!--            </div>-->
             
-            <div class="form-group">
-              <label class="col-sm-5 control-label">イベント開催時間</label>
-              <div class="col-sm-3">
-                <%= f.text_field :start %>
-              </div>
-              <div class="col-sm-1">
-                <p>〜</p>
-              </div>
-              <div class="col-sm-3">
-                <%= f.text_field :finish %>
-              </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--              <label class="col-sm-5 control-label">イベント開催時間</label>-->
+<!--              <div class="col-sm-3">-->
+<!--                <%# f.text_field :start %>-->
+<!--              </div>-->
+<!--              <div class="col-sm-1">-->
+<!--                <p>〜</p>-->
+<!--              </div>-->
+<!--              <div class="col-sm-3">-->
+<!--                <%# f.text_field :finish %>-->
+<!--              </div>-->
+<!--            </div>-->
             
-            <div class="form-group">
-              <label class="col-sm-5 control-label">参加費</label>
-              <div class="col-sm-5">
-                <%= f.text_field :entry_fee %>
-              </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--              <label class="col-sm-5 control-label">参加費</label>-->
+<!--              <div class="col-sm-5">-->
+<!--                <%# f.text_field :entry_fee %>-->
+<!--              </div>-->
+<!--            </div>-->
             
-            <div class="form-group">
-              <label class="col-sm-5 control-label">募集人数</label>
-              <div class="col-sm-5">
-                <%= f.text_field :capacity %>
-              </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--              <label class="col-sm-5 control-label">募集人数</label>-->
+<!--              <div class="col-sm-5">-->
+<!--                <%# f.text_field :capacity %>-->
+<!--              </div>-->
+<!--            </div>-->
             
-            <div class="form-group">
-              <label class="col-sm-5 control-label">主催者</label>
-              <div class="col-sm-5">
-                <%= f.text_field :organizer %>
-              </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--              <label class="col-sm-5 control-label">主催者</label>-->
+<!--              <div class="col-sm-5">-->
+<!--                <%# f.text_field :organizer %>-->
+<!--              </div>-->
+<!--            </div>-->
             
-            <div class="form-group">
-              <label class="col-sm-5 control-label">イベント詳細</label>
-              <div class="col-sm-5">
-                <%= f.text_area :event_detail, class:"form-control" %><br>
-              </div>
-            </div>
-            <div class="form-group"  id="exampleFormControlSelect1">
-              <label class="col-sm-5 control-label">開催ステータス</label>
-                <div class="col-sm-5">
+<!--            <div class="form-group">-->
+<!--              <label class="col-sm-5 control-label">イベント詳細</label>-->
+<!--              <div class="col-sm-5">-->
+<!--                <%# f.text_area :event_detail, class:"form-control" %><br>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="form-group"  id="exampleFormControlSelect1">-->
+<!--              <label class="col-sm-5 control-label">開催ステータス</label>-->
+<!--                <div class="col-sm-5">-->
                           
-                    <select class="form-control" id="exampleFormControlSelect1">
+<!--                    <select class="form-control" id="exampleFormControlSelect1">-->
                        <%# @.each do |genre| %>  
-                       <option>
-                           開催中
+<!--                       <option>-->
+<!--                           開催中-->
                           <%# genre.name %> 
-                       </option>
-                       <option>
-                          準備中  
-                       </option>
+<!--                       </option>-->
+<!--                       <option>-->
+<!--                          準備中  -->
+<!--                       </option>-->
                        <%# end %>
-                    </select>
-                  <br>
-                <%= f.submit "投稿する" %>
-                </div>
-              </div>
-            </div>
-            <% end %>
+<!--                    </select>-->
+<!--                  <br>-->
+<!--                <%# f.submit "投稿する" %>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <%# end %>-->
         
         
+<!--    </div>-->
+<!--</div>-->
+
+<div class="container user-sign-in">
+ <div class="row form-title">
+   <h3>イベント編集</h3> 
+ </div> 
+  <%= alert %>
+ <%= form_with model:@event, url:admins_event_path(@event.id), method: :patch, class:"form-horizontal", local:true do |f| %>
+    <%# render "users/shared/error_messages", resource: resource %>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "イベント名", class:'fa' %>
+        </div>
+      </div>
     </div>
-</div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :date, autofocus: true, autocomplete: "date", placeholder: "開催日" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :start, autofocus: true, autocomplete: "start", placeholder: "開催時間" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :finish, autofocus: true, autocomplete: "finish", placeholder: "終了時間" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :entry_fee, autofocus: true, autocomplete: "entry_fee", placeholder: "参加費" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :capacity, autofocus: true, autocomplete: "capacity", placeholder: "募集人数" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :organizer, autofocus: true, autocomplete: "organizer", placeholder: "主催者" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_area :event_detail, placeholder: "説明文", class:"textarea" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12 dropdown">
+          <select class="form-control" id="exampleFormControlSelect1">
+                       <%# @.each do |genre| %>  
+            <option>
+              開催中
+                          <%# genre.name %> 
+            </option>
+            <option>
+              準備中  
+            </option>
+                       <%# end %>
+            </select>          
+        </div>
+      </div>
+    </div>
+
+  <div class="row user-links">
+    <%= f.submit "更新する", class:"btn btn-secondary btn btn-lg w-80"%>
+<% end %>

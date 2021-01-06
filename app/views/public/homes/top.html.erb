@@ -6,35 +6,57 @@
     </div>
     <div class="row user-top-btn">
         <div class="col-xs-4">
-            <%= link_to "質問を見る", root_path, class:"btn btn-primary" %>
+            <%= link_to "質問を見る", questions_path, class:"btn btn-primary" %>
         </div>
         <div class="col-xs-4">
             <%= link_to "会員登録", new_user_registration_path, class:"btn btn-danger" %>
         </div>
         <div class="col-xs-4">
-            <%= link_to "投稿を見る", root_path, class:"btn btn-primary" %>
+            <%= link_to "投稿を見る", posts_path, class:"btn btn-primary" %>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="row user-top-question">
-        <h3>新着</h3>
-        <p>谷回りについてわからない人がいるそうです</p>
+  <div class="row">
+    <div class="col-xs-6 user-top-question">
+        <h3 class="toppage-midashi"><i class="fas fa-skiing"></i>新着質問一覧</h3>
+        <% if @questions.present? %> 
+        <% @questions.last(3).each do |question| %>
+          <%= l question.created_at, format: :short %><br>
+          <%= link_to question.title, question_path(question.id) %><br>
+        <% end %>
+        <% else %>
+            <p>まだ質問が届いていません</p>
+        <% end %>
+        <!--<p>谷回りについてわからない人がいるそうです</p>-->
+        <%= link_to "MORE", questions_path, class:"btn btn-secondary btn btn-lg w-20"%>
     </div>
+    <div class="col-xs-6 user-top-event">
+        <h3 class="toppage-midashi"><i class="fas fa-skiing"></i>イベント一覧</h3>
+          <% if @events.present? %>
+            <% @events.each do |event| %>
+              <%= event.date %><br>
+              <%= link_to event.name, events_path %><br>
+            <% end %>
+          <% else %>
+            <p>イベントの予定がありません</p>
+          <% end %>
+    </div>
+  </div>
     <div class="row user-top-about">
-        <h3>Skipediaとは？？</h3>
+        <h3 class="toppage-midashi"><i class="fas fa-skiing"></i>Skipediaとは？？</h3>
         <p>スキーの専門用語を調べたり投稿したり質問できるありそうでなかったポータルサイトです！</p>
     </div>
     <div class="row user-top-recommend">
-        <h3>こんな人にオススメ</h3>
-        <p>○スキーの専門用語が理解できない人</p>
-        <p>○改めて理解を深めたい人</p>
-        <p>○スキー業界に自分自身の経験や技術論を広めたい人</p>
-        <p>○不特定多数の人に質問したい人</p>
+        <h3 class="toppage-midashi "><i class="fas fa-skiing"></i>こんな人にオススメ</h3>
+        <p><i class="fas fa-skiing"></i>スキーの専門用語が理解できない人</p>
+        <p><i class="fas fa-skiing"></i>改めて理解を深めたい人</p>
+        <p><i class="fas fa-skiing"></i>○スキー業界に自分自身の経験や技術論を広めたい人</p>
+        <i class="fas fa-skiing">不特定多数の人に質問したい人</i>
     </div>
     <div class="row user-top-function">
-        <h3>機能一覧</h3>
+        <h3 class="toppage-midashi"><i class="fas fa-skiing"></i>機能一覧</h3>
         <p> ○質問機能</p>
         <p> ○投稿機能</p>
         <p> ○イベント参加</p>

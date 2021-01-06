@@ -4,7 +4,7 @@
     <title>Skipedia</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/beca0b28fa.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -31,8 +31,12 @@
               <li>ユーザー</li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               <li><%= link_to "マイページ", users_path %></li>
+              <p class="navbar-text navbar-right">ようこそ<%= current_user.name %>さん</p>
       			 <% elsif admin_signed_in? %>
               <li>管理者</li>
+              <li><%= link_to "ジャンル", admins_genres_path %></li>
+              <li><%= link_to "タグ", admins_tags_path %></li>
+              <li><%= link_to "イベント", admins_events_path %></li>
               <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
              <% else %>
               <li>ゲストユーザー</li>
@@ -52,31 +56,31 @@
       </nav>
       
       <% if flash[:notice] == '投稿に成功しました' %>
-        <div class="flash-success">
+        <div class="flash-message flash-success">
            <%= flash[:notice] %>
         </div>
       <% elsif flash[:notice] == '編集に成功しました' %>
-        <div class="flash-edit">
+        <div class="flash-message flash-edit">
            <%= flash[:notice] %>
         </div>
       <% elsif flash[:notice] == '削除しました' %>
-        <div class="flash-delete">
+        <div class="flash-message flash-delete">
            <%= flash[:notice] %>
         </div>
       <% elsif flash[:notice] == '更新したで！'%>
-        <div class="flash-update">
+        <div class="flash-message flash-update">
            <%= flash[:notice] %>
         </div>
       <% elsif flash[:notice] == 'error'%>
-        <div class="flash-error">
+        <div class="flash-message flash-error">
            <%= flash[:notice] %>
         </div>
       <% elsif flash[:notice] == 'BANしました！'%>
-        <div class="flash-error">
+        <div class="flash-message flash-error">
            <%= flash[:notice] %>
         </div>
       <% elsif flash[:notice] == "今までありがとうございました！" %>
-        <div class="flash-error">
+        <div class="flash-message flash-error">
            <%= flash[:notice] %>
         </div>
       <% else %>
