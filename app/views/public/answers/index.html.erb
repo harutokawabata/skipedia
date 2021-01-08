@@ -1,0 +1,35 @@
+<div class="container">
+    <h3>回答一覧</h3>
+    <div class="row">
+        <table class="table tabke-bordered">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <td>質問内容</td>
+                <td>回答内容</td>
+                <td>回答者</td>
+                <td>削除</td>
+              </tr>
+            </thead>
+            <tbody>
+                <% a = 0 %>
+                <% @answers.each do |answer| %>
+                <tr>
+                    <th><%= a += 1 %></th>
+                    <td>
+                        <%= answer.question.user.name %>さんからの質問<br>
+                        <%= answer.question.title %></td>
+                    <td><%= answer.introduction %></td>
+                    <td><%= answer.user.name %></td>
+                    <td>
+                        <% if user_signed_in? && current_user.id == answer.user_id %>
+                        <%= link_to "質問取り消し（削除)", answer_path(answer.id), method: :delete %>
+                        <% end %>
+                    </td>
+                    <td><%# answer.user.name %></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

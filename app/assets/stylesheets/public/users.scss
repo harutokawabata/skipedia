@@ -23,3 +23,61 @@
     margin-bottom: 20px;
 }
 
+///////////////mypage//////////////////
+// .user.mypage {
+//     background: linear-gradient(transparent 70%, gray 70%);
+//     width: 100%;
+//     text-align: center;
+// }
+
+.col-xs-4.user-mypage.user-info {
+    background: linear-gradient(gray, white);
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 6px 0px #ccc;
+    // text-shadow: 2px 2px 1px black;
+    width: 330px;
+    height: 300px;
+    // background-color: rgba(0,0,0,0.5);
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    text-align: center;
+    padding-top: 40px;
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.user-status {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    background-color: white;
+    height: 20px;
+    color: black;
+}
+
+.user-mypage-box {
+    // text-align: center;
+    color: black;
+}
+
+.text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+// height: auto;
+}
+
+.row.user-mypage{
+    display: flex;
+    justify-content: center;
+}
+
+.user.mypage {
+  padding: 1rem 2rem;
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
+  text-align: center;
+}

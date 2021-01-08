@@ -6,6 +6,7 @@ class Public::QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @question_answer = Question.new
+    # @answer = Answer.find(params[:id])
   end
 
   def edit
@@ -19,6 +20,7 @@ class Public::QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    @question.user_id = current_user.id
     @question.save
     redirect_to questions_path
     #   flash[:notice] = "投稿に成功しました"
@@ -33,10 +35,13 @@ class Public::QuestionsController < ApplicationController
   end
 
   def destroy
+    @question = Question.find(params[:id])
+    @question.destroy!
+    redirect_to questions_path
   end
   
   private
   def question_params
-    params.require(:question).permit(:tag_id, :genre_id, :name, :title, :introduction, :link, :is_active)
+    params.require(:question).permit(:tag_id, :genre_id, :user_id, :name, :title, :introduction, :link, :is_active)
   end
 end

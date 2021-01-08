@@ -9,7 +9,11 @@
             <%= link_to "質問を見る", questions_path, class:"btn btn-primary" %>
         </div>
         <div class="col-xs-4">
-            <%= link_to "会員登録", new_user_registration_path, class:"btn btn-danger" %>
+            <% if user_signed_in? %>
+              <%= link_to "マイページ", users_path, class:"btn btn-danger" %>
+            <% else %>
+              <%= link_to "会員登録", new_user_registration_path, class:"btn btn-danger" %>
+            <% end %>
         </div>
         <div class="col-xs-4">
             <%= link_to "投稿を見る", posts_path, class:"btn btn-primary" %>
@@ -26,6 +30,7 @@
           <%= l question.created_at, format: :short %><br>
           <%= link_to question.title, question_path(question.id) %><br>
         <% end %>
+        <%= link_to '回答一覧', answers_path %><br>
         <% else %>
             <p>まだ質問が届いていません</p>
         <% end %>
