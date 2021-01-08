@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :event_statuses, dependent: :destroy
   has_many :events,through: :event_statuses
+  has_many :answers, dependent: :destroy
+  has_many :questions, dependent: :destroy
   
   # has_many :events, dependent: :destroy
 

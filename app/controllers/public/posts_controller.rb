@@ -11,6 +11,10 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.genre_id = post_params[:genre_id]
+    @post.tag_id = post_params[:tag_id]
+    # puts @post.inspect
+    # puts post_params
     @post.save!
     redirect_to posts_path
   end

@@ -1,44 +1,102 @@
 <div class="container">
-    <h3>マイページ</h3>
+    <h3 class="user mypage">マイページ</h3>
     <div class="row">
-        <%= @user.name %>nameは現在nil
+        <p><%= @user.name %>の現在の状況です</p>
         <p>ステータス：インフルエンサー　獲得いいね数：３２個　フォロワー数：23人</p>
     </div>
     
-    <div class="row">
-        <table class="table table-bordered">
-        	<tbody>
-        		<tr>
-        			<th>ユーザーネーム</th>
-        			<td><%= @user.name %></td>
-        			<th>あなたのファン</th>
-        			<td>未実装</td>
-        		</tr>
-        		<tr>
-        			<th>お気に入りの投稿</th>
-        			<td>〇〇件</td>
-        			<th>お気に入りの質問</th>
-        			<td>〇〇件</td>
-        		</tr>
-        		<tr>
-        			<th>最近の投稿</th>
-        			<td colspan="3">3件くらい表示　もっと見る</td>
-        		</tr>
-        		<tr>
-        			<th>最近の質問</th>
-        			<td colspan="3">3件くらい表示　もっと見る</td>
-        		</tr>
-        		<%# @event_statuses.each do |es| %>
-        		<tr>
-        			<th>申し込み中のイベント</th>
-        			<td colspan="3"><%# es.cancel %>　もっと見る</td>
-        		</tr>
-        		<%# end %>
-        	</tbody>
-        </table>
-    </div>
-    <div class="row">
+    <div class="row user-mypage">
+      <div class="col-xs-4 user-mypage user-info">
+        <div class="user-status">
+          <p>一般会員</p>
+        </div>
+        <!--<div>-->
+          <i class="far fa-id-card fa-6x"></i>
+        <!--</div>-->
+        <h4 class="user-mypage-box">会員情報</h4>
+        <p>登録名:<%= @user.name %></p>
         <%= link_to '会員情報を編集する',  edit_users_path %> 
+        
+      </div>
+      <div class="col-xs-4 user-mypage user-info">
+        <!--<div>-->
+          <i class="fas fa-question-circle fa-6x"></i>
+        <!--</div>-->
+        <h4 class="user-mypage-box">質問履歴</h4>
+        <p>最近の質問</p>
+        <%= link_to '会員情報を編集する',  edit_users_path %> 
+      </div>
+      <div class="col-xs-4 user-mypage user-info">
+        <!--<div>-->
+          <i class="fas fa-file-alt fa-6x"></i>
+        <!--</div>-->
+        <h4 class="user-mypage-box">投稿データ</h4>
+        <p>登録名:<%= @user.name %></p>
+        <%= link_to '会員情報を編集する',  edit_users_path %> 
+      </div>
+    </div>
+<!--/////////////////////////////////////////////////////2段目//////////////////////////////////////////////////    -->
+    <div class="row user-mypage">
+      <div class="col-xs-4 user-mypage user-info">
+        <!--<div>-->
+          <i class="far fa-calendar-alt fa-6x"></i>
+        <!--</div>-->
+        <h4 class="user-mypage-box">イベント申し込み状況</h4>
+        <p>登録名:<%= @user.name %></p>
+        <%= link_to '確認する',  events_path %> 
+        
+      </div>
+      <div class="col-xs-4 user-mypage user-info">
+        <!--<div>-->
+          <i class="fas fa-reply-all fa-6x"></i>
+        <!--</div>-->
+        <h4 class="user-mypage-box">返答履歴</h4>
+        <p>質問に対してあった回答を表示します</p>
+        <%= link_to '返答確認',  edit_users_path %> 
+      </div>
+      <div class="col-xs-4 user-mypage user-info">
+        <!--<div>-->
+          <i class="fas fa-skiing fa-6x"></i>
+        <!--</div>-->
+        <h4 class="user-mypage-box">回答履歴</h4>
+        <p>あなたが回答した履歴を表示します</p>
+        <%= link_to '回答確認',  edit_users_path %> 
+      </div>
+    </div>
+        
+        
+    <!--    <table class="table table-bordered">-->
+    <!--    	<tbody>-->
+    <!--    		<tr>-->
+    <!--    			<th>ユーザーネーム</th>-->
+    <!--    			<td><%# @user.name %></td>-->
+    <!--    			<th>あなたのファン</th>-->
+    <!--    			<td>未実装</td>-->
+    <!--    		</tr>-->
+    <!--    		<tr>-->
+    <!--    			<th>お気に入りの投稿</th>-->
+    <!--    			<td>〇〇件</td>-->
+    <!--    			<th>お気に入りの質問</th>-->
+    <!--    			<td>〇〇件</td>-->
+    <!--    		</tr>-->
+    <!--    		<tr>-->
+    <!--    			<th>最近の投稿</th>-->
+    <!--    			<td colspan="3">3件くらい表示　もっと見る</td>-->
+    <!--    		</tr>-->
+    <!--    		<tr>-->
+    <!--    			<th>最近の質問</th>-->
+    <!--    			<td colspan="3">3件くらい表示　もっと見る</td>-->
+    <!--    		</tr>-->
+        		<%# @event_statuses.each do |es| %>
+    <!--    		<tr>-->
+    <!--    			<th>申し込み中のイベント</th>-->
+        			<%# es.cancel %>
+    <!--    		</tr>-->
+        		<%# end %>
+    <!--    	</tbody>-->
+    <!--    </table>-->
+    <!--</div>-->
+    <div class="row">
         <%= link_to '退会するお',  users_unsbscribe_path %> 
     </div>
 </div>

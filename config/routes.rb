@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   
   # namespace :public do
+  #   get 'answers/index'
+  #   get 'answers/edit'
+  #   get 'answers/create'
+  #   get 'answers/update'
+  #   get 'answers/destroy'
+  # end
+  # namespace :public do
   #   get 'events/index'
   #   get 'events/show'
   #   get 'events/confirm'
@@ -15,6 +22,8 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :edit, :new, :create, :show, :update, :destroy]
     resources :events, only: [:index, :edit, :new, :create, :show, :update, :destroy]
     post 'events/confirm' => 'events#confirm', as: 'events_confirm'
+    resources :answers, only: [:index, :edit, :create, :show, :update, :destroy]
+    get '/answers/:question_id/new' => 'answers#new', as: 'new_answer'
   end
   
 
