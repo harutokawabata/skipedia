@@ -22,6 +22,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :edit, :new, :create, :show, :update, :destroy]
     resources :events, only: [:index, :edit, :new, :create, :show, :update, :destroy]
     post 'events/confirm' => 'events#confirm', as: 'events_confirm'
+    get 'events/:id/cancel' => 'events#cancel', as: 'events_cancel'
+    # get 'events/:id/confirm' => 'events#confirm', as: 'events_confirm'
+    get 'events/:id/withdraw' => 'events#withdraw', as: 'events_withdraw'
     resources :answers, only: [:index, :edit, :create, :show, :update, :destroy]
     get '/answers/:question_id/new' => 'answers#new', as: 'new_answer'
   end

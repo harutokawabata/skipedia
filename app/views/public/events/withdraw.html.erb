@@ -1,2 +1,21 @@
-<h1>Public::Events#withdraw</h1>
-<p>Find me in app/views/public/events/withdraw.html.erb</p>
+    <!--enum event_status:{-->
+    <!--    perparation: 0, #準備中-->
+    <!--    waiting: 1, #受付中-->
+    <!--    finish: 2, #受付終了-->
+    <!--}-->
+
+<div class="container">
+<!--<% if @entry.do_entry? %>  #do_entry-->
+        <h2>エントリーありがとうございました！</h2>
+        <p>マイページより状況を確認できます</p>
+        <%= link_to "マイページ", users_path %>
+        <%= link_to "イベント一覧", events_path %>
+  <!--<% elsif @entry.cancel_entry? %> cancel_entry-->
+        <h2>ありがとうございました！</h2>
+        <p>またの機会にお待ちしております！</p>
+        <%= link_to "マイページ", users_path %>
+        <%= link_to "イベント一覧", events_path %>
+      <% else %>
+        <p>表示がうまくできてないお</p>
+     <% end %>
+</div>

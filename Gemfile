@@ -67,3 +67,4 @@ gem 'i18n_generators'
 gem 'enum_help'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+gem 'rails-i18n'

@@ -1,10 +1,17 @@
 ja:
-  emun:
-    event_status:
+  enums:
+    event:
+      event_status:
+        perparation: '準備中'
+        waiting: '受付中'
+        finish: '受付終了'
+    event_entry:
       cancel:
-        donot_entry: 未エントリー
-        entry: エントリー済み
-        stop_entry: キャンセル
+        donot_entry: 'エントリー待ち' #0
+        do_entry: 'エントリー済み' #1
+        cancel_entry: 'キャンセル' #2
+        canceld: 'キャンセル済み' #3
+      # stop_entry: 3　#受付終了
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"

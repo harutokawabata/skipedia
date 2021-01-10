@@ -1,53 +1,82 @@
 <div class="container">
- <h2>管理者トップページ</h2>
- <div class="row admin-top">
-   <div class="col-xs-4 admin-top">
-    <img src="/assets/admins/skipedia-admin-event.jpg" alt="">
-    <%= link_to 'イベント作成', admins_events_path, class:"btn btn-primary toppage" %>
+ <h3 class="midashi3">管理者トップページ</h3>
+ <div class="row c-line">
+   <div class="col-xs-4 c-boxarea">
+      <i class="far fa-calendar-alt fa-6x"></i>
+      <h4 class="user-mypage-box">イベント作成</h4>
+      <p>管理者はイベントを作成できます。</p>
+      <%= link_to 'イベント作成', admins_events_path, class:"btn btn-primary toppage" %>
    </div>
-   <div class="col-xs-4 admin-top">
-    <img src="/assets/admins/skipedia-admin-user.jpg" alt="">
-    <%= link_to '会員一覧', admins_users_path, class:"btn btn-danger toppage" %>
+   <div class="col-xs-4 c-boxarea">
+      <i class="far fa-id-card fa-6x"></i>
+      <h4 class="user-mypage-box">会員一覧</h4>
+      <p>Skipediaにご登録いただいている皆様を管理しています。退会復旧処理やBANも可能です</p>
+    　<%= link_to '会員一覧', admins_users_path, class:"btn btn-danger toppage" %>
    </div>
-   <div class="col-xs-4 admin-top">
-    <img src="/assets/admins/skipedia-admin-qanda.jpg" alt="">
-    <%= link_to '質問・投稿一覧', admins_events_path, class:"btn btn-primary toppage" %>
+   <div class="col-xs-4 c-boxarea">
+      <i class="fas fa-history fa-6x"></i>
+      <h4 class="user-mypage-box">履歴一覧</h4>
+      <p>投稿・質問・回答・イベント参加状況など様々な履歴が閲覧できます</p>
+    　<%= link_to '未実装', admins_users_path, class:"btn btn-primary toppage" %>
    </div>
- </div>
- <div class="row admin-top">
-  <!--10列幅分のボックス-->
-  <!--<div class="col-xs-10 bg-primary">10列</div>-->
-</div>
-
+  </div>
 <!--行2-->
-<div class="row">
-  <div class="col-xs-6">
-    <h3>投稿件数合計</h3></br>
-    <p>投稿の合計は<%= Post.count %>件です</p>
-  </div>
-  <div class="col-xs-6">
-     <!--<img src="/assets/admins/skipedia-admin-event.jpg" alt="">-->
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-6">
-    <h3>質問件数合計</h3>
-    <p>質問の合計は<%= Question.count %>件です</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-6">
-    <h3>開催中のイベント</h3>
-    <p>開催中のイベントは<%= Event.count %>件です</p>
-    <%= Event.all %>
-    <%# @events.each do |event| %>
-    <%# if event.event_status == "" %>
-      <%# event.name %>
-    <%# else %>
-      <p>企画倒れ</p>
-    <%# end %>
-    <%# end %>
+    <div class="row c-line">
+      <div class="col-xs-12">
+        <% a = 0 %>
+        <h4 class="midashi4">投稿件数合計（全<%= Post.count %>件）</h4>
+          <% @posts.last(5).each do |posted| %>
+          <%= l posted.created_at, format: :short %><br>
+          <%= a += 1 %>)<%= link_to posted.title, post_path(posted.id) %><br>
+          <% end %>
+        <% a = 0 %>
+        <h4 class="midashi4">質問件数合計（全<%= Question.count %>件 )</h4>
+          <% @questions.last(5).each do |question| %>
+           <%= l question.created_at, format: :short %><br>
+           <%= a += 1 %>)<%= link_to question.title, question_path(question.id) %><br>
+          <% end %>
+           
+          <p>質問の合計は<%= Question.count %>件です</p>
+        <% a = 0 %>
+        <h4 class="midashi4">回答件数合計（全<%= Answer.count %>件）</h4>
+         
+         <% @answers.last(5).each do |answer| %>
+           <%= a += 1 %>)<%= answer.question.title %>に対しての回答<br>
+           =><%= answer.introduction %><br>
+         <% end %>
+           
+         
+          
+        <h4 class="midashi4">開催中のイベント</h4>
+        <p>開催中のイベント<%= Event.count %>件です</p>
+        <% @events.each do |event| %>
+            <% if event.event_status == 0 %>
+              <p>開催準備中</p>
+              <%= event.name %>
+            <% elsif event.event_status == 1 %>
+              <p>受付中</p>
+              <%= event.name %>
+            <% elsif event.event_status == 2 %>
+              <p>受付終了</p>
+            <% else %>
+            <% end %>
+        <% end %>
+        <%# end %>
+     </div>
   </div>
 </div>
 
-</div>
+
+ <!--  <div class="col-xs-4 admin-top">-->
+ <!--   <img src="/assets/admins/skipedia-admin-event.jpg" alt="">-->
+  
+ <!--  </div>-->
+ <!--  <div class="col-xs-4 admin-top">-->
+ <!--   <img src="/assets/admins/skipedia-admin-user.jpg" alt="">-->
+ <!--   <%# link_to '会員一覧', admins_users_path, class:"btn btn-danger toppage" %>-->
+ <!--  </div>-->
+ <!--  <div class="col-xs-4 admin-top">-->
+ <!--   <img src="/assets/admins/skipedia-admin-qanda.jpg" alt="">-->
+ <!--   <%# link_to '質問・投稿一覧', admins_events_path, class:"btn btn-primary toppage" %>-->
+ <!--  </div>-->
+ <!--</div>-->

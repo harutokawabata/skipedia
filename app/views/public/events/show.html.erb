@@ -1,14 +1,14 @@
 <div class="container">
     <h2>イベント申し込みページ</h2>
-    <h3>
-        <%# if @event.donot_entry? %>
-        <p>受付中</p>
-        <%# elsif @event.entry? %>
-        <p>申し込み中</p>
-        <%# elsif @event.stop_entry? %>
-        <p>キャンセル済み</p>
-        <%# end %>
-    </h3>
+      <% if @entry.blank? %>
+          <p>受付中</p>
+      <% else %>
+        <% if @entry.do_entry? %>
+          <p>エントリー済み</p>
+        <% else %>
+          <p>キャンセル済み</p>
+        <% end %>
+      <% end %>
     <div class="row">
       <div class="col-xs-2"><p>イベント名</p></div>
       <div class="col-xs-4"><p><%= @event.name %></p></div>
@@ -39,15 +39,17 @@
     </div>
     
     <div class="row">
-    <% @event.event_statuses.each do |ees| %>
-      <% if ees.cancel == 'donot_entry' %>
+      <% if @entry.blank? %>
         <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
-      <% elsif ees.cancel == 'entry'%>
-        <%= link_to "イベント申し込みをキャンセルする", events_confirm_path(id: @event.id), method: :post, class:"btn btn-danger" %>
-      <% elsif ees.cancel == 'stop_entry'%>
-        <%= link_to "イベント申し込みを再申し込みする", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+      <% else %>
+        <% if @entry.do_entry? %>
+          <%= link_to "イベント申し込みをキャンセルする", events_confirm_path(id: @event.id), method: :post, class:"btn btn-danger" %><br>
+          <p>※再申し込みはできません</p>
+          <%# link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+        <% elsif @entry.cancel_entry? %>
+          <%= link_to "再度申し込みはできません(一覧へ戻る)", events_path, class:"btn btn-primary" %>
+        <% end %>
       <% end %>
-    <% end %>
     </div>
     
 </div>

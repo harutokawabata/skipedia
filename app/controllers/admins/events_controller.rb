@@ -10,6 +10,7 @@ class Admins::EventsController < ApplicationController
     
     def create
         @event = Event.new(event_params)
+        # @event.event_entries = event_entry.cancel
         if @event.save!
             # flash[:notice] = "イベントの追加に成功しました"
             redirect_to admins_events_path
@@ -25,8 +26,8 @@ class Admins::EventsController < ApplicationController
     
     def update
         @event = Event.find(params[:id])
-        if @event = Event.update(event_params)
-            flash[:notice] = "イベントの編集に成功しました"
+        if @event.update(event_params)
+            flash[:notice] = "編集に成功しました"
             redirect_to admins_events_path
         else
             flash[:notice] = "error"
@@ -53,6 +54,6 @@ class Admins::EventsController < ApplicationController
     private
     def event_params
         params[:cancel] = 0
-        params.require(:event).permit(:name, :date, :start, :finish, :entry_fee, :organizer, :event_detail, :evemt_status, :capacity, :cancel, :customer_id)
+        params.require(:event).permit(:event_entries, :name, :date, :start, :finish, :entry_fee, :organizer, :event_detail, :event_status, :capacity, :cancel, :customer_id)
     end
 end
