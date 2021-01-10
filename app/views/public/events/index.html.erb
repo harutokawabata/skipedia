@@ -20,20 +20,26 @@
         	    <% a = 0 %>
         	    <% @events.each do |event| %>
         		<tr>
-        			<th><%= a += 1 %></th>
+        			<th><%= event.id %></th>
         			<th><%= event.name %></th>
         			<td><%= event.event_detail %></td>
-        			<td>
-        			    <% event.event_statuses.each do |ees| %>
-            			    <% if ees.cancel == 'donot_entry' %>
-            			        <%= link_to "詳細確認", event_path(ees.id), class:"btn btn-primary" %>
-            			    <% elsif ees.cancel == 'entry' %>
-            			        <%= link_to "キャンセル", event_path(ees.id), class:"btn btn-primary" %>
-            			    <% elsif ees.cancel == 'stop_entry' %>
-            			        <%= link_to "再エントリー", event_path(ees.id), class:"btn btn-primary" %>
+        	     		<td>
+            			    <% if event.event_status == "waiting" %>
+            			    <%# b = event.id %>
+            			        <%# X = @cancel.cancel %>
+            			        <% if event.cancel == nil %>
+            			        　<%= link_to "エントリーする", event_path(event.id), class:"btn btn-danger" %>
+            			        <% elsif event.cancel == 0 %>
+            			          <%= link_to "キャンセルする", event_path(event.id), class:"btn btn-primary" %>
+            			        <% elsif event.cancel == 1 %>
+            			          <%= link_to "キャンセル済み", event_path(event.id), class:"btn btn-danger" %>
+            			        <% end %>
+            			    <% elsif event.event_status == "perparation" %>
+            			        <p class="btn btn-danger">準備中</p> 
+            			    <% elsif event.event_status == "finish" %>
+            			        <p class="btn btn-danger">受付終了</p>
             			    <% end %>
-        			    <% end %>
-        			</td>
+            	       	</td>		    
         		</tr>
         		<% end %>
         	</tbody>

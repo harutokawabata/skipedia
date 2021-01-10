@@ -153,17 +153,15 @@
     <div class="row user-sign-in">
       <div class="field">
         <div class="col-xs-12 dropdown">
-          <select class="form-control" id="exampleFormControlSelect1">
-                       <%# @.each do |genre| %>  
-            <option>
-              開催中
-                          <%# genre.name %> 
-            </option>
-            <option>
-              準備中  
-            </option>
+          <%= f.select :event_status, [["準備中", "perparation"],["受付中", "waiting"], ["受付終了", "finish"]], include_blank: "選択してください" %>
+            
+            <!--<option>-->
+            <!--</option>-->
+            <!--<option>-->
+            <!--  準備中  -->
+            <!--</option>-->
                        <%# end %>
-            </select>          
+                     
         </div>
       </div>
     </div>
