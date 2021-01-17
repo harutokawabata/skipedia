@@ -16,6 +16,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/////////////////////flashメッセージ///////////////
+
 .flash-success {
     background-color: limegreen;
     color: white;
@@ -50,6 +52,12 @@
 
 .flash-login {
     background-color: gold;
+    color: #c8e4ff;
+    text-align: center;
+}
+
+.flash-message flash-entry {
+    background-color: red;
     color: #c8e4ff;
     text-align: center;
 }
@@ -98,7 +106,7 @@ input[type="password"] {
 }
 
 /////////////////////////////////枠や見出しのcss/////////////////////////
-.row.question-toparea{
+.row.c-toparea{
     margin: 20px;
     margin-bottom: 30px;
 }
@@ -106,6 +114,7 @@ input[type="password"] {
 .row.question-box{
     border: 1px solid #ccc;
     box-shadow: 10px 10px 6px 1px #ccc;
+    // margin-bottom: 200px;
 }
 
 .question-box-text{
@@ -113,29 +122,46 @@ input[type="password"] {
     position: relative;
 }
 
-.tag{
-  background: #5cd;
-  border-radius: 8px 0 0 8px;
-  color: #fff;
-  display: inline-block;
-  height: 20px;
-  line-height: 20px;
-  padding: 0 2em 0 3em;
-  position: relative;
-}
+// .tag{
+//   background: #5cd;
+//   border-radius: 8px 0 0 8px;
+//   color: #fff;
+//   display: inline-block;
+//   height: 20px;
+//   line-height: 20px;
+//   padding: 0 2em 0 3em;
+//   position: relative;
+// }
 
-.tag::before {
-  border: 10px solid transparent;
-  border-left-color: #5cd;
-  border-right-width: 0;
-  content: '';
-  display: block;
-  height: 0;
-  position: absolute;
-  right: -10px;
-  top: 0;
-  width: 0;
-}
+// .tag::before {
+//   border: 10px solid transparent;
+//   border-left-color: #5cd;
+//   border-right-width: 0;
+//   content: '';
+//   display: block;
+//   height: 0;
+//   position: absolute;
+//   right: -10px;
+//   top: 0;
+//   width: 0;
+// }
+
+.tags{
+	margin:0;
+	padding:0;
+	position:absolute;
+	right:24px;
+	bottom:-12px;
+	list-style:none;
+	}
+	
+.tags li, .tags a{
+	float:left;
+	height:24px;
+	line-height:24px;
+	position:relative;
+	font-size:11px;
+	}
 
 .question-midashi{
     background: linear-gradient(gray, red);
@@ -172,7 +198,7 @@ input[type="password"] {
   padding: 1rem 2rem;
 //   border-top: 3px dotted #000;
   border-bottom: 3px dotted #000;
-  width: 70%;
+  width: 100%;
 }
 
 
@@ -227,3 +253,206 @@ input[type="password"] {
     margin-top: 100px;
 }
 
+///////////////////////////iconのcssや管理者画面のuserに関するcss//////////////////////////////
+.p:first-child{
+    margin-right: auto;
+}
+
+
+.user-info {
+  background: linear-gradient(gray, black);
+  width: 330px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+//   text-align: center;
+}
+
+.image-area {
+    margin-top: 65px;
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+
+.image-area.admin {
+    border-radius: 50px;
+    background-color: white;
+    width: 100px;
+    height: 100px;
+}
+
+.status{
+    display: inline;
+}
+
+.icon-area {
+//   display: flex;
+//   justify-content: center;
+  border-radius: 30px;
+}
+
+.content-area{
+    color: black;
+    width: 330px;
+    height: 350px;
+    background: linear-gradient(gray, white);
+}
+
+.text-area {
+    margin: -10px 20px;
+}
+
+.name-area{
+    padding-top: 50px;
+    color: black;
+    text-align: center;
+}
+
+.underbar {
+    background: linear-gradient(transparent 70%, #ff99ab 70%);
+    font-size: 18px;
+}
+
+.ban-box {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}
+
+.ban-area:last-child{
+    margin-left: 200px;
+}
+
+//////////////////////////////////post_imageのcss//////////////////////
+
+.introduction-area{
+    border :solid 2px black;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.image-area{
+  display: flex;
+  justify-content: center;
+//   margin: 50px; 
+//   background-color: pink;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 50px;
+}
+
+.col-xs-4.c-boxarea.pi {
+    height: 400px;
+    
+}
+
+// .inline-block li {
+//     float: left;
+//     display: inline-block;
+// }
+
+ .timeline {
+    border: 1px solid #ccc;
+    box-shadow: 1px 0px 1px 0px #ccc;
+    width: 100%;
+    height: 80px;
+    position: relative;
+    display: flex;
+ }
+ .image-image {
+    position: relative;
+    // border: 2px solid green;
+    width: 160px;
+    height: 80px;
+ }
+ .image-image-image{
+    // background: yellow;
+    position: absolute;
+    top: 50%; /*親要素を起点に上から50%*/
+    left: 50%;  /*親要素を起点に左から50%*/
+    transform: translateY(-50%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
+    -webkit-transform: translateY(-50%) translateX(-50%);
+ }
+ 
+ .post-text-area {
+    // border: 10px solid red;
+    width: 100%;
+ }
+ 
+ .ppp{
+   display: flex;
+ }
+ 
+ .ppp li {
+     display: inline-block;
+ }
+ 
+ 
+ .text-center {
+     text-align: center;
+ }
+ 
+ .post-info-area{
+    //  display: table;
+ }
+ 
+ /////////user側のquestions・posts・answers共通/////////////////////
+ .c-delete {
+    position: relative;
+ }
+ 
+ .c-delete-icon {
+
+ }
+ 
+  .c-toparea{
+    margin-bottom: 10px;
+ }
+ 
+ .c-btn {
+     margin-top: 20px;
+ }
+ 
+////投稿などのタイトル投稿日の左右切り離し
+ .c-left{
+     margin-right: auto;
+ }
+ 
+ .c-right{
+     padding-right: 20px;
+     opacity: 0.7;
+ }
+ 
+ .c-ul{
+   display: flex;
+ }
+ 
+///////幅の指定///////////
+.c-width-800 {
+    width: 800px;
+}
+
+//////flexbox////
+.c-flex-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.c-toparea{
+    border :solid 2px black;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.c-margin-bottom {
+    margin-bottom: 20px;
+}
+.c-margin-top {
+    margin-top: 20px;
+}

@@ -1,35 +1,61 @@
 <div class="container">
-    <h3>回答一覧</h3>
-    <div class="row">
-        <table class="table tabke-bordered">
-            <thead>
-              <tr>
-                <th>No.</th>
-                <td>質問内容</td>
-                <td>回答内容</td>
-                <td>回答者</td>
-                <td>削除</td>
-              </tr>
-            </thead>
-            <tbody>
-                <% a = 0 %>
-                <% @answers.each do |answer| %>
-                <tr>
-                    <th><%= a += 1 %></th>
-                    <td>
-                        <%= answer.question.user.name %>さんからの質問<br>
-                        <%= answer.question.title %></td>
-                    <td><%= answer.introduction %></td>
-                    <td><%= answer.user.name %></td>
-                    <td>
-                        <% if user_signed_in? && current_user.id == answer.user_id %>
-                        <%= link_to "質問取り消し（削除)", answer_path(answer.id), method: :delete %>
-                        <% end %>
-                    </td>
-                    <td><%# answer.user.name %></td>
-                </tr>
-                <% end %>
-            </tbody>
-        </table>
+    <h3 class="midashi3">回答一覧</h3>
+    <div class="row c-toparea">
+      <ul>
+        <li>質問に対する回答一覧ページです</li>
+        <li>お困りの方がたくさんいらっしゃいます。<a><%= link_to "こちら", questions_path %></a>から確認してください</li>
+      </ul>
     </div>
+    <div class="c-flex-box" style="justify-content: space-between">
+      <div class="text-left c-search-area c-margin-bottom">
+        <%= form_tag(answers_search_path, :method => 'get') do %>
+          <%= text_field_tag :search, "タイトル名で検索" %>
+          <%= submit_tag '検索', :name => nil %>
+        <% end %>
+      </div>
+    </div>
+
+  <% @answers.order(created_at: :desc).each do |answer| %>
+  <div class="row">
+    <div class="timeline">
+      <div class="col-lg-2 image-image">
+        <p class="text-center"><%= answer.user.name %>さんの回答</p>
+        <div class="image-image-image">
+          <i class="fas fa-user-circle fa-3x"></i>
+        </div>
+      </div>
+      <div class="col-lg-8 post-text-area">
+        <ul class="c-ul">
+          <li class="c-left" style="font-size:20px;"><%= link_to answer.question.title.truncate(60, omission: '...'), question_path(answer.question.id) %><br>
+          <li>投稿日:<%= l answer.created_at, format: :short %></li>
+        </ul>
+        <div class="post-introduction-area">
+          <%= answer.introduction.truncate(60, omission: '...') %>
+            <div class="text-right">
+              <%= link_to "全文表示", answer_path(answer.id) %>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-2 post-info-area">
+        <ul>
+          <li><i class="fas fa-folder"></i><%= answer.question.tag.genre.name %><br></li>
+          <li><i class="fas fa-tags"></i><%= answer.question.tag.name %><br></li>
+          <li><%= link_to "回答の詳細を見る", answer_path(answer.id) %><br></li>
+          <% if user_signed_in? %>
+          <li>
+            <div class="c-delete">
+              <% if current_user.id == answer.user_id %>
+                <%= link_to answer_path(answer.id), :method => :delete do %>
+                  <i class="fas fa-trash-alt c-delete-icon"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    </div>
+   <% end %>
+
 </div>

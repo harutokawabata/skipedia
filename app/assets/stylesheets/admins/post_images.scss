@@ -1,3 +1,25 @@
 // Place all the styles related to the admins::post_images controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+input[type="text"] {
+        width: 1000px;
+        height: 40px;
+    }
+
+// .post_image_form {
+//   width: 100%;
+//     // background-color: green;
+// //   display: flex;
+// //   justify-content: center;
+    
+// }
+
+.btn-area{
+  margin: 20px 0px;
+}
+
+.pi-text-area{
+  float: left;
+  text-align: left;
+}

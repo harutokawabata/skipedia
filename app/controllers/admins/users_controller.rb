@@ -1,4 +1,5 @@
 class Admins::UsersController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @users = User.all
   end
@@ -6,6 +7,7 @@ class Admins::UsersController < ApplicationController
   def show
     @users = User.all
     @user = User.find(params[:id])
+    @user_events = @user.events
   end
   
   def destroy
@@ -20,6 +22,22 @@ class Admins::UsersController < ApplicationController
   
   def confirm
     @user = User.find(params[:id])
+  end
+  
+  def update
+    @user.update(user_params)
+    redirect_to admins_users_path
+  end
+  
+  def withdraw
+    @user = User.find(params[:id])
+    if @user.update(is_deleted: false)
+      flash[:notice] = "会員復活"
+      redirect_to admins_users_path
+    else
+      flash[:notice] = "error"
+      redirect_to admins_users_path
+    end
   end
   
   private

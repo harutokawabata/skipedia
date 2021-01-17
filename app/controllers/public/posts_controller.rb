@@ -25,6 +25,9 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    if @post.user_id != current_user.id
+      redirect_to posts_path
+    end
   end
 
   def update
@@ -39,8 +42,12 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
   
+  def search
+    @posts = Post.search(params[:search])
+  end
+  
   private
   def post_params
-    params.require(:post).permit(:question_id, :genre_id, :tag_id, :title, :introduction, :link, :status, :name)
+    params.require(:post).permit(:question_id, :genre_id, :tag_id, :title, :introduction, :link, :status, :name, :search)
   end
 end

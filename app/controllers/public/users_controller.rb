@@ -38,6 +38,27 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
   
+  def history_question
+    @user = current_user
+    @questions = Question.where(user_id: current_user.id).order(created_at: "desc")
+  end
+  
+  def history_post
+    @user = current_user
+    @posts = Post.where(user_id: current_user.id).order(created_at: "desc")
+  end
+  
+  def history_answer
+    @user = current_user
+    @answers = Answer.where(user_id: current_user.id).order(created_at: "desc")
+  end
+  
+  def history_return_answer
+    @user = current_user
+    @answers = Answer.all
+    @questions = current_user.questions.order(created_at: :desc)
+  end
+  
   private
   def user_params
     params.require(:user).permit(:name, :watchword, :encrypted_password, :popular, :is_deleted, :email, :password)

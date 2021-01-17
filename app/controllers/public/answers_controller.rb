@@ -20,11 +20,24 @@ class Public::AnswersController < ApplicationController
     @answer.question_id = answer_params[:question_id]
     # @post.genre_id = post_params[:genre_id]
     # @answer.title = qusetion.title
-    @answer.save!
-    redirect_to answers_path
+    # byebug
+    if @answer.save!
+      if @answer.question.is_active == "f"
+        @answer.question.is_active = "t"
+        @answer.question.save!
+      end
+    end
+    redirect_to questions_path
+  end
+  
+  def show
+    @answer = Answer.find(params[:id])
   end
 
   def edit
+    @answers = Answer.new
+    # @answer = Answer.find(params[:id])
+    # @question = Question.find(params[id])
   end
 
   def update
@@ -36,8 +49,13 @@ class Public::AnswersController < ApplicationController
     redirect_to answers_path
   end
   
+  def search
+    @answers = Answer.search(params[:search])
+    # @answers = Answer.all
+  end
+  
   private
   def answer_params
-    params.permit(:user_id, :question_id, :tag_id, :introduction, :title, :link, :status)
+    params.permit(:user_id, :question_id, :tag_id, :introduction, :title, :link, :status, :search)
   end
 end

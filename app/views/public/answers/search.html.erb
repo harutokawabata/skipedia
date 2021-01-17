@@ -1,0 +1,62 @@
+<div class="container">
+    <h3 class="midashi3">回答一覧</h3>
+    <div class="row c-toparea">
+      <ul>
+        <li>質問に対する回答一覧ページです</li>
+        <li>お困りの方がたくさんいらっしゃいます。<a><%= link_to "こちら", questions_path %></a>から確認してください</li>
+      </ul>
+    </div>
+    <div class="c-flex-box" style="justify-content: space-between">
+      <div class="text-left c-search-area c-margin-bottom">
+        <%= form_tag(answers_search_path, :method => 'get') do %>
+          <%= text_field_tag :search, "タイトル名で検索" %>
+          <%= submit_tag '検索', :name => nil %>
+        <% end %>
+      </div>
+    </div>
+  <% if @answer.present? %>
+  <% @answers.order(created_at: :desc).each do |answer| %>
+  <div class="row">
+    <div class="timeline">
+      <div class="col-lg-2 image-image">
+        <p class="text-center"><%= answer.user.name %>さんの回答</p>
+        <div class="image-image-image">
+          <i class="fas fa-user-circle fa-3x"></i>
+        </div>
+      </div>
+      <div class="col-lg-8 post-text-area">
+        <ul class="c-ul">
+          <li class="c-left" style="font-size:20px;"><%= link_to answer.question.title.truncate(60, omission: '...'), question_path(answer.question.id) %><br>
+          <li>投稿日:<%= l answer.created_at, format: :short %></li>
+        </ul>
+        <div class="post-introduction-area">
+          <%= answer.introduction.truncate(60, omission: '...') %>
+            <div class="text-right">
+              <%= link_to "全文表示", answer_path(answer.id) %>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-2 post-info-area">
+        <ul>
+          <li><i class="fas fa-folder"></i><%= answer.question.tag.genre.name %><br></li>
+          <li><i class="fas fa-tags"></i><%= answer.question.tag.name %><br></li>
+          <li><%= link_to "回答の詳細を見る", answer_path(answer.id) %><br></li>
+          <% if user_signed_in? %>
+          <li>
+            <div class="c-delete">
+              <% if current_user.id == answer.user_id %>
+                <%= link_to answer_path(answer.id), :method => :delete do %>
+                  <i class="fas fa-trash-alt c-delete-icon"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    </div>
+   <% end %>
+   <% end %>
+
+</div>

@@ -2,8 +2,8 @@
 <div class="container">
     <h3 class="user mypage">マイページ</h3>
     <div class="row">
-        <p><%= @user.name %>の現在の状況です</p>
-        <p>ステータス：インフルエンサー　獲得いいね数：３２個　フォロワー数：23人</p>
+        <!--<p><%# @user.name %>の現在の状況です</p>-->
+        <!--<p>ステータス：インフルエンサー　獲得いいね数：３２個　フォロワー数：23人</p>-->
     </div>
     
     <div class="row c-line">
@@ -25,7 +25,7 @@
         <!--</div>-->
         <h4 class="user-mypage-box">質問履歴</h4>
         <p>最近の質問</p>
-        <%= link_to '会員情報を編集する',  edit_users_path %> 
+        <%= link_to '質問履歴を確認する', users_questions_path %> 
       </div>
       <div class="col-xs-4 c-boxarea">
         <!--<div>-->
@@ -33,7 +33,7 @@
         <!--</div>-->
         <h4 class="user-mypage-box">投稿データ</h4>
         <p>登録名:<%= @user.name %></p>
-        <%= link_to '会員情報を編集する',  edit_users_path %> 
+        <%= link_to '投稿履歴を確認',  users_posts_path %> 
       </div>
     </div>
 <!--/////////////////////////////////////////////////////2段目//////////////////////////////////////////////////    -->
@@ -53,7 +53,7 @@
         <!--</div>-->
         <h4 class="user-mypage-box">返答履歴</h4>
         <p>質問に対してあった回答を表示します</p>
-        <%= link_to '返答確認',  edit_users_path %> 
+        <%= link_to '返答確認',  users_return_answers_path %> 
       </div>
       <div class="col-xs-4 c-boxarea">
         <!--<div>-->
@@ -61,10 +61,9 @@
         <!--</div>-->
         <h4 class="user-mypage-box">回答履歴</h4>
         <p>あなたが回答した履歴を表示します</p>
-        <%= link_to '回答確認',  edit_users_path %> 
+        <%= link_to '回答確認',  users_answers_path %> 
       </div>
     </div>
-        
         
     <!--    <table class="table table-bordered">-->
     <!--    	<tbody>-->
@@ -97,7 +96,4 @@
     <!--    	</tbody>-->
     <!--    </table>-->
     <!--</div>-->
-    <div class="row">
-        <%= link_to '退会するお',  users_unsbscribe_path %> 
-    </div>
 </div>

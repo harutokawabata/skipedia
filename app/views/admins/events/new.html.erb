@@ -77,7 +77,22 @@
     <!--          </div>-->
     <!--        </div>-->
     <!--        <%# end %>-->
-    <!--     </div>-->
+<div class="container">
+<div class="row">
+  <h3 class="midashi3">イベント追加</h3>
+  <div class="c-toparea">
+    <p><span class="underbar">このページの機能及び注意点</span></p>
+    <ul>
+      <li>イベントを新規で追加することができます</li>
+      <li>イベントを追加できるのは管理者だけでユーザーには追加の権限はありません</li>
+      <li>イベントを作成し投稿すると保留であってもユーザー画面に表示されます</li>
+      <li>ユーザーからの申込みをまだ受け入れたくない場合は準備中で投稿してください</li>
+      <li>エントリーを開始したい場合は受付中に変更することでユーザーはエントリーすることができます</li>
+    </ul>
+  </div>
+</div>  
+  
+</div>
 
 <div class="container user-sign-in">
  <div class="row form-title">
@@ -90,6 +105,15 @@
       <div class="field">
         <div class="col-xs-12">
           <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "イベント名", class:'fa' %>
+        </div>
+      </div>
+    </div>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12 dropdown">
+          <%# f.attachment_field :image %>
+           <%= f.collection_select(:post_image_id, PostImage.all, :id, :name) %>
+           <!--f.collection.select :post_image, [[event.post_image_id, ""],["受付中", "waiting"], ["受付終了", "finish"]], include_blank: "選択してください" %>-->
         </div>
       </div>
     </div>

@@ -1,5 +1,14 @@
 <div class="container">
-    <h3>ユーザー一覧</h3>
+    <h3 class="midashi3">ユーザー一覧</h3>
+    <div class="row">
+      <div class="c-toparea">
+           <p><span class="underbar">このページの機能及び注意点</span></p>
+          <ul>
+              <li>ユーザーの情報を一覧で表示しています</li>
+              <li>さらに詳しい情報は会員詳細より確認できます</li>
+          </ul>
+      </div>
+    </div>
     <div class="row">
         <table class="table table-bordered">
         	<thead>
@@ -17,11 +26,17 @@
         		<tr>
         			<th><%= user.id %></th>
         			<td><%= user.name %></td>
-        			<td>投稿数未実装</td>
-        			<td>質問数未実装</td>
-        			<td><%= user.is_deleted %></td>
+        			<td><%= user.posts.count %>件</td>
+        			<td><%= user.questions.count %>件</td>
         			<td>
-        			    <%= link_to '詳細', admins_user_path(user.id), method: :get %> 
+        			  <% if user.is_deleted == false %>
+        			    <p>有効会員</p>
+        			  <% elsif user.is_deleted == true %>
+        			    <p>退会済み</p>
+        			  <% end %>
+        			</td>
+        			<td>
+        			    <%= link_to '会員詳細', admins_user_path(user.id), method: :get %> 
         			</td>
         		</tr>
         		<% end %>

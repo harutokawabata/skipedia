@@ -22,7 +22,13 @@
       				<span class="icon-bar"></span>
       			</button>
       			<p class="navbar-brand">
-      				<%= link_to 'Skipedia', root_path %>
+      			  <% if user_signed_in? %>
+      				  <%= link_to 'Skipedia', root_path %>
+      				<% elsif admin_signed_in? %>
+      				  <%= link_to 'Skipedia-admin', admins_path %>
+      				<% else %>
+      				  <%= link_to 'Skipedia', root_path %>
+      				<% end %>
       			</p>
       		</div>
       		
@@ -32,17 +38,28 @@
               <li>ユーザー</li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               <li><%= link_to "マイページ", users_path %></li>
-              <p class="navbar-text navbar-right">ようこそ<%= current_user.name %>さん</p>
+              <li><%= link_to "投稿一覧", posts_path %></li>
+              <li><%= link_to "質問一覧", questions_path %></li>
+              <li><%= link_to "回答一覧", answers_path %></li>
+              <li><%= link_to "イベント一覧", events_path %></li>
       			 <% elsif admin_signed_in? %>
               <li>管理者</li>
-              <li><%= link_to "ジャンル", admins_genres_path %></li>
-              <li><%= link_to "タグ", admins_tags_path %></li>
-              <li><%= link_to "イベント", admins_events_path %></li>
+              <li><%= link_to "ジャンル管理", admins_genres_path %></li>
+              <li><%= link_to "タグ管理", admins_tags_path %></li>
+              <li><%= link_to "イベント追加", admins_events_path %></li>
+              <li><%= link_to "履歴", admins_histories_path %></li>
+              <li><%= link_to "写真", admins_post_images_path %></li>
+              <li><%= link_to "会員一覧", admins_users_path %></li>
               <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
              <% else %>
               <li>ゲストユーザー</li>
-              <li><%= link_to "新規登録", new_user_registration_path %></li>
+              <li><%= link_to "会員登録", new_user_registration_path %></li>
               <li><%= link_to "ログイン", new_user_session_path %></li>
+              <li><%= link_to "Skipediaとは", new_user_session_path %></li>
+              <li><%= link_to "投稿一覧", posts_path %></li>
+              <li><%= link_to "質問一覧", questions_path %></li>
+              <li><%= link_to "回答一覧", answers_path %></li>
+              <li><%= link_to "イベント一覧", events_path %></li>
              <% end %>
               <p class="notice"><%# notice %></p>
               <p class="alert"><%#alert %></p>
@@ -50,7 +67,11 @@
       				<!--<li><a href="#">メニューＣ</a></li>-->
       			</ul>
       			<% if admin_signed_in? %>
-        			<p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link">ゲスト</a> さん。</p>
+        			<p class="navbar-text navbar-right">管理者でログイン中</p>
+        		<% elsif user_signed_in? %>
+      			  <p class="navbar-text navbar-right">ようこそ<%= current_user.name %>さん</p>
+      			<% else %>
+      			  <p class="navbar-text navbar-right">ようこそゲストさん</p>
       			<% end %>
       		</div>
       	</div>
@@ -82,6 +103,10 @@
         </div>
       <% elsif flash[:notice] == "今までありがとうございました！" %>
         <div class="flash-message flash-error">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == "お申し込みが完了しました！" %>
+        <div class="flash-message flash-entry">
            <%= flash[:notice] %>
         </div>
       <% else %>

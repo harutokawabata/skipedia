@@ -21,7 +21,8 @@ class Public::QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user_id = current_user.id
-    @question.save
+    # @question.is_active = true
+    @question.save!
     redirect_to questions_path
     #   flash[:notice] = "投稿に成功しました"
     #   redirect_to questions_path
@@ -40,8 +41,13 @@ class Public::QuestionsController < ApplicationController
     redirect_to questions_path
   end
   
+  def search
+     @questions = Question.search(params[:search])
+  end
+  
+  
   private
   def question_params
-    params.require(:question).permit(:tag_id, :genre_id, :user_id, :name, :title, :introduction, :link, :is_active)
+    params.require(:question).permit(:tag_id, :genre_id, :user_id, :name, :title, :introduction, :link, :is_active, :search)
   end
 end
