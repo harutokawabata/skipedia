@@ -1,38 +1,45 @@
 <div class="container">
-    <div class="row">
-        <table class="table table-bordered">
-        	<!--<thead>-->
-        	<!--	<tr>-->
-        	<!--		<th></th>-->
-        	<!--		<th>名前</th>-->
-        	<!--		<th>惑星</th>-->
-        	<!--		<th>勝点</th>-->
-        	<!--	</tr>-->
-        	<!--</thead>-->
-        	<tbody>
-        		<tr>
-        			<th class="col-xs-2">タイトル</th>
-        			<td><%= @post.title %></td>
-        		</tr>
-        		<tr>
-        			<th>ジャンル・タグ</th>
-        			<td><%= @post.genre.name %> <%= @post.tag.name %></td>
-        		</tr>
-        		<tr>
-        		    <th>内容</th>
-        		    <td><%= @post.introduction %></td>
-        		</tr>
-        		<tr>
-        		    <th>参考リンク</th>
-        		    <td><%# @post.link %></td>
-        		</tr>
-        	</tbody>
-        </table>
-    </div>
+  <h3 class="midashi3">投稿詳細ページ</h3>
+  <div class="row text-center">
     <% if @post.user == current_user %>
-    <div class="row">
-        <%= link_to '編集する', edit_post_path, class:"btn btn-primary" %>
-        <%= link_to '削除する', post_path, method: :delete, class:"btn btn-danger" %>
-    </div>
+      <%= link_to '編集する', edit_post_path, class:"btn btn-primary" %>
+      <%= link_to '削除する', post_path, method: :delete, class:"btn btn-danger" %>
+      <p>※このボタンは投稿者の<%= @post.user.name %>にだけ表示されています</p>
     <% end %>
-</div>
+  </div>
+  <div class="row c-toparea">
+  </div>
+    <div class="row question-box">
+      <div class="question-box-text">
+        <h4 class="question-midashi"><%= @post.tag.genre.name %>に関する投稿です</h4>
+        <!--<i class="far fa-question-circle"></i>-->
+        <div class="midashi4" style="margin-bottom:10px; font-size:20px;">
+          <%= @post.title %>
+        </div>
+        <div class="tag">
+          <ul class="c-ul">
+            <i class="fas fa-tags c-left"><%= @post.tag.name %></i>
+            <i class="c-right"><%= @post.user.name %>さんの投稿です</i>
+          </ul>
+        </div>
+        <div style="margin:20px 0px">
+          <%= @post.introduction %>
+        </div>
+        <div class="c-link-area">
+          <% if @post.link.present? %>
+          <p>参考文献：<%= @post.link %></p>
+          <% else %>
+          <p>参考文献はありません</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row question-btn" style="text-align:center;">
+    <% if user_signed_in? %>
+      <%= link_to '新規投稿', new_post_path(@post.id), class:"btn btn-primary c-btn" %>
+    <% else %>
+      <%= link_to '会員登録して回答する', new_user_registration_path, class:"btn btn-danger c-btn" %>
+    <% end %>
+  <!--#引数を@questionにしてrootingを/answers/:id/newにしたら上手くパスはとおった-->
+    </div>
+  </div>

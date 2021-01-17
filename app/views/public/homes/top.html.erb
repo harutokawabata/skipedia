@@ -5,17 +5,17 @@
         <h3>-誰でも投稿できるスキー百科事典-</h3>
     </div>
     <div class="row user-top-btn">
-        <div class="col-xs-4">
+        <div class="col-lg-4">
             <%= link_to "質問を見る", questions_path, class:"btn btn-primary" %>
         </div>
-        <div class="col-xs-4">
+        <div class="col-lg-4">
             <% if user_signed_in? %>
               <%= link_to "マイページ", users_path, class:"btn btn-danger" %>
             <% else %>
               <%= link_to "会員登録", new_user_registration_path, class:"btn btn-danger" %>
             <% end %>
         </div>
-        <div class="col-xs-4">
+        <div class="col-lg-4">
             <%= link_to "投稿を見る", posts_path, class:"btn btn-primary" %>
         </div>
     </div>
@@ -23,7 +23,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-6 user-top-question">
+    <div class="col-lg-6 user-top-question">
         <h3 class="midashi3"><i class="fas fa-skiing"></i>新着質問一覧</h3>
         <% if @questions.present? %> 
         <% @questions.last(3).each do |question| %>
@@ -37,7 +37,7 @@
         <!--<p>谷回りについてわからない人がいるそうです</p>-->
         <%= link_to "MORE", questions_path, class:"btn btn-secondary btn btn-lg w-20", style:"text-align:center;" %>
     </div>
-    <div class="col-xs-6 user-top-event">
+    <div class="col-lg-6 user-top-event">
         <h3 class="midashi3"><i class="fas fa-skiing"></i>イベント一覧</h3>
           <% if @events.present? %>
             <% @events.each do |event| %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_09_062506) do
+ActiveRecord::Schema.define(version: 2021_01_15_131026) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -66,12 +66,25 @@ ActiveRecord::Schema.define(version: 2021_01_09_062506) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "post_image_id"
   end
 
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
     t.text "introduction", null: false
     t.boolean "is_active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.integer "answer_id"
+    t.integer "event_id"
+    t.integer "post_id"
+    t.integer "question_id"
+    t.integer "user_id"
+    t.integer "event_entry_id"
+    t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -103,11 +116,11 @@ ActiveRecord::Schema.define(version: 2021_01_09_062506) do
     t.string "title"
     t.text "introduction"
     t.string "link"
-    t.string "is_active"
+    t.string "is_active", default: "f"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "answer"
     t.integer "user_id"
+    t.integer "answer_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -125,7 +138,6 @@ ActiveRecord::Schema.define(version: 2021_01_09_062506) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.string "watchword"
     t.string "popular", default: "0"
     t.boolean "is_deleted", default: false
     t.datetime "created_at", null: false

@@ -1,48 +1,103 @@
 <div class="container">
-    <h2>イベント一覧</h2>
+    <h3 class="midashi3">イベント一覧</h3>
+    <div class="row">
+    <h4 class="midashi4">イベントの情報が<%= @events.count %>件あります</h4>
     <ul>
-        <li>開催中のイベントにエントリーできます</li>
-        <li>参加中のイベントはマイページで確認できます</li>
-        <li>キャンセルはできますが再度申し込みの際は１からのお手続きをお願いします</li>
+        <ol>開催中のイベントにエントリーできます</ol>
+        <ol>参加中のイベントはマイページで確認できます</ol>
+        <ol>キャンセルはできますが再度申し込みの際は１からのお手続きをお願いします</ol>
+        <ol>エントリーは先着順です</ol>
     </ul>
+    </div>
     <div class="row">
         <table class="table table-bordered">
         	<thead>
         		<tr>
-        			<th>No.</th>
-        			<th>イベント名</th>
-        			<th>概要・詳細</th>
-        			<th>参加申請</th>
+        			<th class="col-lg-1 text-center">No.</th>
+        			<th class="col-lg-9 text-center">イベント名</th>
+        			<th class="col-lg-2 text-center">参加状況</th>
+        			<!--<th>概要・詳細</th>-->
+        			<!--<th>参加申請</th>-->
         		</tr>
         	</thead>
         	<tbody>
         	    <!--tbodypp-->
-        	    <% a = 0 %>
-        	    <% @events.each do |event| %>
-        		<tr>
-        			<th><%= event.id %></th>
-        			<th><%= event.name %></th>
-        			<td><%= event.event_detail %></td>
-        	     		<td>
-            			    <% if event.event_status == "waiting" %>
-            			    <%# b = event.id %>
-            			        <%# X = @cancel.cancel %>
-            			        <% if event.cancel == nil %>
-            			        　<%= link_to "エントリーする", event_path(event.id), class:"btn btn-danger" %>
-            			        <% elsif event.cancel == 0 %>
-            			          <%= link_to "キャンセルする", event_path(event.id), class:"btn btn-primary" %>
-            			        <% elsif event.cancel == 1 %>
-            			          <%= link_to "キャンセル済み", event_path(event.id), class:"btn btn-danger" %>
-            			        <% end %>
-            			    <% elsif event.event_status == "perparation" %>
-            			        <p class="btn btn-danger">準備中</p> 
-            			    <% elsif event.event_status == "finish" %>
-            			        <p class="btn btn-danger">受付終了</p>
-            			    <% end %>
-            	       	</td>		    
-        		</tr>
+        	  <% a = 0 %>
+        	  <% @events.each do |event| %>
+        	     <!--<p> EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') %></p>-->
+        	    <% a = event.capacity %>
+        	    <% b = event.event_entries.where(cancel: 'do_entry').count %>
+        	    <% acceptable = a - b %>
+        	    <% if acceptable > 0 %>
+            	   <% if user_signed_in? %>
+            		 <tr>
+            		   <th class="text-center"><%= event.id %></th>
+            		   <th><%= link_to event.name, event_path(event.id) %></th>
+                	 <% if EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["do_entry"] %>
+                	   <th class="text-center">エントリー済みです</th>
+                	 <% elsif EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["cancel_entry"] %>
+                		<th class="text-center">キャンセル済みです</th>
+                	 <% else %>
+                		<th class="text-center">エントリーできます！</th>
+                	 <% end %>
+                     </tr>
+            	   <% else %>
+            		 <tr>
+            			<th class="text-center"><%= event.id %></th>
+            			<th><%= link_to event.name, event_path(event.id) %></th>
+            			<th class="text-center">会員登録で参加できます！</th>
+            		 </tr>
+            	   <% end %>
+        		<% elsif acceptable <= 0 %>
+        		   <% if user_signed_in? %>
+            		 <tr>
+            		   <th class="text-center"><%= event.id %></th>
+            		   <th><%= link_to event.name, event_path(event.id) %></th>
+                	 <% if EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["do_entry"] %>
+                	   <th class="text-center">エントリー済みです</th>
+                	 <% elsif EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["cancel_entry"] %>
+                		<th class="text-center">キャンセル済みです</th>
+                	 <% else %>
+                		<th class="text-center">満席です</th>
+                	 <% end %>
+                     </tr>
+            　　　 <% else %>
+            		 <tr>
+            			<th class="text-center"><%= event.id %></th>
+            			<th><%= link_to event.name, event_path(event.id) %></th>
+            			<th class="text-center">満席です！</th>
+            		 </tr>
+            	   <% end %>
         		<% end %>
+        　     <% end %>
         	</tbody>
         </table>
     </div>
 </div>
+
+
+<!--3７行目以下-->
+           		     <!--#if EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["do_entry"] %>-->
+            			  
+            			<%# elsif EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["cancel_entry"] %>
+            			<!--<th>キャンセル済みです</th>-->
+            			<%# else %>
+            			<!--<th></th>-->
+        			<%# event.event_detail %>
+        	     		<!--<td>-->
+            			    <%## if event.event_status == "waiting" %>
+            			    <%# b = event.id %>
+            			        <%# X = @cancel.cancel %>
+            			        <%## if event.cancel == nil %>
+            			        <%## link_to "エントリーする", event_path(event.id), class:"btn btn-danger" %>
+            			        <%## elsif event.cancel == 0 %>
+            			          <%## link_to "キャンセルする", event_path(event.id), class:"btn btn-primary" %>
+            			        <%## elsif event.cancel == 1 %>
+            			          <%## link_to "エントリーする", event_path(event.id), class:"btn btn-danger" %>
+            			        <%## end %>
+            			    <%## elsif event.event_status == "perparation" %>
+            			        <!--<p class="btn btn-danger">準備中</p> -->
+            			    <%## elsif event.event_status == "finish" %>
+            			        <!--<p class="btn btn-danger">受付終了</p>-->
+            			    <%## end %>
+            	       	<!--</td>		    -->

@@ -1,11 +1,13 @@
 class Admins::EventsController < ApplicationController
-    
+    before_action :authenticate_admin!
     def index
         @events = Event.all
+        @post_images = PostImage.all
     end
     
     def new
         @event = Event.new
+        @events = Event.all
     end
     
     def create
@@ -54,6 +56,6 @@ class Admins::EventsController < ApplicationController
     private
     def event_params
         params[:cancel] = 0
-        params.require(:event).permit(:event_entries, :name, :date, :start, :finish, :entry_fee, :organizer, :event_detail, :event_status, :capacity, :cancel, :customer_id)
+        params.require(:event).permit(:post_image_id, :event_entries, :name, :date, :start, :finish, :entry_fee, :organizer, :event_detail, :event_status, :capacity, :cancel, :customer_id)
     end
 end

@@ -1,0 +1,59 @@
+<%# @user.answers.inspect %>
+<%# @answers.inspect %>
+<!--<p><%# @user.inspect %></p>-->
+
+<div class="container">
+    <h3 class="midashi3"><%= @user.name %> さんの回答履歴一覧</h3>
+    <div class="row">
+        <div class="c-toparea">
+        <p><span class="underbar">このページについて</span></p>
+            <ul>
+                <li><%= @user.name %>さん匿名の質問者さんに対して回答した内容が一覧で表示されています</li>
+                <li>この一覧ページより回答内容の編集や削除が可能です</li>
+            </ul>
+        </div>
+    </div>
+  <% @answers.each do |answer| %>
+  <div class="row">
+    <div class="timeline">
+      <div class="col-lg-2 image-image">
+        <p class="text-center"><%= answer.user.name %>さんの回答</p>
+        <div class="image-image-image">
+          <i class="fas fa-user-circle fa-3x"></i>
+        </div>
+      </div>
+      <div class="col-lg-8 post-text-area">
+        <ul class="c-ul">
+          <li class="c-left" style="font-size:20px;"><%= link_to answer.question.title.truncate(60, omission: '...'), question_path(answer.question.id) %><br>
+          <li>投稿日:<%= l answer.created_at, format: :short %></li>
+        </ul>
+        <div class="post-introduction-area">
+          <%= answer.introduction.truncate(60, omission: '...') %>
+            <div class="text-right">
+              <%= link_to "全文表示", answer_path(answer.id) %>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-2 post-info-area">
+        <ul>
+          <li><i class="fas fa-folder"></i><%= answer.question.tag.genre.name %><br></li>
+          <li><i class="fas fa-tags"></i><%= answer.question.tag.name %><br></li>
+          <li>&nbsp;</li>
+          <% if user_signed_in? %>
+          <li>
+            <div class="c-delete">
+              <% if current_user.id == answer.user_id %>
+                <%= link_to answer_path(answer.id), :method => :delete do %>
+                  <i class="fas fa-trash-alt c-delete-icon"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    </div>
+   <% end %>
+</div>
+

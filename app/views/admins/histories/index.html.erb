@@ -1,0 +1,152 @@
+<div class="container">
+    <h3 class="midashi3">履歴一覧</h3>
+    <div class="c-toparea">
+      <p><span class="underbar">このページの機能及び注意点</span></p>
+      <ul>
+        <li>このページでは質問・投稿・イベント・回答・会員情報の履歴を一覧で表示しています</li>
+        <li>一つの項目当たり５件まで表示しています</li>
+        <li>もっと見るをクリックすると該当する部分に関して更に詳しい情報を見ることができます</li>
+      </ul>
+    </div>
+    <div class="row">
+      <h4 class="midashi4">質問</h4>
+      <table class="table table-bordered">
+    	<thead>
+    		<tr>
+    			<th class="col-lg-1 text-center">No.</th>
+    			<th class="col-lg-9 text-center">質問タイトルと内容</th>
+    			<th class="col-lg-2 text-center">参考リンク</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	    <% @questions.last(5).each do |question| %>
+    		<tr>
+    			<th class="text-center"><%= question.id %></th>
+    			<td>
+    			  <div class="">
+    			     [質問内容：<%= question.title %>]  
+    			  </div>
+    			  =><%= question.introduction.truncate(60, omission: '...') %>
+    			</td>
+    		  <%# event.event_entries.each do |eee| %>
+    	      <%# end %>
+    			<td><%= l question.created_at, format: :short %></td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+      </table>
+      <div class="text-center">
+        <%= link_to "もっと見る", admins_questions_path, class:'text-center' %>
+      </div>
+    </div>
+    <div class="row">
+      <h4 class="midashi4">投稿</h4>
+      <table class="table table-bordered">
+    	<thead>
+    		<tr>
+    			<th class="col-lg-1 text-center">No.</th>
+    			<th class="col-lg-7 text-center">投稿タイトル</th>
+    			<th class="col-lg-2 text-center">投稿内容</th>
+    			<th class="col-lg-2 text-center">参考リンク</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	    <% @posts.last(5).each do |post| %>
+    		<tr>
+    			<th class="text-center"><%= post.id %></th>
+    			<td><%= post.title %></td>
+    		  <%# event.event_entries.each do |eee| %>
+    			<td><%= post.introduction %></td>
+    	      <%# end %>
+    			<td><%= l post.created_at, format: :short %></td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+      </table>
+      <div class="text-center">
+        <%= link_to "もっと見る", admins_histories_path, class:'text-center' %>
+      </div>
+    </div>
+    <div class="row">
+      <h4 class="midashi4">回答一覧</h4>
+      <table class="table table-bordered">
+    	<thead>
+    		<tr>
+    			<th class="col-lg-1 text-center">No.</th>
+    			<th class="col-lg-7 text-center">質問タイトル</th>
+    			<th class="col-lg-2 text-center">回答者</th>
+    			<th class="col-lg-2 text-center">回答作成日</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	    <% @answers.last(5).each do |answer| %>
+    		<tr>
+    			<th class="text-center"><%= answer.id %></th>
+    			<td><%= answer.question.title %></td>
+    			<td><%= answer.user.name %></td>
+    			<td><%= l answer.created_at, format: :short %></td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+      </table>
+      <div class="text-center">
+        <%= link_to "もっと見る", admins_histories_path, class:'text-center' %>
+      </div>
+    </div>
+    <div class="row">
+      <h4 class="midashi4">イベント</h4>
+      <table class="table table-bordered">
+    	<thead>
+    		<tr>
+    			<th class="col-lg-1 text-center">No.</th>
+    			<th class="col-lg-7 text-center">イベント名</th>
+    			<th class="col-lg-2 text-center">受付状況</th>
+    			<th class="col-lg-2 text-center">空席状況</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	    <% @events.last(5).each do |event| %>
+    		<tr>
+    			<th class="text-center"><%= event.id %></th>
+    			<td><%= link_to event.name, admins_event_path(event.id) %></td>
+    		  <%# event.event_entries.each do |eee| %>
+    			<td><%= event.event_status %></td>
+    	      <%# end %>
+    			<td><%= l event.created_at, format: :short %></td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+      </table>
+      <div class="text-center">
+        <%# link_to "もっと見る", as_histories_path, class:'text-center' %>
+      </div>
+    </div>
+    <div class="row">
+      <h4 class="midashi4">会員情報</h4>
+      <table class="table table-bordered">
+    	<thead>
+    		<tr>
+    			<th class="col-lg-1 text-center">No.</th>
+    			<th class="col-lg-7 text-center">登録名</th>
+    			<th class="col-lg-2 text-center">状態</th>
+    			<th class="col-lg-2 text-center">登録日</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	    <% @users.last(5).each do |user| %>
+    		<tr>
+    			<th class="text-center"><%= user.id %></th>
+    			<td><%= user.name %></td>
+    		  <%# event.event_entries.each do |eee| %>
+    			<td><%= user.is_deleted %></td>
+    	      <%# end %>
+    			<td><%= l user.created_at, format: :short %></td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+      </table>
+      <div class="text-center">
+        <%= link_to "もっと見る", admins_histories_path, class:'text-center' %>
+      </div>
+    </div>
+</div>

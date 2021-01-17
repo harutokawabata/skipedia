@@ -6,6 +6,16 @@ class Question < ApplicationRecord
     # optional: trueは外部キーのnilを許可する,これがないとエラーになる
     has_many :answers, dependent: :destroy
     belongs_to :user
+    has_many :histories, dependent: :destroy
+    
+    def self.search(search)
+        if search
+          Question.where(['title LIKE ?', "%#{search}%"])
+        else
+          Question.all
+        end
+    end
+
     # optional: true
 
     # belongs_to :genres, dependent: :destroy

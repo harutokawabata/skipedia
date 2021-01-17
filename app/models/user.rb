@@ -5,7 +5,8 @@ class User < ApplicationRecord
   has_many :events,through: :event_entries
   has_many :answers, dependent: :destroy
   has_many :questions, dependent: :destroy
-  
+  has_many :histories, dependent: :destroy
+
   # has_many :events, dependent: :destroy
 
   #したの記載はnameでログインする時に記載

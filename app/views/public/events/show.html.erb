@@ -1,46 +1,86 @@
 <div class="container">
-    <h2>イベント申し込みページ</h2>
-      <% if @entry.blank? %>
-          <p>受付中</p>
-      <% else %>
-        <% if @entry.do_entry? %>
-          <p>エントリー済み</p>
+    <h3 class="midashi3">イベント申し込みページ</h3>
+    <%= @eeec %>
+    <div class="alert alert-danger text-center" role="alert">
+      <% if @acceptable > 0 %>
+        <div class="row c-div-center">
+        <% if @entry.present? %>
+          <% if @entry.blank? %>
+              <p>受付中</p>
+          <% else %>
+            <% if @entry.do_entry? %>
+              <p>エントリー済み</p>
+            <% else %>
+              <p>キャンセル済み</p>
+            <% end %>
+          <% end %>
         <% else %>
-          <p>キャンセル済み</p>
+          <% if user_signed_in? %>
+            <p>受付中です</p>
+          <% else %>
+            <p>会員登録または会員の方はログインでエントリーできます(あと<%= @acceptable %>名エントリーできます）</p>
+          <% end %>
         <% end %>
+        </div>
+      <% elsif @acceptable <= 0 %> 
+        <div class="row c-div-center">
+          <p>満席です</p>
+        </div>
       <% end %>
-    <div class="row">
-      <div class="col-xs-2"><p>イベント名</p></div>
-      <div class="col-xs-4"><p><%= @event.name %></p></div>
     </div>
-    <div class="row">
-      <div class="col-xs-2"><p>イベント開催日</p></div>
-      <div class="col-xs-4"><p><%= @event.date %></p></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2"><p>開催時間〜終了時間</p></div>
-      <div class="col-xs-4"><p><%= @event.start %>〜<%= @event.finish %></p></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2"><p>参加費</p></div>
-      <div class="col-xs-4"><p><%= @event.entry_fee %></p></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2"><p>主催者</p></div>
-      <div class="col-xs-4"><p><%= @event.organizer %></p></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2"><p>イベント詳細</p></div>
-      <div class="col-xs-4"><p><%= @event.event_detail %></p></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2"><p>受付人数</p></div>
-      <div class="col-xs-4"><p><%= @event.capacity %></p></div>
+    <div class="row c-image text-center">
+      <% if @event.post_image.present? %>
+        <%= attachment_image_tag(@event.post_image, :image, format: 'jpeg', size: "800x450") %>
+      <% elsif @event.post_image.blank? %>
+        <p>画像投稿はありません</p>
+      <% end %>
     </div>
     
-    <div class="row">
+    <div class="row c-flex-box">
+    <table class="row table table-bordered c-width-800">
+      <tbody>
+      	<tr>
+      		<th class="col-lg-2">イベント名</th>
+      		<td class="col-lg-10"><%= @event.name %></td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">上限人数</th>
+      		<td class="col-lg-10"><%= @event.capacity %>名<br>
+      		（あと<%= @acceptable %>人のお申し込みが可能です)</td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">開催日時</th>
+      	  <td class="col-lg-10">
+      	    <%= @event.date %>
+      	    <div class="time">
+      	      <%= @event.start %>〜<%= @event.finish %>
+      	    </div>
+      	  </td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">参加費</th>
+      	  <td class="col-lg-10"><%= @event.entry_fee %></td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">主催及び主管</th>
+      	  <td class="col-lg-10"><%= @event.organizer %></td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">イベント詳細</th>
+      	  <td class="col-lg-10"><%= @event.event_detail %></td>
+      	</tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="row entry-btn text-center">
+    <% if @entry.present? %>
       <% if @entry.blank? %>
-        <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+        <% if @acceptable > 0 %>
+          <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+        <% elsif @acceptable <= 0 %>
+          <%= link_to "満席です", events_path, method: :post, class:"btn btn-danger" %>
+        <% end %>
       <% else %>
         <% if @entry.do_entry? %>
           <%= link_to "イベント申し込みをキャンセルする", events_confirm_path(id: @event.id), method: :post, class:"btn btn-danger" %><br>
@@ -50,6 +90,18 @@
           <%= link_to "再度申し込みはできません(一覧へ戻る)", events_path, class:"btn btn-primary" %>
         <% end %>
       <% end %>
+    <% else %>
+      <% if user_signed_in? %>
+        <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+      <% else %>
+        <% if @acceptable > 0 %>
+          <%= link_to "会員登録して参加する", new_user_registration_path, class:"btn btn-primary" %>
+        <% elsif @acceptable <= 0 %>
+          <%= link_to "満席です(一覧へ戻る)", events_path, class:"btn btn-danger" %>
+        <% end %>
+      <% end %>
+
+    <% end %>
     </div>
     
 </div>

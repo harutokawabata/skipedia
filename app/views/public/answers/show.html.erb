@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered">
+        	<!--<thead>-->
+        	<!--	<tr>-->
+        	<!--		<th></th>-->
+        	<!--		<th>名前</th>-->
+        	<!--		<th>惑星</th>-->
+        	<!--		<th>勝点</th>-->
+        	<!--	</tr>-->
+        	<!--</thead>-->
+        	<tbody>
+        		<tr>
+        			<th class="col-xs-2">タイトル</th>
+        			<td><%= @answer.question.title %></td>
+        		</tr>
+        		<tr>
+        			<th>ジャンル・タグ</th>
+        			<td><%= @answer.question.tag.genre.name %>　・　<%= @answer.question.tag.name %></td>
+        		</tr>
+        		<tr>
+        		    <th>内容</th>
+        		    <td><%= @answer.introduction %></td>
+        		</tr>
+        		<tr>
+        		    <th>参考リンク</th>
+        		    <td><%= @answer.link %></td>
+        		</tr>
+        	</tbody>
+        </table>
+    </div>
+    <% if @answer.user == current_user %>
+    <div class="row text-center">
+        <%= link_to '編集する', edit_answer_path(@answer.id), class:"btn btn-primary" %>
+        <%= link_to '削除する', answer_path(@answer.id), method: :delete, class:"btn btn-danger" %>
+    </div>
+    <% end %>
+</div>
