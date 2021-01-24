@@ -3,6 +3,8 @@ class Post < ApplicationRecord
     has_many :histories, dependent: :destroy
     belongs_to :user
     belongs_to :tag
+    validates :title, :introduction, presence: true
+
     # belongs_to :answer, optional: true
     
     def self.search(search)

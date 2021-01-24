@@ -31,13 +31,17 @@
   <% end %>
 
   <div class="row user-links">
-    <%= f.submit "ログイン", class:"btn btn-secondary btn btn-lg w-80"%>
+    <%#= f.submit "ログイン", class:"btn btn-secondary btn btn-lg w-80"%>
+    <%= f.submit "ログイン", class:"btn-lg w-80 btn_bk"%>
+
   </div>
 <% end %>
   <div class="row user-links">
     <p>会員登録がまだの方は<a><%= link_to "こちら",  new_user_registration_path %></a></p>
   </div>
   <div class="row user-links">
-    <p>パスワードを忘れてもうた方は<a><%= link_to "こちら",  new_user_password_path %></a></p>
+    <!--<p>パスワードを忘れてもうた方は-->
+    <%# link_to "こちら",  new_user_password_path %>
+    
   </div>
 </div>

@@ -3,7 +3,7 @@
   <div class="row">
     　<div class="c-toparea">
       <p><span class="underbar">このページでできること</span></p>
-      <ul>
+      <ul class="c-toparea-ul">
         <li>このページでは会員情報の編集及び退会処理が可能です</li>
         <li>一度「更新する」ボタンを押すと情報が更新されます</li>
         <li>「退会する」のボタンを押すと退会確認ページへと飛びます</li>
@@ -17,8 +17,8 @@
    <div class="row form-title">
      <h3>登録内容編集</h3> 
    </div> 
-    <%= alert %>
-  <%= form_with model: @user, url: users_path do |f| %>
+
+  <%= form_with model: @user, method: :patch, url: users_path do |f| %>
       <div class="row user-sign-in">
         <div class="field">
           <div class="col-xs-12">
@@ -55,7 +55,7 @@
       </div>
   
     <div class="row user-links">
-      <%= f.submit "更新する", class:"btn btn-secondary btn btn-lg w-80"%>
+      <%= f.submit "更新する", data: {confirm:'更新してもよろしいですか？'}, class:"btn-lg w-80 btn_bk"%>
     </div>
   <% end %>
     

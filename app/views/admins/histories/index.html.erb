@@ -56,7 +56,7 @@
     			<th class="text-center"><%= post.id %></th>
     			<td><%= post.title %></td>
     		  <%# event.event_entries.each do |eee| %>
-    			<td><%= post.introduction %></td>
+    			<td><%= post.introduction.truncate(60, omission: '...') %></td>
     	      <%# end %>
     			<td><%= l post.created_at, format: :short %></td>
     		</tr>
@@ -101,7 +101,7 @@
     			<th class="col-lg-1 text-center">No.</th>
     			<th class="col-lg-7 text-center">イベント名</th>
     			<th class="col-lg-2 text-center">受付状況</th>
-    			<th class="col-lg-2 text-center">空席状況</th>
+    			<th class="col-lg-2 text-center">更新日時</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -110,9 +110,17 @@
     			<th class="text-center"><%= event.id %></th>
     			<td><%= link_to event.name, admins_event_path(event.id) %></td>
     		  <%# event.event_entries.each do |eee| %>
-    			<td><%= event.event_status %></td>
+    			<td class="text-center">
+    			  <% if event.event_status == "perparation" %>
+    			    準備中
+    			  <% elsif event.event_status == "waiting" %>
+    			    受付中
+    			  <% elsif event.event_status == "finish" %>
+    			    受付終了
+    			  <% end %>
+    			</td>
     	      <%# end %>
-    			<td><%= l event.created_at, format: :short %></td>
+    			<td class="text-center"><%= l event.updated_at, format: :short %></td>
     		</tr>
     		<% end %>
     	</tbody>
@@ -136,11 +144,17 @@
     	    <% @users.last(5).each do |user| %>
     		<tr>
     			<th class="text-center"><%= user.id %></th>
-    			<td><%= user.name %></td>
+    			<td><%= link_to user.name, admins_user_path(user.id) %></td>
     		  <%# event.event_entries.each do |eee| %>
-    			<td><%= user.is_deleted %></td>
+    			<td class="text-center">
+    			  <% if user.is_deleted == false %>
+    			  有効会員
+    			  <% elsif user.is_deleted == true %>
+    			   退会済み
+    			  <% end %>
+    			</td>
     	      <%# end %>
-    			<td><%= l user.created_at, format: :short %></td>
+    			<td class="text-center"><%= l user.created_at, format: :short %></td>
     		</tr>
     		<% end %>
     	</tbody>

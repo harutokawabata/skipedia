@@ -3,13 +3,11 @@
   <div class="row text-center">
     <% if @post.user == current_user %>
       <%= link_to '編集する', edit_post_path, class:"btn btn-primary" %>
-      <%= link_to '削除する', post_path, method: :delete, class:"btn btn-danger" %>
-      <p>※このボタンは投稿者の<%= @post.user.name %>にだけ表示されています</p>
+      <%= link_to '削除する', post_path, data: {confirm:'本当に削除しますか？'}, method: :delete, class:"btn btn-danger" %>
+      <p>※このボタンは投稿者の<%= @post.user.name %>さんにだけ表示されています</p>
     <% end %>
   </div>
-  <div class="row c-toparea">
-  </div>
-    <div class="row question-box">
+    <div class="row question-box c-margin-top">
       <div class="question-box-text">
         <h4 class="question-midashi"><%= @post.tag.genre.name %>に関する投稿です</h4>
         <!--<i class="far fa-question-circle"></i>-->
@@ -27,18 +25,23 @@
         </div>
         <div class="c-link-area">
           <% if @post.link.present? %>
-          <p>参考文献：<%= @post.link %></p>
+          <p>参考文献：<%= link_to @post.link, @post.link, target: :_blank %>
           <% else %>
           <p>参考文献はありません</p>
           <% end %>
         </div>
       </div>
     </div>
-    <div class="row question-btn" style="text-align:center;">
+    <div class="row question-btn c-margin-top" style="text-align:center;">
     <% if user_signed_in? %>
-      <%= link_to '新規投稿', new_post_path(@post.id), class:"btn btn-primary c-btn" %>
+    <div class="col-lg-6">
+      <%= link_to '新規投稿', new_post_path, class:"btn-lg w-80 btn_bk" %>
+    </div>
+    <div class="col-lg-6">
+      <%= link_to '一覧へ戻る', posts_path, class:"btn-lg w-80 btn_bk" %>
+    </div>
     <% else %>
-      <%= link_to '会員登録して回答する', new_user_registration_path, class:"btn btn-danger c-btn" %>
+      <%= link_to '会員登録して投稿する', new_user_registration_path, class:"btn-lg w-80 btn_bk" %>
     <% end %>
   <!--#引数を@questionにしてrootingを/answers/:id/newにしたら上手くパスはとおった-->
     </div>

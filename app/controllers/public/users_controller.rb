@@ -28,8 +28,10 @@ class Public::UsersController < ApplicationController
   end
   
   def withdraw
+    @events = current_user.events
     @user = current_user
     if @user.update(is_deleted: true)
+      @events.destroy_all
       reset_session
       flash[:notice] = "今までありがとうございました！"
     else

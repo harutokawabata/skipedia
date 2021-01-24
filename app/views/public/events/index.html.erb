@@ -1,14 +1,14 @@
 <div class="container">
     <h3 class="midashi3">イベント一覧</h3>
-    <div class="row">
-    <h4 class="midashi4">イベントの情報が<%= @events.count %>件あります</h4>
-    <ul>
-        <ol>開催中のイベントにエントリーできます</ol>
-        <ol>参加中のイベントはマイページで確認できます</ol>
-        <ol>キャンセルはできますが再度申し込みの際は１からのお手続きをお願いします</ol>
-        <ol>エントリーは先着順です</ol>
+    <div class="row c-toparea">
+    <ul class="c-toparea-ul">
+        <li>開催中のイベントにエントリーできます</li>
+        <li>参加中のイベントはマイページで確認できます</li>
+        <li>キャンセルはできますが再度申し込みの際は１からのお手続きをお願いします</li>
+        <li>エントリーは先着順です</li>
     </ul>
     </div>
+    <h4 class="midashi4">イベントの情報が<%= @events.count %>件あります</h4>
     <div class="row">
         <table class="table table-bordered">
         	<thead>
@@ -30,23 +30,37 @@
         	    <% acceptable = a - b %>
         	    <% if acceptable > 0 %>
             	   <% if user_signed_in? %>
-            		 <tr>
-            		   <th class="text-center"><%= event.id %></th>
-            		   <th><%= link_to event.name, event_path(event.id) %></th>
-                	 <% if EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["do_entry"] %>
-                	   <th class="text-center">エントリー済みです</th>
-                	 <% elsif EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["cancel_entry"] %>
-                		<th class="text-center">キャンセル済みです</th>
-                	 <% else %>
-                		<th class="text-center">エントリーできます！</th>
-                	 <% end %>
-                     </tr>
-            	   <% else %>
-            		 <tr>
-            			<th class="text-center"><%= event.id %></th>
-            			<th><%= link_to event.name, event_path(event.id) %></th>
-            			<th class="text-center">会員登録で参加できます！</th>
-            		 </tr>
+                		 <tr>
+                		   <th class="text-center"><%= event.id %></th>
+                		   <th><%= link_to event.name, event_path(event.id) %></th>
+                	  <% if event.event_status == "perparation" %>
+                	   　　<th class="text-center">準備中</th>
+                	  <% elsif event.event_status == "waiting" %>
+                    	 <% if EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["do_entry"] %>
+                    	   <th class="text-center">エントリー済みです</th>
+                    	 <% elsif EventEntry.where(user_id: current_user.id).where(event_id: event.id).pluck('cancel') == ["cancel_entry"] %>
+                    		<th class="text-center">キャンセル済みです</th>
+                    	 <% else %>
+                    		<th class="text-center">エントリーできます！</th>
+                    	 <% end %>
+                      <% elsif event.event_status == "finish" %>
+                            <th class="text-center">受付終了</th>
+                      <% end %>
+                         </tr>
+                   <% else %>
+                		 <tr>
+                			<th class="text-center"><%= event.id %></th>
+                			<th><%= link_to event.name, event_path(event.id) %></th>
+                			<% if event.event_status == "perparation" %>
+                			    <th class="text-center">準備中</th>
+                			<% elsif event.event_status == "waiting" %>
+                			    <th class="text-center">会員登録で参加できます</th>
+                			<% elsif event.event_status == "finish" %>
+                			    <th class="text-center">受付終了</th>
+                			<% else %>
+                			    <th class="text-center">あれ？</th>
+                			<% end %>
+                		 </tr>
             	   <% end %>
         		<% elsif acceptable <= 0 %>
         		   <% if user_signed_in? %>

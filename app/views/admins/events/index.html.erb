@@ -3,7 +3,7 @@
         <h3 class="midashi3">イベント一覧ページ</h3>
         <div class="c-toparea">
         <p><span class="underbar">このページの機能及び注意点</span></p>
-          <ul>
+          <ul class="c-toparea-ul">
             <li>イベントを追加できます</li>
             <li>開催中のイベント名はユーザー側トップページに表示されます</li>
             <li>イベントは多すぎると管理ができません。（３つまでにしましょう）</li>
@@ -26,7 +26,7 @@
         		<tr>
         			<th><%= event.id %></th>
         			<td><%= link_to event.name, admins_event_path(event.id) %></td>
-        			<td><%= event.event_detail %></td>
+        			<td><%= event.event_detail.truncate(60, omission: '...') %></td>
         			<td><%= event.event_status_i18n %></td>
         			<td>
         			    <%= link_to "編集", edit_admins_event_path(event.id), class:"btn btn-primary" %>

@@ -16,7 +16,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/////////////////////flashメッセージ///////////////
+/* ----flashメッセージ---- */
 
 .flash-success {
     background-color: limegreen;
@@ -62,10 +62,26 @@
     text-align: center;
 }
 
+////ボタン（btn)のカスタム//////
+.text-center.btn{
+    // width: 400px;
+    text-align: center;
+}
+.c-btn-custom {
+    width: 100%;
+    padding: 0 20%;
+    text-align: center;
+}
+
+.c-custom {
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
 ////////////////////////////formのcss////////////////////////////////
 input[type="text"] {
         width: 340px;
-        height: 40px;
+        height: 40px
     }
 input[type="password"] {
         width: 340px;
@@ -80,7 +96,7 @@ input[type="password"] {
     
 .w-80 {
   width: 80% !important;
-  background: linear-gradient(gray, black);
+  
   color: white;
 }
 
@@ -164,7 +180,7 @@ input[type="password"] {
 	}
 
 .question-midashi{
-    background: linear-gradient(gray, red);
+    background: linear-gradient(gray, black);
     position: absolute;
     display: inline-block;
     top: -32px;
@@ -176,15 +192,21 @@ input[type="password"] {
     // color: whit;
 }
 
+.navbar-brand {
+    margin-top: -5px;
+}
 
 ////////////////////////////toppageのcss////////////////////////////////
-.container.user-top{
-  width: 80% !important;
+.row.user-top{
+  width: 100% !important;
   background: linear-gradient(gray, white);
   color: white;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 6px 0px #ccc;
   text-shadow: 2px 2px 1px black;
+  height: 300px;
+  text-align: center;
+
 }
 
 .midashi3{
@@ -313,11 +335,6 @@ input[type="password"] {
     text-align: center;
 }
 
-.underbar {
-    background: linear-gradient(transparent 70%, #ff99ab 70%);
-    font-size: 18px;
-}
-
 .ban-box {
   display: flex;
   justify-content: center;
@@ -327,6 +344,18 @@ input[type="password"] {
 .ban-area:last-child{
     margin-left: 200px;
 }
+
+/* spanに関するcss */
+.underbar {
+    background: linear-gradient(transparent 70%, #ff99ab 70%);
+    font-size: 18px;
+}
+
+.c-color-red {
+    color: red;
+}
+
+
 
 //////////////////////////////////post_imageのcss//////////////////////
 
@@ -360,7 +389,7 @@ input[type="password"] {
     border: 1px solid #ccc;
     box-shadow: 1px 0px 1px 0px #ccc;
     width: 100%;
-    height: 80px;
+    height: 85px;
     position: relative;
     display: flex;
  }
@@ -386,10 +415,12 @@ input[type="password"] {
  
  .ppp{
    display: flex;
+   justify-content: space-between;
  }
  
  .ppp li {
      display: inline-block;
+     
  }
  
  
@@ -455,4 +486,112 @@ input[type="password"] {
 }
 .c-margin-top {
     margin-top: 20px;
+}
+.c-margin-right {
+    margin-right: 20px;
+}
+.c-margin-left {
+    margin-left: 20px;
+}
+// toppageのオススメ
+.user-top-function {
+    font-size: 24px;
+    background-color: #8080802e;
+    width: 100%;
+    height: 120%;
+    line-height: 40px;
+    position: relative;
+    margin-top: 35px;
+}
+
+.c-point-area {
+    background: linear-gradient(gray, black);
+    position: absolute;
+    display: inline-block;
+    top: -18px;
+    left: 38px;
+    padding: 0 9px;
+    color: white;
+    padding: 10px;
+    // border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    text-align: center;
+}
+
+.c-margin-auto {
+    margin: -10px; 
+}
+
+// toppageのアバウトエリア
+.user-top-about2 {
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.c-image-area{
+    height: 245px;
+    width: 345px;
+    background: linear-gradient(gray, white);
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 6px 0px #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-image-area-icon {
+    // width: 200px;
+    // height: 100px;
+    text-align: center;
+}
+
+.c-font-size{
+ font-size: 24px;
+}
+
+.c-text-area{
+    height: 245px;
+    width: 345px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 6px 0px #ccc;
+}
+
+.c-margin-around{
+    margin: 20px;
+    
+}
+
+.c-line-height {
+    line-height: 30px;
+}
+
+.btn_bk{
+    background: linear-gradient(gray, black);
+}
+
+// .ul {
+//   list-style-type: none;
+//   padding-left: 0;
+//  }
+
+.c-toparea-ul {
+    list-style: disc outside;
+    margin-left: 20px;
+    // padding-left: -10px;
+}
+
+.overflow-auto{
+    // orverflow: scroll;
+    // width: 200px;
+    // // height: 200px;
+    // background-color: pink;
+    display: block;
+    margin: 10px 20px;
+    height: 150px;
+    border: 1px solid;
+    overflow-y: scroll;
+    background: #FFFFFF;
+    opacity: 0.8;
 }

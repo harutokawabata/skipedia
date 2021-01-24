@@ -17,7 +17,6 @@
       <div class="row">
         <div class="timeline">
           <div class="image-image">
-            <p class="text-center"><%= question.user.name %></p>
             <div class="image-image-image">
               <i class="fas fa-user-circle fa-3x"></i>
             </div>
@@ -37,13 +36,13 @@
           <div class="col-lg-2 post-info-area">
             <ul>
               <li><i class="fas fa-folder"></i><%= question.tag.genre.name %><br></li>
-              <li><i class="fas fa-tags"></i><%= link_to question.tag.name %><br></li>
+              <li><i class="fas fa-tags"></i><%= question.tag.name %><br></li>
               <% if user_signed_in? %>
               <li>
                 <div class="c-delete">
                   <% if current_user.id == question.user_id %>
-                    <%= link_to question_path(question.id), :method => :delete do %>
-                      <i class="fas fa-trash-alt c-delete-icon"></i>
+                    <%= link_to question_path(question.id), data: {confirm:'本当に削除しますか？'}, :method => :delete do %>
+                      <i class="fas fa-trash-alt c-delete-icon">削除</i>
                     <% end %>
                   <% end %>
                 </div>

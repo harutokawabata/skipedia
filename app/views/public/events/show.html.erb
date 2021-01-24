@@ -1,32 +1,54 @@
 <div class="container">
     <h3 class="midashi3">イベント申し込みページ</h3>
-    <%= @eeec %>
-    <div class="alert alert-danger text-center" role="alert">
-      <% if @acceptable > 0 %>
-        <div class="row c-div-center">
-        <% if @entry.present? %>
-          <% if @entry.blank? %>
-              <p>受付中</p>
-          <% else %>
-            <% if @entry.do_entry? %>
-              <p>エントリー済み</p>
+    <div class="c-toparea">
+      <ul class="c-toparea-ul">
+          <% if @acceptable > 0 %>
+          <div class="row c-div-center">
+            <div class="c-margin-left">
+            <% if @entry.present? %>
+              <% if @entry.blank? %>
+                <% if @event.event_status == "perparation" %>
+                  <li>現在、準備中です</li>
+                <% elsif @event.event_status == "waiting" %>
+                  <li>現在、受付中</li>
+                <% elsif @event.event_status == "finish" %>
+                  <li>受付終了しました</li>
+                <% end %>
+              <% else %>
+                <% if @entry.do_entry? %>
+                  <li>エントリー済み</li>
+                <% else %>
+                  <li>キャンセル済み</li>
+                <% end %>
+              <% end %>
             <% else %>
-              <p>キャンセル済み</p>
+              <% if user_signed_in? %>
+                <% if @event.event_status == "perparation" %>
+                  <li>現在、準備中です</li>
+                <% elsif @event.event_status == "waiting" %>
+                  <li>受付中</li>
+                  <li>ページ下部のボタンを一度クリックするとエントリーが完了します</li>
+                <% elsif @event.event_status == "finish" %>
+                  <li>受付終了</li>
+                <% end %>
+              <% else %>
+                <% if @event.event_status == "perparation" %>
+                  <li>現在、準備中です</li>
+                <% elsif @event.event_status == "waiting" %>
+                  <li>会員登録または会員の方はログインでエントリーできます(あと<%= @acceptable %>名エントリーできます）</li>
+                <% elsif @event.event_status == "finish" %>
+                  <li>受付終了</li>
+                <% end %>
+              <% end %>
             <% end %>
-          <% end %>
-        <% else %>
-          <% if user_signed_in? %>
-            <p>受付中です</p>
-          <% else %>
-            <p>会員登録または会員の方はログインでエントリーできます(あと<%= @acceptable %>名エントリーできます）</p>
-          <% end %>
+            <li>会員登録をしていない方はお申し込みいただけません</li>
+            </div>
+          </div>
+        <% elsif @acceptable <= 0 %> 
+            <li>満席です。またの機会にお待ちしております</li>
         <% end %>
-        </div>
-      <% elsif @acceptable <= 0 %> 
-        <div class="row c-div-center">
-          <p>満席です</p>
-        </div>
-      <% end %>
+      </li>
+      </ul>
     </div>
     <div class="row c-image text-center">
       <% if @event.post_image.present? %>
@@ -67,7 +89,11 @@
       	</tr>
       	<tr>
       	  <th class="col-lg-2">イベント詳細</th>
-      	  <td class="col-lg-10"><%= @event.event_detail %></td>
+      	  <td class="col-lg-10 overflow-auto">
+      	      <div class="c-margin-around">
+          	    <%= @event.event_detail %>
+        	    </div>
+      	  </td>
       	</tr>
       </tbody>
     </table>
@@ -77,7 +103,7 @@
     <% if @entry.present? %>
       <% if @entry.blank? %>
         <% if @acceptable > 0 %>
-          <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+          <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), data: {confirm:'お申し込みを確定します'}, method: :get, class:"btn btn-primary" %>
         <% elsif @acceptable <= 0 %>
           <%= link_to "満席です", events_path, method: :post, class:"btn btn-danger" %>
         <% end %>
@@ -92,15 +118,30 @@
       <% end %>
     <% else %>
       <% if user_signed_in? %>
-        <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), method: :post, class:"btn btn-primary" %>
+        <% if @event.event_status == "perparation" %>
+          <%= link_to '準備中です(一覧へ戻る)', events_path %>
+        <% elsif @event.event_status == "waiting" %>
+          <% if @acceptable > 0 %>
+            <%= link_to "イベント申し込みを確定する", events_confirm_path(id: @event.id), data: {confirm:'お申し込みを確定します'}, method: :post, class:"btn btn-primary" %>
+          <% elsif @acceptable <= 0 %>
+             <%= link_to "満席です(一覧へ戻る)", events_path, class:"btn btn-danger" %>
+          <% end %>
+        <% elsif @event.event_status == "finish" %>
+          <%= link_to '受付終了しました(一覧へ戻る）', events_path %>
+        <% end %>
       <% else %>
-        <% if @acceptable > 0 %>
-          <%= link_to "会員登録して参加する", new_user_registration_path, class:"btn btn-primary" %>
-        <% elsif @acceptable <= 0 %>
-          <%= link_to "満席です(一覧へ戻る)", events_path, class:"btn btn-danger" %>
+        <% if @event.event_status == "perparation" %>
+          <%= link_to '準備中です（一覧へ戻る）', events_path %>
+        <% elsif @event.event_status == "waiting" %>
+          <% if @acceptable > 0 %>
+            <%= link_to "会員登録して参加する", new_user_registration_path, class:"btn btn-primary" %>
+          <% elsif @acceptable <= 0 %>
+            <%= link_to "満席です(一覧へ戻る)", events_path, class:"btn btn-danger" %>
+          <% end %>
+        <% elsif @event.event_status == "finish" %>
+          <%= link_to '受付終了しました（一覧へ戻る）', events_path %>
         <% end %>
       <% end %>
-
     <% end %>
     </div>
     

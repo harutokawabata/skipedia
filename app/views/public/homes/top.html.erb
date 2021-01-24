@@ -1,70 +1,150 @@
  <!--user-topと記載のあるページは独自のcssを割り当て中-->
-<div class="container user-top">
-    <div class="row user-top-text">
+<div class="container">
+  <div class="row user-top">
+    <div class="user-top-text">
         <h2>Skipedia</h2>
         <h3>-誰でも投稿できるスキー百科事典-</h3>
     </div>
-    <div class="row user-top-btn">
+    <div class="user-topBox" style="padding-top: 140px;">
         <div class="col-lg-4">
-            <%= link_to "質問を見る", questions_path, class:"btn btn-primary" %>
+            <%# link_to "質問を見る", questions_path, class:"btn btn-primary" %>
+            <%= link_to "質問を見る", questions_path, class:"btn-lg w-80 btn_bk"%>
         </div>
         <div class="col-lg-4">
             <% if user_signed_in? %>
-              <%= link_to "マイページ", users_path, class:"btn btn-danger" %>
+              <%# link_to "マイページ", users_path, class:"btn btn-danger" %>
+              <%= link_to "マイページ", users_path, class:"btn-lg w-80 btn_bk" %>
             <% else %>
-              <%= link_to "会員登録", new_user_registration_path, class:"btn btn-danger" %>
+              <%# link_to "会員登録", new_user_registration_path, class:"btn btn-danger" %>
+              <%= link_to "会員登録", new_user_registration_path, class:"btn-lg w-80 btn_bk" %>
             <% end %>
         </div>
         <div class="col-lg-4">
-            <%= link_to "投稿を見る", posts_path, class:"btn btn-primary" %>
+            <%# link_to "投稿を見る", posts_path, class:"btn btn-primary" %>
+            <%= link_to "投稿を見る", posts_path, class:"btn-lg w-80 btn_bk" %>
         </div>
     </div>
-</div>
-
-<div class="container">
+  </div>
+  <div class="row infomation-area">
+    <h4 class="midashi4">インフォメーション</h4>
+    <p><span class="infomation-area-new">新着</span>Skipedia ver.1.00リリースしました！</p>
+  </div>
   <div class="row">
     <div class="col-lg-6 user-top-question">
         <h3 class="midashi3"><i class="fas fa-skiing"></i>新着質問一覧</h3>
         <% if @questions.present? %> 
-        <% @questions.last(3).each do |question| %>
+        <% @questions.first(3).each do |question| %>
           <%= l question.created_at, format: :short %><br>
           <%= link_to question.title, question_path(question.id) %><br>
         <% end %>
-        <%= link_to '回答一覧', answers_path %><br>
         <% else %>
             <p>まだ質問が届いていません</p>
         <% end %>
         <!--<p>谷回りについてわからない人がいるそうです</p>-->
-        <%= link_to "MORE", questions_path, class:"btn btn-secondary btn btn-lg w-20", style:"text-align:center;" %>
+        <div class="text-center">
+          <%= link_to "もっと見る", questions_path %>
+        </div>
     </div>
     <div class="col-lg-6 user-top-event">
         <h3 class="midashi3"><i class="fas fa-skiing"></i>イベント一覧</h3>
           <% if @events.present? %>
-            <% @events.each do |event| %>
-              <%= event.date %><br>
-              <%= link_to event.name, events_path %><br>
+            <% @events.order(title: :desc).each do |event| %>
+              <%= l event.created_at, format: :short %><br>
+              <%= link_to event.name, event_path(event.id) %>(<%= event.date%>)<br>
             <% end %>
           <% else %>
             <p>イベントの予定がありません</p>
           <% end %>
+        <div class="text-center">
+          <%= link_to "もっと見る", events_path %>
+        </div>
     </div>
   </div>
-    <div class="row user-top-about">
+     <div class="row user-top-about">
         <h3 class="midashi3"><i class="fas fa-skiing"></i>Skipediaとは？？</h3>
-        <p>スキーの専門用語を調べたり投稿したり質問できるありそうでなかったポータルサイトです！</p>
-    </div>
-    <div class="row user-top-recommend">
-        <h4 class="midashi4"><i class="fas fa-skiing"></i>こんな人にオススメ</h4>
-        <p><i class="fas fa-skiing"></i>スキーの専門用語が理解できない人</p>
-        <p><i class="fas fa-skiing"></i>改めて理解を深めたい人</p>
-        <p><i class="fas fa-skiing"></i>○スキー業界に自分自身の経験や技術論を広めたい人</p>
-        <i class="fas fa-skiing">不特定多数の人に質問したい人</i>
-    </div>
-    <div class="row user-top-function">
-        <h4 class="midashi4"><i class="fas fa-skiing"></i>機能一覧</h4>
-        <p> ○質問機能</p>
-        <p> ○投稿機能</p>
-        <p> ○イベント参加</p>
-        <p> ○閲覧</p>
+        <p class="text-center"><span class="underbar">スキーの専門用語を調べたり投稿したり質問できるありそうでなかったWebアプリケーションです！</span></p>
+     </div>
+     <h4 class="midashi4 c-font-size"><i class="fas fa-skiing"></i>こんな人へオススメ！</h4>
+     <div class="row user-top-function">
+       <div class="c-point-area"><p class="c-margin-auto">Point</p></div>
+        <ul class="c-margin-around non-ul">
+          <li><i class="far fa-check-circle"></i>専門用語が理解できない人</li>
+          <li><i class="far fa-check-circle"></i>改めて理解を深めたい人</li>
+          <li><i class="far fa-check-circle"></i>スキー業界に知識を広めたい人</li>
+          <li><i class="far fa-check-circle"></i>不特定多数の人に質問したい人</li>
+        </ul>
+     </div>
+      <% if user_signed_in? %>
+      <div class="c-btn-custom c-margin-top">
+        <div class="text-center">
+          <%= link_to "マイページ", users_path, class:"btn-lg w-80 btn_bk btn-block c-custom" %>
+        </div>
+      </div>
+      <% else %>
+      <div class="c-btn-custom c-margin-top">
+        <div class="text-center">
+          <%= link_to "Skipediaに会員登録する", new_user_registration_path, class:"btn-lg w-80 btn_bk btn-block c-custom" %>
+          <%# link_to "Skipediaに会員登録する", new_user_registration_path, class:"btn btn-danger btn-lg btn-block c-custom" %>
+        </div>
+      </div>
+      <% end %>
+    
+    <h4 class="midashi4 c-font-size"><i class="fas fa-skiing"></i>Skipediaの機能</h4>
+    <div class="row user-top-about2">
+      <div class="c-about-area c-margin-top c-margin-right">
+        <div class="c-image-area">
+          <div class="c-image-area-icon">
+            <h4 class="text-center">回答機能</h4>
+              <i class="fas fa-skiing fa-6x"></i>
+          </div>
+        </div>
+        <div class="c-text-area">
+          <div class="c-margin-around">
+            <h4 class="text-center">質問に対して回答ができます</h4>
+            <p class="c-line-height">スキーは大好き！やめられない！<br>でも、専門用語に悩むスキーヤーはかなり多いです。そんなスキーヤーの手助けをしてみませんか？？</p>
+            <div class="text-center c-margin-top">
+             <%= link_to "回答する", questions_path, class:"btn-lg w-80 btn_bk" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="c-about-area c-margin-top c-margin-right">
+        <div class="c-image-area">
+          <div class="c-image-area-icon">
+            <h4 class="text-center">投稿機能</h4>
+            <div class="ttt">
+            <i class="fas fa-file-alt fa-6x"></i>
+            </div>
+          </div>
+        </div>
+        <div class="c-text-area">
+          <div class="c-margin-around">
+            <h4 class="text-center">スキーに関する投稿ができる</h4>
+            <p class="c-line-height">やっと覚えた専門用語、トレンドの技術、マテリアルの特性などなんでもOK!<br>スキーを始めた頃の自分自身へ向けて投稿してみよう</p>
+            <div class="text-center c-margin-top">
+              <%= link_to "投稿する", new_post_path, class:"btn-lg w-80 btn_bk" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="c-about-area c-margin-top c-margin-right">
+        <div class="c-image-area">
+          <div class="c-image-area-icon">
+            <h4>質問機能</h4>
+            <i class="fas fa-question-circle fa-6x"></i>
+          </div>
+        </div>
+        <div class="c-text-area">
+          <div class="c-margin-around">
+            <h4 class="text-center">匿名で質問できます</h4>
+            <p class="c-line-height">専門用語を間違えて覚えてしまったり、理解できないと成長の妨げになります。分からないことがあれば匿名で不特定多数の人に聞くことができます</p>
+            <div class="text-center c-margin-top">
+              <%= link_to "質問する", new_question_path, class:"btn-lg w-80 btn_bk" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </div>

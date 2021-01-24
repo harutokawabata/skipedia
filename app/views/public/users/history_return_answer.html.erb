@@ -8,7 +8,7 @@
         <div class="c-toparea">
         <p><span class="underbar">このページについて</span></p>
             <ul>
-                <li><%= @user.name %>さん質問した内容に対する返答が確認できます</li>
+                <li><%= @user.name %>さんが質問した内容に対する「返答」が確認できます</li>
                 <li>この一覧ページより</li>
             </ul>
         </div>
@@ -22,7 +22,6 @@
       <div class="row">
         <div class="timeline">
           <div class="image-image">
-            <p class="text-center"><%= question.user.name %></p>
             <div class="image-image-image">
               <i class="fas fa-user-circle fa-3x"></i>
             </div>
@@ -33,7 +32,7 @@
               <li class="c-right">回答日:<%= l qa.created_at, format: :short %></li>
             </ul>
             <div class="post-introduction-area">
-                <%= qa.introduction %>
+                <%= qa.introduction.truncate(60, omission: '...') %>
               <div class="text-right">
                 <%= link_to "全文表示", question_path(question.id) %>
               </div>

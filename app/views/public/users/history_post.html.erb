@@ -9,17 +9,16 @@
             </ul>
         </div>
     </div>
- <% @posts.each do |post| %>
+ <% @posts.order(created_at: :desc).each do |post| %>
   <div class="row">
     <div class="timeline">
       <div class="image-image">
-        <p class="text-center"><%= post.user.name %></p>
         <div class="image-image-image">
           <i class="fas fa-user-circle fa-3x"></i>
         </div>
       </div>
       <div class="post-text-area">
-        <ul class="c-ul">
+        <ul class="ppp">
           <li class="c-left" style="font-size:20px;"><%= link_to post.title, post_path(post.id) %></li>
           <li class="c-right">投稿日:<%= l post.created_at, format: :short %></li>
         </ul>
@@ -33,13 +32,13 @@
       <div class="col-lg-2 post-info-area">
         <ul>
           <li><i class="fas fa-folder"></i><%= post.tag.genre.name %><br></li>
-          <li><i class="fas fa-tags"></i><%= link_to post.tag.name %><br></li>
+          <li><i class="fas fa-tags"></i><%= post.tag.name %><br></li>
           <% if user_signed_in? %>
           <li>
             <div class="c-delete">
               <% if current_user.id == post.user_id %>
-                <%= link_to post_path(post.id), :method => :delete do %>
-                  <i class="fas fa-trash-alt c-delete-icon"></i>
+                <%= link_to post_path(post.id), data: {confirm:'本当に削除しますか？'}, :method => :delete do %>
+                  <i class="fas fa-trash-alt c-delete-icon">削除</i>
                 <% end %>
               <% end %>
             </div>
