@@ -5,7 +5,14 @@
           <P>未回答の質問です</p>
       <% elsif @question.is_active == "t" %>
           <p>回答が<%= @question.answers.count %>件あります！</p>
+      <% else %>
+           <p>デフォルト設定以前のコメント</p>
       <% end %>
+      <ul class="c-toparea-ul">
+        <li>会員の方はこの質問に対して回答することができます</li>
+        <li>会員登録がまだの方は登録の後に回答することができます</li>
+        <li>削除ボタンはログイン中の方のみに表示されています</li>
+      </ul>
     </div>
     <div class="row question-box">
       <div class="question-box-text">
@@ -17,31 +24,33 @@
         <p><%= @question.title %></p>
       </div>
     </div>
-    <div class="row question-btn" style="text-align:center;">
+    <div class="row question-btn c-margin-top" style="text-align:center;">
     <% if user_signed_in? %>
-      <%= link_to '回答する', new_answer_path(@question.id), class:"btn btn-primary c-btn" %>
+      <%= link_to 'この質問に回答する', new_answer_path(@question.id), class:"btn-lg w-80 btn_bk" %>
     <% else %>
-      <%= link_to '会員登録して回答する', new_user_registration_path, class:"btn btn-danger" %>
+      <%= link_to '会員登録して回答する', new_user_registration_path, class:"btn-lg w-80 btn_bk" %>
     <% end %>
   <!--#引数を@questionにしてrootingを/answers/:id/newにしたら上手くパスはとおった-->
     </div>
   <h4 class="midashi4">この質問に対する回答一覧</h4>
   <% @question.answers.each do |answer| %>
-  <% if answer.present? %>
+  <% if answer.blank? %>
+    <p>回答募集中です！</p>
+  <% else %>
     <div class="row">
       <div class="timeline">
         <div class="col-lg-2 image-image">
-          <p class="text-center"><%= answer.user.name %>さん</p>
           <div class="image-image-image">
             <i class="fas fa-user-circle fa-3x"></i>
           </div>
         </div>
         <div class="col-lg-8 post-text-area">
           <ul class="ppp">
+            <li><%= answer.user.name %>さん</li>
             <li>投稿日:<%= l answer.created_at, format: :short %></li>
           </ul>
           <div class="post-introduction-area">
-            <%= answer.introduction.truncate(60, omission: '...') %>
+            <%=link_to answer.introduction.truncate(60, omission: '...'), answer_path(answer.id) %>
           </div>
         </div>
         <div class="col-lg-2 post-info-area">
@@ -52,8 +61,8 @@
             <li>
               <div class="c-delete">
                 <% if current_user.id == answer.question.user_id %>
-                  <%= link_to answer_path(answer.id), :method => :delete do %>
-                    <i class="fas fa-trash-alt c-delete-icon"></i>
+                  <%= link_to answer_path(answer.id), data: {confirm:'本当に削除しますか？'}, :method => :delete do %>
+                    <i class="fas fa-trash-alt c-delete-icon">削除</i>
                   <% end %>
                 <% end %>
               </div>
@@ -63,8 +72,6 @@
         </div>
       </div>
       </div>
-   <% else %>
-     <p>回答募集中です！</p>
    <% end %>
    <% end %>
 </div>

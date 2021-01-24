@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  
+  validates :agree, inclusion: { in: %w(t), message: "利用規約に同意してください" }
   # belongs_to :user
   has_many :posts, dependent: :destroy
   has_many :event_entries, dependent: :destroy
@@ -25,5 +27,7 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && (self.is_deleted == false)
   end
+  
+  
 
 end

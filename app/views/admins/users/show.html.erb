@@ -28,17 +28,14 @@
           <li>質問数：<%= @user.questions.count %>件</li>
           <li>回答数：<%= @user.answers.count %>件</li>
         </ul>
-        <p>申し込み中のイベント</p>
+        <p>【申し込み中のイベント】</p>
         <%if @user.events.present? %>
-        <% @user_events.each do |ue| %>
-          <p>エントリー履歴あり（<%= ue.event_entries.where(cancel: "do_entry").count %>件）</p>
-          <% ue.event_entries.each do |ueee| %>
-          <ul>
-            <li><%# e %></li>
-          </ul>
+          <% if @user_ee.where(cancel: "do_entry").count > 0 %>
+            <p>現在<%= @user_ee.where(cancel: "do_entry").count %>件のイベントにエントリー中です</p>
+          <% else %>
+            <p>キャンセルされました</p>
           <% end %>
-        <% end %>
-        <% elsif @user.events.blank? %>
+        <% else %>
           <p>エントリー履歴なし</p>
         <% end %>
       </div>
@@ -51,9 +48,9 @@
           <% if @user.posts.empty? %>
             <p>まだ投稿はありません</p>
           <% else %>
-            <% @user.posts.last(5).each do |post| %>
+            <% @user.posts.order(created_at: :desc).last(5).each do |post| %>
             <%= l post.created_at, format: :short %><br>
-            【<%= post.title %>】<%= post.introduction %>
+            【<%= post.title %>】<%= post.introduction %><br>
             <% end %>
           <% end %>
       </div>
@@ -63,7 +60,7 @@
           <% if @user.questions.empty? %>
             <p>まだ質問はありません</p>
           <% else %>
-            <% @user.questions.last(5).each do |question| %>
+            <% @user.questions.order(created_at: :desc).last(5).each do |question| %>
                 <%= l question.created_at, format: :short %><br>
                 【<%= question.title %>】<%= question.introduction %><br>
             <% end %>
@@ -74,7 +71,7 @@
         <% if @user.answers.empty? %>
           <p>まだ回答はありません</p>
         <% else %>
-          <% @user.answers.last(5).each do |answered| %>
+          <% @user.answers.order(created_at: :desc).last(5).each do |answered| %>
             <%= l answered.created_at, format: :short %><br>
             【<%= answered.question.title %>】<%= answered.introduction %><br>
           <% end %>
@@ -85,17 +82,15 @@
         <% if @user.events.empty? %>
           <p>まだイベントの申込みはありません</p>
         <% else %>
-          <% @user.events.last(5).each do |event| %>
-            <% event.event_entries.last(5).each do |ee| %>
+          <% @user_ee.last(5).each do |ee| %>
             <div class="admin-user-show-event">
               【<%= ee.event.name %>】
-              <% if ee.cancel = "cancel_entry" %>
+              <% if ee.cancel == "cancel_entry" %>
                 <p>キャンセル済み</p>
               <% elsif ee.cancel == "do_entry" %>
                 <p>申し込み中</p>
               <% end %>
             </div>
-            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -103,14 +98,14 @@
         <h4 class="midashi4"><%= @user.name %>さんの管理ができます</h4>
             <p>悪質なユーザーは強制退会できます。システム上、退会処理をしてもらってもステータスが更新されるだけでデータは残ります。</p>
             <p>ここで可能な処理は<span class="underbar">完全削除</span>です。今後<%= @user.name %>さんのデータは一切見れなくなります</p>
-        <div class="ban-box">
-          <div class="ban-area">
-            <%= link_to "BANする", admins_confirm_path(@user.id), class:"btn btn-danger" %>
-          </div>
-          <div class="ban-area">
+        <div class="ban-box row">
+          <div class="col-lg-4">
             <%= link_to "質問一覧に戻る", admins_users_path, class:"btn btn-primary" %>
           </div>
-          <div class="ban-area">
+          <div class="col-lg-4">
+            <%= link_to "BANする", admins_confirm_path(@user.id), class:"btn btn-danger" %>
+          </div>
+          <div class="col-lg-4">
             <%= link_to "復活させる", admins_users_withdraw_path(@user.id), class:"btn btn-primary", method: :patch %>
           </div>
         </div>

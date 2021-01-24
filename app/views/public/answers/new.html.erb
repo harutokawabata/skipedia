@@ -1,15 +1,18 @@
 <div class="container">
     <h3 class="midashi3">回答ページ</h3>
     <div class="row c-toparea">
-      <p>ここでは質問に対して回答ができます</p>
-      <p>技術論のマウンティングや誹謗中傷は禁止です</p>
+      <ul class="c-toparea-ul">
+        <li>ここでは質問に対して回答ができます</li>
+        <li>技術論のマウンティングや誹謗中傷は禁止です</li>
+        <li>回答の削除は行なえますが、編集機能はありません</li>
+      </ul>
     </div>
     <div class="row question-box">
       <div class="question-box-text">
         <h4 class="question-midashi"><%= @question.tag.genre.name %>に関する質問です</h4>
         <!--<i class="far fa-question-circle"></i>-->
         <div class="tag">
-        <p><%= @question.tag.name %></p>
+        <i class="fas fa-tags"><%= @question.tag.name %></i>
         </div>
         <p><%= @question.title %></p>
       </div>
@@ -33,7 +36,7 @@
       </div>
     </div>
     <div class="row user-links">
-        <%= f.submit "投稿する", class:"btn btn-secondary btn btn-lg w-80"%>
+        <%= f.submit "投稿する", class:"btn-lg w-80 btn_bk"%>
     </div>
    <% end %>
 </div>

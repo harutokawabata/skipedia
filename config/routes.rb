@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     get 'events/:id/cancel' => 'events#cancel', as: 'events_cancel'
     # get 'events/:id/confirm' => 'events#confirm', as: 'events_confirm'
     get 'events/:id/withdraw' => 'events#withdraw', as: 'events_withdraw'
-    resources :answers, only: [:index, :edit, :create, :show, :update, :destroy]
+    resources :answers, only: [:index, :create, :show, :destroy]
     get '/answers/:question_id/new' => 'answers#new', as: 'new_answer'
   end
   
@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
       sessions:      'admins/sessions',
       passwords:     'admins/passwords',
-      registrations: 'admins/registrations'
+      # registrations: 'admins/registrations'
     }
   # devise_scope :admins do
   #   get '/admins/sign_out' => 'devise/sessions#destroy'
@@ -89,6 +89,7 @@ devise_for :users, controllers: {
 
     get '/admins' => 'admins/homes#top'
     root 'public/homes#top'
+    get 'about' => 'public/homes#about'
     
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

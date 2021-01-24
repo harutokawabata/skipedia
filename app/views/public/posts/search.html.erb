@@ -4,16 +4,18 @@
   <div class="row">
     <div class="c-toparea">
       <p><span class="underbar">このページについて</span></p>
-      <ul>
+      <ul class="c-toparea-ul">
         <li>スキーの経験や知識を投稿できます。だれでも投稿可能ですので、お気軽にどうぞ</li>
         <li>ログイン中の会員の皆様はこの一覧よりご自身の投稿データを削除できます</li>
+        <li>会員登録で誰でも投稿することが可能です。ログイン中の方は➕から新規投稿できます</li>
+        <li>投稿は編集及び削除が可能です</li>
       </ul>
     </div>
   </div>
   <div class="c-flex-box" style="justify-content: space-between">
-    <div class="text-left c-search-area">
+    <div class="text-left c-search-area c-margin-bottom">
         <%= form_tag(posts_search_path, :method => 'get') do %>
-          <%= text_field_tag :search, "タイトル名で検索" %>
+          <%= text_field_tag :search, "", {placeholder:"タイトル名で検索"} %>
           <%= submit_tag '検索', :name => nil %>
         <% end %>
       </div>
@@ -41,18 +43,17 @@
   <div class="row">
     <div class="timeline">
       <div class="image-image">
-        <p class="text-center"><%= post.user.name %></p>
         <div class="image-image-image">
           <i class="fas fa-user-circle fa-3x"></i>
         </div>
       </div>
       <div class="post-text-area">
-        <ul class="c-ul">
-          <li class="c-left" style="font-size:20px;"><%= link_to post.title, post_path(post.id) %></li>
+        <ul class="ppp">
+          <li><%= post.user.name %></li>
           <li class="c-right">投稿日:<%= l post.created_at, format: :short %></li>
         </ul>
+        <p><%= link_to post.title, post_path(post.id) %></p>
         <div class="post-introduction-area">
-          <%= post.introduction.truncate(60, omission: '...') %>
           <div class="text-right">
             <%= link_to "全文表示", post_path(post.id) %>
           </div>
@@ -61,13 +62,13 @@
       <div class="col-lg-2 post-info-area">
         <ul>
           <li><i class="fas fa-folder"></i><%= post.tag.genre.name %><br></li>
-          <li><i class="fas fa-tags"></i><%= link_to post.tag.name %><br></li>
+          <li><i class="fas fa-tags"></i><%= post.tag.name %><br></li>
           <% if user_signed_in? %>
           <li>
             <div class="c-delete">
               <% if current_user.id == post.user_id %>
-                <%= link_to post_path(post.id), :method => :delete do %>
-                  <i class="fas fa-trash-alt c-delete-icon"></i>
+                <%= link_to post_path(post.id), data: {confirm:'本当に削除しますか？'}, :method => :delete do %>
+                  <i class="fas fa-trash-alt c-delete-icon">削除</i>
                 <% end %>
               <% end %>
             </div>

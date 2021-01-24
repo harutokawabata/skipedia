@@ -25,24 +25,22 @@
       <div class="col-xs-12">
         <% a = 0 %>
         <h4 class="midashi4">投稿件数合計（全<%= Post.count %>件）</h4>
-          <% @posts.last(5).each do |posted| %>
+          <% @posts.order(created_at: :desc).last(5).each do |posted| %>
           <%= l posted.created_at, format: :short %><br>
           <%= a += 1 %>)<%= link_to posted.title, post_path(posted.id) %><br>
           <% end %>
         <% a = 0 %>
         <h4 class="midashi4">質問件数合計（全<%= Question.count %>件 )</h4>
-          <% @questions.last(5).each do |question| %>
+          <% @questions.order(created_at: :desc).last(5).each do |question| %>
            <%= l question.created_at, format: :short %><br>
            <%= a += 1 %>)<%= link_to question.title, question_path(question.id) %><br>
           <% end %>
-           
-          <p>質問の合計は<%= Question.count %>件です</p>
         <% a = 0 %>
         <h4 class="midashi4">回答件数合計（全<%= Answer.count %>件）</h4>
          
-         <% @answers.last(5).each do |answer| %>
+         <% @answers.order(created_at: :desc).last(5).each do |answer| %>
            <%= a += 1 %>)<%= answer.question.title %>に対しての回答<br>
-           =><%= answer.introduction %><br>
+           =><%= answer.introduction.truncate(60, omission: '...') %><br>
          <% end %>
            
          

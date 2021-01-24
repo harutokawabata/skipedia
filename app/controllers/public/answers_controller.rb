@@ -34,15 +34,6 @@ class Public::AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
   end
 
-  def edit
-    @answers = Answer.new
-    # @answer = Answer.find(params[:id])
-    # @question = Question.find(params[id])
-  end
-
-  def update
-  end
-
   def destroy
     @answer = Answer.find(params[:id])
     @answer.destroy!
@@ -51,6 +42,9 @@ class Public::AnswersController < ApplicationController
   
   def search
     @answers = Answer.search(params[:search])
+    # @answers = Answer.joins(:question).where("questions.title LIKE?", "%#{params[:search]}%")
+    # pp @answers
+
     # @answers = Answer.all
   end
   

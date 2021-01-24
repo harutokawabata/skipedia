@@ -7,6 +7,7 @@ class Question < ApplicationRecord
     has_many :answers, dependent: :destroy
     belongs_to :user
     has_many :histories, dependent: :destroy
+    validates :title, :introduction, :tag_id, presence: true
     
     def self.search(search)
         if search

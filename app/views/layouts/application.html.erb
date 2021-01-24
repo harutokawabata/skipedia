@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#sampleNavbar">
     <div class="footerFixed">
     <header>
       <nav class="navbar navbar-inverse">
@@ -21,15 +21,18 @@
       				<span class="icon-bar"></span>
       				<span class="icon-bar"></span>
       			</button>
-      			<p class="navbar-brand">
+      			<div class="navbar-brand">
       			  <% if user_signed_in? %>
-      				  <%= link_to 'Skipedia', root_path %>
+      			    <%=link_to image_tag('admins/skipedia.jpg'), root_path %>
+      				  <%# link_to 'Skipedia', root_path %>
       				<% elsif admin_signed_in? %>
-      				  <%= link_to 'Skipedia-admin', admins_path %>
+      				  <%= link_to image_tag('admins/skipedia-admin.jpg'), admins_path %>
       				<% else %>
-      				  <%= link_to 'Skipedia', root_path %>
+      			  	 <!--<img src="/assets/images/admins/skipedia.jpg" alt="">-->
+      			  	 <%= link_to image_tag('admins/skipedia.jpg'), root_path %>
+      				  <%# link_to 'Skipedia', root_path %>
       				<% end %>
-      			</p>
+      			</div>
       		</div>
       		
       		<div class="collapse navbar-collapse" id="navbarEexample7">
@@ -55,7 +58,7 @@
               <li>ゲストユーザー</li>
               <li><%= link_to "会員登録", new_user_registration_path %></li>
               <li><%= link_to "ログイン", new_user_session_path %></li>
-              <li><%= link_to "Skipediaとは", new_user_session_path %></li>
+              <li><%= link_to "Skipediaとは", about_path %></li>
               <li><%= link_to "投稿一覧", posts_path %></li>
               <li><%= link_to "質問一覧", questions_path %></li>
               <li><%= link_to "回答一覧", answers_path %></li>

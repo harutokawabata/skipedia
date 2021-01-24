@@ -7,17 +7,23 @@
     <!--}-->
 
 <div class="container">
+    <div class="row text-center">
 <!--<% if @entry.do_entry? %>  #do_entry-->
         <h2>エントリーありがとうございました！</h2>
         <p>マイページより状況を確認できます</p>
-        <%= link_to "マイページ", users_path %>
-        <%= link_to "イベント一覧", events_path %>
+        <div class="text-center">
+          <div class="col-lg-4"><%= link_to "トップページ", root_path %></div>
+          <div class="col-lg-4"><%= link_to "マイページ", users_path %></div>
+          <div class="col-lg-4"><%= link_to "イベント一覧", events_path %></div>
+        </div>
   <!--<% elsif @entry.cancel_entry? %> cancel_entry-->
         <h2>ありがとうございました！</h2>
         <p>またの機会にお待ちしております！</p>
-        <%= link_to "マイページ", users_path %>
-        <%= link_to "イベント一覧", events_path %>
+        <div class="col-lg-4"><%= link_to "トップページ", root_path %></div>
+        <div class="col-lg-4"><%= link_to "マイページ", users_path %></div>
+        <div class="col-lg-4"><%= link_to "イベント一覧", events_path %></div>
       <% else %>
         <p>表示がうまくできてないお</p>
      <% end %>
+     </div>
 </div>

@@ -1,38 +1,64 @@
 <div class="container">
+  <h3 class="midashi3">回答詳細ページ</h3>
+    <div class="row c-toparea">
+      <p><span class="underbar">このページについて</span></p>
+      <ul class="c-toparea-ul">
+        <li>「<%= @answer.question.title %>」に対する回答ページです</li>
+        <li>回答者ご本人はこの画面から削除が行えます（編集機能はありません）</li>
+      </ul>
+    </div>
     <div class="row">
+        <p></p><%= @answer.user.name %>さんからのの回答です</p>
         <table class="table table-bordered">
-        	<!--<thead>-->
-        	<!--	<tr>-->
-        	<!--		<th></th>-->
-        	<!--		<th>名前</th>-->
-        	<!--		<th>惑星</th>-->
-        	<!--		<th>勝点</th>-->
-        	<!--	</tr>-->
-        	<!--</thead>-->
         	<tbody>
         		<tr>
-        			<th class="col-xs-2">タイトル</th>
-        			<td><%= @answer.question.title %></td>
+        			<th class="col-xs-2 text-center">質問内容</th>
+        			<td class="text-center"><%= @answer.question.title %></td>
         		</tr>
         		<tr>
-        			<th>ジャンル・タグ</th>
-        			<td><%= @answer.question.tag.genre.name %>　・　<%= @answer.question.tag.name %></td>
+        			<th class="text-center">ジャンル・タグ</th>
+        			<td class="text-center"><i class="fas fa-folder"></i><%= @answer.question.tag.genre.name %> / <i class="fas fa-tags"></i><%= @answer.question.tag.name %></td>
         		</tr>
         		<tr>
-        		    <th>内容</th>
-        		    <td><%= @answer.introduction %></td>
+        		    <th class="text-center">回答内容</th>
+        		    <td class="overflow-auto"><%= @answer.introduction %></td>
         		</tr>
         		<tr>
-        		    <th>参考リンク</th>
-        		    <td><%= @answer.link %></td>
+        		    <th class="text-center">参考リンク</th>
+        		    <td class="text-center"><%= link_to @answer.link, @answer.link, target: :_blank %></a></td>
         		</tr>
         	</tbody>
         </table>
     </div>
-    <% if @answer.user == current_user %>
     <div class="row text-center">
-        <%= link_to '編集する', edit_answer_path(@answer.id), class:"btn btn-primary" %>
-        <%= link_to '削除する', answer_path(@answer.id), method: :delete, class:"btn btn-danger" %>
+      <% if @answer.user == current_user %>
+        <div class="col-lg-4">
+          <%= link_to '回答一覧へ戻る', answers_path %>
+        </div>
+        <div class="col-lg-4">
+          <%= link_to '削除する', answer_path(@answer.id), data: {confirm:'本当に削除しますか？'}, method: :delete %>
+        </div>
+        <div class="col-lg-4">
+          <%= link_to '質問一覧へ戻る', questions_path %>
+        </div>
+      <% else %>
+        <div class="col-lg-6">
+          <%= link_to '回答一覧へ戻る', answers_path %>
+        </div>
+        <div class="col-lg-6">
+          <%= link_to '質問一覧へ戻る', questions_path %>
+        </div>
+      <% end %>
     </div>
-    <% end %>
+    <div class="overflow-auto">
+        <h4 class="text-center">この回答とは別の回答を見る</h4>
+       <div class="c-margin-around">
+         <ul class="c-toparea-ul">
+         <% @answer.question.answers.order(created_at: :desc).each do |aqa| %>
+           <%= l aqa.created_at, format: :short %><br>
+           <%= link_to aqa.introduction.truncate(20, omission: '...'), answer_path(aqa.id) %><br>
+         <% end %>
+         </ul>
+       </div>
+    </div>
 </div>
