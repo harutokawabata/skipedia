@@ -114,6 +114,15 @@
     
     <div class="row user-sign-in">
       <div class="field">
+        <div class="col-xs-12 dropdown">
+          <label>写真</label>
+          <%= f.collection_select(:post_image_id, PostImage.all, :id, :name) %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
         <div class="col-xs-12">
           <label>開催日</label>
           <%= f.text_field :date, autofocus: true, autocomplete: "date", placeholder: "開催日" %>

@@ -29,7 +29,7 @@
         			<td><%= tag.genre.name %></td>
         			<td>
         			    <%= link_to "編集", edit_admins_tag_path(tag.id), class:"btn btn-primary" %>
-        			    <%= link_to "削除", admins_tag_path(tag.id), method: :delete, class:"btn btn-danger" %>
+        			    <%= link_to "削除", admins_tag_path(tag.id), data: {confirm:'本当に削除しますか？'}, method: :delete, class:"btn btn-danger" %>
         			</td>
         		</tr>
         		<% end %>

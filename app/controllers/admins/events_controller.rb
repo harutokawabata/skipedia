@@ -51,6 +51,8 @@ class Admins::EventsController < ApplicationController
     
     def show
         @event = Event.find(params[:id])
+        @events = Event.all
+        @event_entries = @event.event_entries
     end
     
     private

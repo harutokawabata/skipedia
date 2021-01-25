@@ -56,10 +56,19 @@
       	  <th class="col-lg-2">イベント詳細</th>
       	  <td class="col-lg-10"><%= @event.event_detail %></td>
       	</tr>
+      	<tr>
+      	  <th class="col-lg-2">参加中のUser</th>
+      	  <td class="col-lg-10">
+      	    <p><%= @event.event_entries.where(cancel: "do_entry").count %>名エントリー中</p>
+      	    <% @event_entries.where(cancel: "do_entry").each do |ee| %>
+      	      <%= link_to ee.user.name, admins_user_path(ee.user_id) %><br>
+      	    <% end %>
+      	  </td>
+      	</tr>
       </tbody>
     </table>
     </div>
     <div class="text-center">
-      <%= link_to "編集する", edit_event_path(@event.id), class:"btn btn-primary" %>
+      <%= link_to "編集する", edit_admins_event_path(@event.id), class:"btn btn-primary" %>
     </div>
 </div>

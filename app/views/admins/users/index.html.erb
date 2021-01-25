@@ -15,6 +15,7 @@
         		<tr>
         			<th>会員ID</th>
         			<th>ユーザー名</th>
+        			<th>Email</th>
         			<th>投稿数</th>
         			<th>質問数</th>
         			<th>ステータス</th>
@@ -26,6 +27,7 @@
         		<tr>
         			<th><%= user.id %></th>
         			<td><%= user.name %></td>
+        			<td><%= user.email %></td>
         			<td><%= user.posts.count %>件</td>
         			<td><%= user.questions.count %>件</td>
         			<td>

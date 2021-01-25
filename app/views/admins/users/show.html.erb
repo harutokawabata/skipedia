@@ -19,6 +19,7 @@
               <p>退会済み</p>
             <% end %>
           </li>
+          <li>email:<%= @user.email %></li>
           <% if @user.popular == "0" %>
             <li>ステータス：一般会員</li>
           <% elsif @user.popular == "1" %>
@@ -106,7 +107,12 @@
             <%= link_to "BANする", admins_confirm_path(@user.id), class:"btn btn-danger" %>
           </div>
           <div class="col-lg-4">
-            <%= link_to "復活させる", admins_users_withdraw_path(@user.id), class:"btn btn-primary", method: :patch %>
+            <% if @user.is_deleted == true %>
+              <%= link_to "復活させる", admins_users_withdraw_path(@user.id), class:"btn btn-primary", method: :patch %>
+            <% else %>
+              <p>退会復活機能があります</p>
+              <p>※Userが退会しているとここにボタンが表示されます</p>
+            <% end %>
           </div>
         </div>
       </div>

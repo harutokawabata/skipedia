@@ -6,6 +6,7 @@
         <li>このページでは質問・投稿・イベント・回答・会員情報の履歴を一覧で表示しています</li>
         <li>一つの項目当たり５件まで表示しています</li>
         <li>もっと見るをクリックすると該当する部分に関して更に詳しい情報を見ることができます</li>
+        <li>投稿と回答のもっと見るは後ほど実装予定</li>
       </ul>
     </div>
     <div class="row">
@@ -40,13 +41,13 @@
       </div>
     </div>
     <div class="row">
-      <h4 class="midashi4">投稿</h4>
+      <h4 class="midashi4">最近の投稿</h4>
       <table class="table table-bordered">
     	<thead>
     		<tr>
     			<th class="col-lg-1 text-center">No.</th>
-    			<th class="col-lg-7 text-center">投稿タイトル</th>
-    			<th class="col-lg-2 text-center">投稿内容</th>
+    			<th class="col-lg-2 text-center">投稿タイトル</th>
+    			<th class="col-lg-7 text-center">投稿内容</th>
     			<th class="col-lg-2 text-center">参考リンク</th>
     		</tr>
     	</thead>
@@ -64,11 +65,11 @@
     	</tbody>
       </table>
       <div class="text-center">
-        <%= link_to "もっと見る", admins_histories_path, class:'text-center' %>
+        <%# link_to "もっと見る", admins_posts_path, class:'text-center' %>
       </div>
     </div>
     <div class="row">
-      <h4 class="midashi4">回答一覧</h4>
+      <h4 class="midashi4">最近の回答一覧</h4>
       <table class="table table-bordered">
     	<thead>
     		<tr>
@@ -90,7 +91,7 @@
     	</tbody>
       </table>
       <div class="text-center">
-        <%= link_to "もっと見る", admins_histories_path, class:'text-center' %>
+        <%# link_to "もっと見る", admins_histories_path, class:'text-center' %>
       </div>
     </div>
     <div class="row">
