@@ -13,4 +13,12 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery
+//= require bootstrap-sprockets
 //= require_tree .
+
+/*global */
+$(function(){
+  console.log('test')
+  setTimeout("$('.flash-message').fadeOut('slow')", 1000);
+})

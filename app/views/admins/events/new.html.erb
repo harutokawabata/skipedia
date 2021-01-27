@@ -1,0 +1,195 @@
+    <!--<h2>イベント追加</h2> -->
+    <!--    <div class="container form">-->
+    <!--      <div class="box event-new">-->
+    <!--        <%# form_with model:@event, url:admins_events_path, class:"form-horizontal", local:true do |f| %>-->
+    <!--        <div class="form-group">-->
+    <!--          <label class="col-sm-5 control-label">イベント名</label>-->
+    <!--          <div class="col-sm-5">-->
+    <!--            <%# f.text_field :name %>-->
+    <!--          </div>-->
+    <!--        </div>-->
+            
+    <!--        <div class="form-group">-->
+    <!--          <label class="col-sm-5 control-label">開催日</label>-->
+    <!--          <div class="col-sm-5">-->
+    <!--            <%# f.text_field :date %>-->
+    <!--          </div>-->
+    <!--        </div>-->
+            
+    <!--        <div class="form-group">-->
+    <!--          <label class="col-sm-5 control-label">イベント開催時間</label>-->
+    <!--          <div class="col-sm-3">-->
+    <!--            <%# f.text_field :start %>-->
+    <!--          </div>-->
+    <!--          <div class="col-sm-1">-->
+    <!--            <p>〜</p>-->
+    <!--          </div>-->
+    <!--          <div class="col-sm-3">-->
+    <!--            <%# f.text_field :finish %>-->
+    <!--          </div>-->
+    <!--        </div>-->
+            
+    <!--        <div class="form-group">-->
+    <!--          <label class="col-sm-5 control-label">参加費</label>-->
+    <!--          <div class="col-sm-5">-->
+    <!--            <%# f.text_field :entry_fee %>-->
+    <!--          </div>-->
+    <!--        </div>-->
+            
+    <!--        <div class="form-group">-->
+    <!--          <label class="col-sm-5 control-label">募集人数</label>-->
+    <!--          <div class="col-sm-5">-->
+    <!--            <%# f.text_field :capacity %>-->
+    <!--          </div>-->
+    <!--        </div>-->
+            
+    <!--        <div class="form-group">-->
+    <!--          <label class="col-sm-5 control-label">主催者</label>-->
+    <!--          <div class="col-sm-5">-->
+    <!--            <%# f.text_field :organizer %>-->
+    <!--          </div>-->
+    <!--        </div>-->
+            
+    <!--        <div class="form-group">-->
+    <!--          <label class="col-sm-5 control-label">イベント詳細</label>-->
+    <!--          <div class="col-sm-5">-->
+    <!--            <%# f.text_area :event_detail, class:"form-control" %><br>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="form-group"  id="exampleFormControlSelect1">-->
+    <!--          <label class="col-sm-5 control-label">開催ステータス</label>-->
+    <!--            <div class="col-sm-5">-->
+                          
+    <!--                <select class="form-control" id="exampleFormControlSelect1">-->
+                       <%# @.each do |genre| %>  
+    <!--                   <option>-->
+    <!--                       開催中-->
+                          <%# genre.name %> 
+    <!--                   </option>-->
+    <!--                   <option>-->
+    <!--                      準備中  -->
+    <!--                   </option>-->
+                       <%# end %>
+    <!--                </select>-->
+    <!--              <br>-->
+    <!--            <%# f.submit "投稿する" %>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <%# end %>-->
+<div class="container">
+<div class="row">
+  <h3 class="midashi3">イベント追加</h3>
+  <div class="c-toparea">
+    <p><span class="underbar">このページの機能及び注意点</span></p>
+    <ul class="c-toparea-ul">
+      <li>イベントを新規で追加することができます</li>
+      <li>イベントを追加できるのは管理者だけでユーザーには追加の権限はありません</li>
+      <li>イベントを作成し投稿すると保留であってもユーザー画面に表示されます</li>
+      <li>ユーザーからの申込みをまだ受け入れたくない場合は準備中で投稿してください</li>
+      <li>エントリーを開始したい場合は受付中に変更することでユーザーはエントリーすることができます</li>
+    </ul>
+  </div>
+</div>  
+  
+</div>
+
+<div class="container user-sign-in">
+ <div class="row form-title">
+   <h3>イベント追加</h3> 
+ </div> 
+  <%= alert %>
+ <%= form_with model:@event, url:admins_events_path, class:"form-horizontal", local:true do |f| %>
+    <%# render "users/shared/error_messages", resource: resource %>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "イベント名", class:'fa' %>
+        </div>
+      </div>
+    </div>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12 dropdown">
+          <%# f.attachment_field :image %>
+           <%= f.collection_select(:post_image_id, PostImage.all, :id, :name) %>
+           <!--f.collection.select :post_image, [[event.post_image_id, ""],["受付中", "waiting"], ["受付終了", "finish"]], include_blank: "選択してください" %>-->
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :date, autofocus: true, autocomplete: "date", placeholder: "開催日" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :start, autofocus: true, autocomplete: "start", placeholder: "開催時間" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :finish, autofocus: true, autocomplete: "finish", placeholder: "終了時間" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :entry_fee, autofocus: true, autocomplete: "entry_fee", placeholder: "参加費" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :capacity, autofocus: true, autocomplete: "capacity", placeholder: "募集人数" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :organizer, autofocus: true, autocomplete: "organizer", placeholder: "主催者" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_area :event_detail, placeholder: "説明文", class:"textarea" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12 dropdown">
+          <%= f.select :event_status, [["準備中", "perparation"],["受付中", "waiting"], ["受付終了", "finish"]], include_blank: "選択してください" %>
+            
+            <!--<option>-->
+            <!--</option>-->
+            <!--<option>-->
+            <!--  準備中  -->
+            <!--</option>-->
+                       <%# end %>
+                     
+        </div>
+      </div>
+    </div>
+
+  <div class="row user-links">
+    <%= f.submit "投稿する", class:"btn-lg w-80 btn_bk"%>
+<% end %>

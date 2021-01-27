@@ -1,0 +1,43 @@
+<div class="container">
+    <h3 class="midashi3">写真館</h3>
+    <div class="c-toparea">
+     <p><span class="underbar">このページで確認できること</span></p>
+      <ul class="c-toparea-ul">
+          <li>投稿済みのイベントに関する画像を一覧で表示できます</li>
+          <li>使う予定のある写真をとりあえず投稿できます</li>
+          <li>画像を投稿してからイベント投稿フォームへアクセスしましょう</li>
+      </ul>
+    </div>
+    <div class="row">
+        <p style="text-align:center;">写真を追加する場合は<a><%= link_to "こちら", new_admins_post_image_path %></a>をクリックしてください</p>
+    </div>
+    
+    
+    <% @post_images.each do |pi| %>
+    
+　　<div class="col-xs-4 c-boxarea pi">
+      <h4>写真の名前：<%= pi.name %></h4>
+       <div class="pi-image-area">
+       <%= attachment_image_tag pi, :image, :fill, 800/3, 450/3, format: 'jpg' %>
+       </div>
+       <div class="btn-area">
+          <%= link_to 'イベント作成', new_admins_event_path, class:"btn btn-primary" %>
+          <%= link_to '削除する', admins_post_image_path(pi.id), method: :delete, class:"btn btn-danger" %>
+      </div>
+      <div class="pi-text-area">
+        <ul>
+           <li>imageのid:<%= pi.id %>です</li>
+           <li>
+               <% if pi.events.present? %>
+                 <p>現在,この画像を<span class="underbar">利用中</span>です</p>
+               <% elsif pi.events.blank? %>
+                 <p>現在,この画像を利用していません</p>
+               <% end %>
+           </li>
+         </ul>  
+      </div>
+    </div>
+    <% end %>      
+  
+       
+</div>

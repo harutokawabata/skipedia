@@ -1,0 +1,49 @@
+<div class="container">
+  <h3 class="midashi3">ジャンル編集</h3>
+    <div class="row">
+      <div class="c-toparea">
+        <p><span class="underbar">このページの機能及び注意点</span></p>
+        <ul class="c-toparea-ul">
+            <li>ジャンルを編集できます</li>
+            <li>デフォルトにあるジャンルは「マテリアル」「技術」「局面」「動作」の4つだけです</li>
+            <li>基本的に追加は行いません</li>
+            <li>編集はできますが、大きく記載内容が変わる場合はユーザーが混乱するので基本的にお勧めしません</li>
+        </ul>
+      </div>
+    </div>
+</div>
+<div class="container user-sign-in">
+ <div class="row form-title">
+   <h3>ジャンル編集</h3> 
+ </div> 
+  <%= alert %>
+  <%= form_with model:@genre,url:admins_genre_path(@genre.id), local:true do |f| %>
+  <%# form_with model:@tag, url:admins_tags_path, class: "form_horizontal", local:true do |f| %>
+    <%# render "admins/shared/error_messages", resource: resource %>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ジャンル名", class:'fa' %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <!--<div class="field">-->
+        <!--<div class="col-xs-12">-->
+          <%= f.text_area :introduction, placeholder: "説明文", class:"textarea" %>
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+    
+    <div class="row user-sign-in">
+          <%= f.radio_button :is_active, :true %>
+          <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+          <p>     </p>
+          <%= f.radio_button :is_active, :fales %>
+          <%= f.label :is_active, "無効", {value: :false, style: "display: inline-block;"} %><br>
+    </div>
+
+  <div class="row user-links">
+    <%= f.submit "投稿する", class:"btn btn-secondary btn btn-lg w-80"%>
+<% end %>

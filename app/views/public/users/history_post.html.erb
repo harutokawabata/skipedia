@@ -1,0 +1,53 @@
+<div class="container">
+    <h3 class="midashi3"><%= @user.name %> さんの投稿履歴一覧</h3>
+    <div class="row">
+        <div class="c-toparea">
+        <p><span class="underbar">このページについて</span></p>
+            <ul>
+                <li><%= @user.name %>さん質問した内容が一覧で表示されています</li>
+                <li>この一覧ページより質問内容の編集や削除が可能です</li>
+            </ul>
+        </div>
+    </div>
+ <% @posts.order(created_at: :desc).each do |post| %>
+  <div class="row">
+    <div class="timeline">
+      <div class="image-image">
+        <div class="image-image-image">
+          <i class="fas fa-user-circle fa-3x"></i>
+        </div>
+      </div>
+      <div class="post-text-area">
+        <ul class="ppp">
+          <li class="c-left" style="font-size:20px;"><%= link_to post.title, post_path(post.id) %></li>
+          <li class="c-right">投稿日:<%= l post.created_at, format: :short %></li>
+        </ul>
+        <div class="post-introduction-area">
+          <%= post.introduction.truncate(60, omission: '...') %>
+          <div class="text-right">
+            <%= link_to "全文表示", post_path(post.id) %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 post-info-area">
+        <ul>
+          <li><i class="fas fa-folder"></i><%= post.tag.genre.name %><br></li>
+          <li><i class="fas fa-tags"></i><%= post.tag.name %><br></li>
+          <% if user_signed_in? %>
+          <li>
+            <div class="c-delete">
+              <% if current_user.id == post.user_id %>
+                <%= link_to post_path(post.id), data: {confirm:'本当に削除しますか？'}, :method => :delete do %>
+                  <i class="fas fa-trash-alt c-delete-icon">削除</i>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+ <% end %>
+</div>
+

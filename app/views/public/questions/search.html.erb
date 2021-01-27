@@ -1,0 +1,82 @@
+<div class="container">
+　<h3 class="midashi3">質問一覧ページ</h3>
+  <div class="row">
+    <!--<p>検索</p>-->
+    <div class="c-toparea">
+      <p><span class="underbar">このページについて</span></p>
+      <ul class="c-toparea-ul">
+        <li>以下のような内容でお困りの方がいらっしゃいます</li>
+        <li>会員登録及びログインにて投稿することが可能になります</li>
+        <li>タイトルをクリックすると回答することができます</li>
+        <li>フォームよりタイトル名で検索することができます</li>
+        <li>質問の削除はできますが編集機能はありません</li>
+        <li><span style="color:red;">回答表示</span>とあるところは質問に対して回答が寄せられています</li>
+      </ul>
+    </div>
+    <div class="c-flex-box" style="justify-content: space-between">
+      <div class="text-left c-search-area c-margin-bottom">
+        <%= form_tag(questions_search_path, :method => 'get') do %>
+          <%= text_field_tag :search, "", {placeholder:"タイトル名で検索"} %>
+          <%= submit_tag '検索', :name => nil %>
+        <% end %>
+      </div>
+      <div class="text-right c-margin-bottom" >
+      <% if user_signed_in? %>  
+        <%= link_to new_question_path, :method => :get do %>
+          <i class="fas fa-plus-circle fa-3x"></i>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <% @questions.order(created_at: :desc).each do |question| %>
+  <div class="row">
+    <div class="timeline">
+      <div class="col-lg-2 image-image">
+        <% if current_user.id == question.user.id %>
+          <p class="text-center c-color-red">自分の質問</p>
+        <% else %>
+          <p class="text-center">匿名さん</p>
+        <% end %>
+        <div class="image-image-image">
+          <i class="fas fa-user-circle fa-3x"></i>
+        </div>
+      </div>
+      <div class="col-lg-8 post-text-area">
+          <ul class="c-ul">
+            <li class="c-left" style="font-size:20px;"><%= link_to question.title.truncate(60, omission: '...'), question_path(question.id) %><br>
+            <li class="c-right">投稿日:<%= l question.created_at, format: :short %></li>
+          </ul>
+          <div class="post-introduction-area">
+            <%= question.introduction.truncate(60, omission: '...') %>
+           <div class="text-right">
+              <% if question.answers.present? %>
+                <%= link_to "回答表示", question_path(question.id), style:"color:red;"%>
+              <% else %>
+                <%= link_to "全文表示", question_path(question.id) %>
+              <% end %>
+            </div>
+          </div>
+      </div>
+      <div class="col-lg-2 post-info-area">
+        <ul>
+          <li><i class="fas fa-folder"></i><%= question.tag.genre.name %><br></li>
+          <li><i class="fas fa-tags"></i><%= question.tag.name %><br></li>
+          <% if user_signed_in? %>
+          <li>
+            <div class="c-delete">
+              <% if current_user.id == question.user_id %>
+                <%= link_to question_path(question.id), data: {confirm:'本当に削除しますか？'}, :method => :delete do %>
+                  <i class="fas fa-trash-alt c-delete-icon">削除</i>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    </div>
+   <% end %>
+</div>

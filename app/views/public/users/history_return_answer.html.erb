@@ -1,0 +1,54 @@
+<%# @user.questions.inspect %>
+<%# @questions.inspect %>
+<!--<p><%# @user.inspect %></p>-->
+
+<div class="container">
+    <h3 class="midashi3"><%= @user.name %> さんの質問に寄せられた回答履歴一覧</h3>
+    <div class="row">
+        <div class="c-toparea">
+        <p><span class="underbar">このページについて</span></p>
+            <ul>
+                <li><%= @user.name %>さんが質問した内容に対する「返答」が確認できます</li>
+                <li>この一覧ページより</li>
+            </ul>
+        </div>
+    </div>
+     <% @questions.each do |question| %>
+     <%# @answers.each do |answer| %>
+     <%# question.answer.introduction %>
+     <%# end %>
+    <% if question.answers.present? %>
+      <% question.answers.each do |qa| %>
+      <div class="row">
+        <div class="timeline">
+          <div class="image-image">
+            <div class="image-image-image">
+              <i class="fas fa-user-circle fa-3x"></i>
+            </div>
+          </div>
+          <div class="post-text-area">
+            <ul class="c-ul">
+              <li class="c-left" style="font-size:20px;"><%= link_to question.title, question_path(question.id) %></li>
+              <li class="c-right">回答日:<%= l qa.created_at, format: :short %></li>
+            </ul>
+            <div class="post-introduction-area">
+                <%= qa.introduction.truncate(60, omission: '...') %>
+              <div class="text-right">
+                <%= link_to "全文表示", question_path(question.id) %>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 post-info-area">
+            <ul>
+              <li><i class="fas fa-folder"></i><%= question.tag.genre.name %><br></li>
+              <li><i class="fas fa-tags"></i><%= link_to question.tag.name %><br></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+

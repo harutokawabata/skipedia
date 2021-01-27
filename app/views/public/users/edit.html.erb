@@ -1,0 +1,73 @@
+<div class="container">
+  <h3 class="midashi3">会員情報編集</h3>
+  <div class="row">
+    　<div class="c-toparea">
+      <p><span class="underbar">このページでできること</span></p>
+      <ul class="c-toparea-ul">
+        <li>このページでは会員情報の編集及び退会処理が可能です</li>
+        <li>一度「更新する」ボタンを押すと情報が更新されます</li>
+        <li>「退会する」のボタンを押すと退会確認ページへと飛びます</li>
+        <li>パスワードを入力する必要があります（このフォームより新しいパスワードに変更も可能です）</li>
+      </ul>
+    　</div>
+  </div>
+</div>
+<div class="container user-sign-in">
+  <div class="user-sign-in">
+   <div class="row form-title">
+     <h3>登録内容編集</h3> 
+   </div> 
+
+  <%= form_with model: @user, method: :patch, url: users_path do |f| %>
+      <div class="row user-sign-in">
+        <div class="field">
+          <div class="col-xs-12">
+            <label>ニックネーム</label>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "\uf007   名前", class:'fa' %>
+          </div>
+        </div>
+      </div>
+      <div class="row user-sign-in">
+        <div class="field">
+          <div class="col-xs-12">
+            <label>メールアドレス</label>
+            <%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "\uf007   メールアドレス", class:'fa' %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row user-sign-in">
+        <div class="field">
+          <div class="col-xs-12">
+            <label>パスワード</label>
+            <%= f.password_field :password, autocomplete: "current-password", placeholder: "\uf084   パスワード6文字以上", class: 'fa' %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row user-sign-in">
+        <div class="field">
+          <div class="col-xs-9">
+            <label>パスワード確認</label>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "\uf058   パスワード確認", class: "fa" %>
+          </div>
+        </div>
+      </div>
+  
+    <div class="row user-links">
+      <%= f.submit "更新する", data: {confirm:'更新してもよろしいですか？'}, class:"btn-lg w-80 btn_bk"%>
+    </div>
+  <% end %>
+    
+  </div>
+</div>
+<div class="container c-margin-top">
+  <div class="text-center">
+    <%= link_to '退会する', users_unsbscribe_path, class:"btn btn-danger" %>
+  </div>
+</div>
+      <%# link_to '退会する', s_unsubscribe_path, method: :get %>
+ 
+<%# button_to "退会する", registration_path(@customer), data: { confirm: "Are you sure?" }, method: :delete %>
+
+

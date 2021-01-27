@@ -1,0 +1,74 @@
+<div class="container">
+    <h3 class="midashi3">タグ一覧・新規追加</h3>
+    <div class="row">
+      <div class="c-toparea">
+        <p><span class="underbar">このページでできること</span></p>
+        <ul class="c-toparea-ul">
+            <li>タグを追加できます</li>
+            <li>ユーザーは親ジャンルを指定する必要があるので、ジャンル名のタグという読み方が成立するのがベストです</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>タグID</th>
+        			<th>タグ名</th>
+        			<th>タグ容説明</th>
+        			<th>親ジャンル</th>
+        			<th>編集・削除</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	    <% @tags.each do |tag| %>
+        		<tr>
+        			<th><%= tag.id %></th>
+        			<td><%= tag.name %></td>
+        			<td><%= tag.introduction %></td>
+        			<td><%= tag.genre.name %></td>
+        			<td>
+        			    <%= link_to "編集", edit_admins_tag_path(tag.id), class:"btn btn-primary" %>
+        			    <%= link_to "削除", admins_tag_path(tag.id), data: {confirm:'本当に削除しますか？'}, method: :delete, class:"btn btn-danger" %>
+        			</td>
+        		</tr>
+        		<% end %>
+        	</tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container user-sign-in">
+ <div class="row form-title">
+   <h3>タグ追加</h3> 
+ </div> 
+  <%= alert %>
+  <%= form_with model:@tag, url:admins_tags_path, class: "form_horizontal", local:true do |f| %>
+    <%# render "admins/shared/error_messages", resource: resource %>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "タグ名", class:'fa' %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_area :introduction, placeholder: "説明文", class:"textarea" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12 dropdown">
+          <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank:"選択してください" %>
+        </div>
+      </div>
+    </div>
+
+  <div class="row user-links">
+    <%= f.submit "投稿する", class:"btn-lg w-80 btn_bk"%>
+<% end %>

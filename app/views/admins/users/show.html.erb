@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+    <div class="user-info">
+        <div class="image-area admin">
+          <div class="icon-area">
+            <i class="fas fa-user fa-4x icon"></i>
+          </div>
+        </div>
+    </div>
+    <div class="content-area">
+      <div class="text-area">
+        <h4 class="name-area">名前             :             <%= @user.name %></h4>
+        <ul>
+          <li>
+            <% if @user.is_deleted == false  %>
+              <p>有効会員</p>
+            <% elsif @user.is_deleted == true %>
+              <p>退会済み</p>
+            <% end %>
+          </li>
+          <li>email:<%= @user.email %></li>
+          <% if @user.popular == "0" %>
+            <li>ステータス：一般会員</li>
+          <% elsif @user.popular == "1" %>
+            <li>ステータス：インフルエンサー</li>
+          <% end %>
+          <li>投稿数：<%= @user.posts.count %>件</li>
+          <li>質問数：<%= @user.questions.count %>件</li>
+          <li>回答数：<%= @user.answers.count %>件</li>
+        </ul>
+        <p>【申し込み中のイベント】</p>
+        <%if @user.events.present? %>
+          <% if @user_ee.where(cancel: "do_entry").count > 0 %>
+            <p>現在<%= @user_ee.where(cancel: "do_entry").count %>件のイベントにエントリー中です</p>
+          <% else %>
+            <p>キャンセルされました</p>
+          <% end %>
+        <% else %>
+          <p>エントリー履歴なし</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+      <h3 class="midashi3"><%= @user.name %>さんの記録詳細</h3>
+      <h4 class="midashi4">投稿内容一覧</h4>
+      <div class="posts">
+          <% if @user.posts.empty? %>
+            <p>まだ投稿はありません</p>
+          <% else %>
+            <% @user.posts.order(created_at: :desc).last(5).each do |post| %>
+            <%= l post.created_at, format: :short %><br>
+            【<%= post.title %>】<%= post.introduction %><br>
+            <% end %>
+          <% end %>
+      </div>
+      <h4 class="midashi4">質問内容一覧</h4>
+      <div class="questions">
+          <%#@user.questions.count %>
+          <% if @user.questions.empty? %>
+            <p>まだ質問はありません</p>
+          <% else %>
+            <% @user.questions.order(created_at: :desc).last(5).each do |question| %>
+                <%= l question.created_at, format: :short %><br>
+                【<%= question.title %>】<%= question.introduction %><br>
+            <% end %>
+          <% end %>
+      </div>
+      <h4 class="midashi4">回答内容一覧</h4>
+      <div class="answers">
+        <% if @user.answers.empty? %>
+          <p>まだ回答はありません</p>
+        <% else %>
+          <% @user.answers.order(created_at: :desc).last(5).each do |answered| %>
+            <%= l answered.created_at, format: :short %><br>
+            【<%= answered.question.title %>】<%= answered.introduction %><br>
+          <% end %>
+        <% end %>
+      </div> 
+      <h4 class="midashi4">イベント申し込み状況</h4>
+      <div class="events">
+        <% if @user.events.empty? %>
+          <p>まだイベントの申込みはありません</p>
+        <% else %>
+          <% @user_ee.last(5).each do |ee| %>
+            <div class="admin-user-show-event">
+              【<%= ee.event.name %>】
+              <% if ee.cancel == "cancel_entry" %>
+                <p>キャンセル済み</p>
+              <% elsif ee.cancel == "do_entry" %>
+                <p>申し込み中</p>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="admin-area">
+        <h4 class="midashi4"><%= @user.name %>さんの管理ができます</h4>
+            <p>悪質なユーザーは強制退会できます。システム上、退会処理をしてもらってもステータスが更新されるだけでデータは残ります。</p>
+            <p>ここで可能な処理は<span class="underbar">完全削除</span>です。今後<%= @user.name %>さんのデータは一切見れなくなります</p>
+        <div class="ban-box row">
+          <div class="col-lg-4">
+            <%= link_to "質問一覧に戻る", admins_users_path, class:"btn btn-primary" %>
+          </div>
+          <div class="col-lg-4">
+            <%= link_to "BANする", admins_confirm_path(@user.id), class:"btn btn-danger" %>
+          </div>
+          <div class="col-lg-4">
+            <% if @user.is_deleted == true %>
+              <%= link_to "復活させる", admins_users_withdraw_path(@user.id), class:"btn btn-primary", method: :patch %>
+            <% else %>
+              <p>退会復活機能があります</p>
+              <p>※Userが退会しているとここにボタンが表示されます</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+</div>

@@ -4,12 +4,122 @@
     <title>Skipedia</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/beca0b28fa.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#sampleNavbar">
+    <div class="footerFixed">
+    <header>
+      <nav class="navbar navbar-inverse">
+      	<div class="container-fluid">
+      		<div class="navbar-header">
+      			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample7">
+      				<span class="sr-only">Toggle navigation</span>
+      				<span class="icon-bar"></span>
+      				<span class="icon-bar"></span>
+      				<span class="icon-bar"></span>
+      			</button>
+      			<div class="navbar-brand">
+      			  <% if user_signed_in? %>
+      			    <%=link_to image_tag('admins/skipedia.jpg'), root_path %>
+      				  <%# link_to 'Skipedia', root_path %>
+      				<% elsif admin_signed_in? %>
+      				  <%= link_to image_tag('admins/skipedia-admin.jpg'), admins_path %>
+      				<% else %>
+      			  	 <!--<img src="/assets/images/admins/skipedia.jpg" alt="">-->
+      			  	 <%= link_to image_tag('admins/skipedia.jpg'), root_path %>
+      				  <%# link_to 'Skipedia', root_path %>
+      				<% end %>
+      			</div>
+      		</div>
+      		
+      		<div class="collapse navbar-collapse" id="navbarEexample7">
+      			<ul class="nav navbar-nav">
+      			 <% if user_signed_in? %>
+              <li>ユーザー</li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to "マイページ", users_path %></li>
+              <li><%= link_to "投稿一覧", posts_path %></li>
+              <li><%= link_to "質問一覧", questions_path %></li>
+              <li><%= link_to "回答一覧", answers_path %></li>
+              <li><%= link_to "イベント一覧", events_path %></li>
+      			 <% elsif admin_signed_in? %>
+              <li>管理者</li>
+              <li><%= link_to "ジャンル管理", admins_genres_path %></li>
+              <li><%= link_to "タグ管理", admins_tags_path %></li>
+              <li><%= link_to "イベント追加", admins_events_path %></li>
+              <li><%= link_to "履歴", admins_histories_path %></li>
+              <li><%= link_to "写真", admins_post_images_path %></li>
+              <li><%= link_to "会員一覧", admins_users_path %></li>
+              <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+             <% else %>
+              <li>ゲストユーザー</li>
+              <li><%= link_to "会員登録", new_user_registration_path %></li>
+              <li><%= link_to "ログイン", new_user_session_path %></li>
+              <li><%= link_to "Skipediaとは", about_path %></li>
+              <li><%= link_to "投稿一覧", posts_path %></li>
+              <li><%= link_to "質問一覧", questions_path %></li>
+              <li><%= link_to "回答一覧", answers_path %></li>
+              <li><%= link_to "イベント一覧", events_path %></li>
+             <% end %>
+              <p class="notice"><%# notice %></p>
+              <p class="alert"><%#alert %></p>
+      				<!--<li class="active"><a href="#">メニューＢ</a></li>-->
+      				<!--<li><a href="#">メニューＣ</a></li>-->
+      			</ul>
+      			<% if admin_signed_in? %>
+        			<p class="navbar-text navbar-right">管理者でログイン中</p>
+        		<% elsif user_signed_in? %>
+      			  <p class="navbar-text navbar-right">ようこそ<%= current_user.name %>さん</p>
+      			<% else %>
+      			  <p class="navbar-text navbar-right">ようこそゲストさん</p>
+      			<% end %>
+      		</div>
+      	</div>
+      </nav>
+      
+      <% if flash[:notice] == '投稿に成功しました' %>
+        <div class="flash-message flash-success">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == '編集に成功しました' %>
+        <div class="flash-message flash-edit">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == '削除しました' %>
+        <div class="flash-message flash-delete">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == '更新したで！'%>
+        <div class="flash-message flash-update">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == 'error'%>
+        <div class="flash-message flash-error">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == 'BANしました！'%>
+        <div class="flash-message flash-error">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == "今までありがとうございました！" %>
+        <div class="flash-message flash-error">
+           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:notice] == "お申し込みが完了しました！" %>
+        <div class="flash-message flash-entry">
+           <%= flash[:notice] %>
+        </div>
+      <% else %>
+        <P></P>
+      <% end %>
+  </header>
     <%= yield %>
-  </body>
+  <footer class="fixed-bottom footer">
+    <p>Copyright © 2020 〇〇 Inc. All Rights Reserved.</p>
+  </footer>
+  </div>
+ </body>
 </html>

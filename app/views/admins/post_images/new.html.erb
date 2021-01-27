@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <h3 class="midashi3">イベント用：画像投稿フォーム</h3>
+    <div class="c-toparea">
+      <p><span class="underbar">このページの機能及び注意点</span></p>
+      <ul class="c-toparea-ul">
+          <li>イベントに関する画像を投稿できます</li>
+          <li>推奨サイズは16:9です</li>
+          <li>画像を投稿してからイベント投稿フォームへアクセスしましょう</li>
+      </ul>
+    </div>
+  </div>
+    <%= form_with model:@post_image, url:admins_post_images_path, local:true do |f| %>
+    <div class="row">
+        <div class="col-sm-12 image-area">
+          <div class="image-field">
+            <%= attachment_image_tag @post_image, :image, fallback: "admins/skipedia-admin-event.jpg", id: "img_p", style: "height: 450px; width:800px;" %>
+          </div>
+        </div>
+    </div>
+    <h4 class="midashi4">画像を投稿する</h4>
+    <div class="row post_image_form">
+        <div class="bomi">
+        <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td class="col-xs-6" style="width:group; text-align:center;"><%= f.attachment_field :image, class:"btn btn-lg btn-block  mt-10 "%></th>
+                <td class="col-xs-6"><%= f.text_field :name, class:"form-control", style:"width: 600px; height: 55px;", placeholder:"写真のタイトルを入力してください"%></th>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <%= f.submit "送信", class:"btn-lg w-80 btn_bk" %>
+    <% end %>
+</div>

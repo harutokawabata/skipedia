@@ -1,0 +1,74 @@
+<div class="container">
+    <h3 class="midashi3">イベント詳細ページ</h3>
+    <% a = @event.capacity %>
+    <% b = @event.event_entries.count %>
+    <% acceptable = a - b %>
+    <div class="row">
+        <% if acceptable > 0 %>
+          <div class="alert alert-danger" role="alert"><strong>エントリー受付中！</strong>：　後、<%= acceptable %>名参加可能です.</div>
+        <% elsif acceptable <= 0 %>
+           <div class="alert alert-danger" role="alert"><strong>満員御礼！</strong></div>
+        <% end %>
+    </div>
+    
+    <% c = @event.event_entries.where(cancel: 'do_entry').count %>
+    <% d = @event.entry_fee %>
+    <div class="row c-flex-box">
+    <table class="row table table-bordered c-width-800">
+      <tbody>
+      	<tr>
+      		<th class="col-lg-2">イベント名</th>
+      		<td class="col-lg-10"><%= @event.name %></td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">上限人数</th>
+      		<td class="col-lg-10">
+      		<%= @event.capacity %>名<br>
+      		<% if acceptable > 0 %>
+      		  <p>（あと<%= @acceptable %>人のお申し込みが可能です</p>
+      	    <% elsif acceptable <= 0 %>
+      	      <p style="color:red;">満員御礼</p>
+      		<% end %>
+      		</td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">開催日時</th>
+      	  <td class="col-lg-10">
+      	    <%= @event.date %>
+      	    <div class="time">
+      	      <%= @event.start %>〜<%= @event.finish %>
+      	    </div>
+      	  </td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">参加費</th>
+      	  <td class="col-lg-4"><%= @event.entry_fee %>円</td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">見込み収益</th>
+      	  <td class="col-lg-4"><%= d * c %>円</td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">主催及び主管</th>
+      	  <td class="col-lg-10"><%= @event.organizer %></td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">イベント詳細</th>
+      	  <td class="col-lg-10"><%= @event.event_detail %></td>
+      	</tr>
+      	<tr>
+      	  <th class="col-lg-2">参加中のUser</th>
+      	  <td class="col-lg-10">
+      	    <p><%= @event.event_entries.where(cancel: "do_entry").count %>名エントリー中</p>
+      	    <% @event_entries.where(cancel: "do_entry").each do |ee| %>
+      	      <%= link_to ee.user.name, admins_user_path(ee.user_id) %><br>
+      	    <% end %>
+      	  </td>
+      	</tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="text-center">
+      <%= link_to "編集する", edit_admins_event_path(@event.id), class:"btn btn-primary" %>
+    </div>
+</div>

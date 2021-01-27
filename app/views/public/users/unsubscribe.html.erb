@@ -1,0 +1,11 @@
+<div class="container text-center">
+    <div class="row" style:'text-align:center;'>
+        <h3>本当に退会しますか？？</h3>
+        <P>退会してしまうとこれまでに登録した情報は残りますがお申し込み中のイベントはキャンセルされます</P>
+        <P>本当によろしいですか？？</P>
+    </div>
+    <div class="row">
+        <%= link_to '退会しない', users_path, class:"btn btn-primary" %>
+        <%= link_to '退会する', users_withdraw_path, date: { confirm: "ほんまに退会しますか？？" }, method: :patch, class:"btn btn-danger" %>
+    </div>
+</div>

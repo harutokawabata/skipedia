@@ -1,0 +1,43 @@
+<div class="container user-sign-in">
+ <div class="row form-title">
+   <h3>管理者ログイン</h3> 
+ </div> 
+ <%= alert %>
+ <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :email, autofocus: true, autocomplete: "admin", placeholder: "\uf0e0   メールアドレス", class:'fa' %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "\uf084   パスワード6文字以上", class: 'fa' %>
+        </div>
+      </div>
+    </div>
+    
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+    
+    <div class="row user-links">
+      <%= f.submit "ログイン", class:"btn-lg w-80 btn_bk"%>
+    </div>
+    <% end %>
+  <div class="row user-links">
+    <p>ユーザー新規登録は<a><%= link_to "こちら",  new_user_registration_path %></a></p>
+  </div>
+  <div class="row user-links">
+    <p>ユーザー画面ログインは<a><%= link_to "こちら",  new_user_session_path %></a></p>
+  </div>
+  <div class="row user-links">
+    <p>トップページは<a><%= link_to "こちら",  root_path %></a></p>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <h3 class="midashi3">イベント一覧ページ</h3>
+        <div class="c-toparea">
+        <p><span class="underbar">このページの機能及び注意点</span></p>
+          <ul class="c-toparea-ul">
+            <li>イベントを追加できます</li>
+            <li>開催中のイベント名はユーザー側トップページに表示されます</li>
+            <li>イベントは多すぎると管理ができません。（３つまでにしましょう）</li>
+          </ul>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>No.</th>
+        			<th>イベント名</th>
+        			<th>イベント詳細</th>
+        			<th>受付状態</th>
+        			<th>編集・削除</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	    <% @events.each do |event| %>
+        		<tr>
+        			<th><%= event.id %></th>
+        			<td><%= link_to event.name, admins_event_path(event.id) %></td>
+        			<td><%= event.event_detail.truncate(60, omission: '...') %></td>
+        			<td><%= event.event_status_i18n %></td>
+        			<td>
+        			    <%= link_to "編集", edit_admins_event_path(event.id), class:"btn btn-primary" %>
+        			    <%= link_to "削除", admins_event_path(event.id), data: {confirm:'本当に削除しますか？'}, method: :delete, class:"btn btn-danger" %>
+        			</td>
+        		</tr>
+        		<% end %>
+        	</tbody>
+        </table>
+    </div>
+    <div class="row" style="text-align: center;">
+        <%= link_to "イベント登録", new_admins_event_path, class:"btn btn-primary" %>
+    </div>
+</div>

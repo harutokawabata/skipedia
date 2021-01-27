@@ -1,0 +1,13 @@
+<div class="container">
+    <h3 class="midashi3">ユーザー強制退会ページ</h3>
+    <div class="row">
+        <h4 class="text-center">注意！一度削除したユーザーは復活できません！</h3>
+        <div class="text-center">
+            <p>本当にBANしますか！？</p>
+            <p>
+                <%= link_to "BANする", admins_user_path(@user.id), method: :delete, class:"btn btn-danger" %>
+                <%= link_to "やっぱやーめた", admins_user_path, class:"btn btn-primary" %>
+            </p>
+        </div>
+    </div>
+</div>

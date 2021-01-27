@@ -1,0 +1,60 @@
+// Place all the styles related to the public::users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container.user-sign-in{
+    // background-color: pink;
+    width: 375px;
+    // vertical-align: baseline;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 6px 0px #ccc;
+    margin: auto;
+}
+
+.row.form-title{
+    // background-color: gray;
+    text-align: center;
+    background: linear-gradient(gray, black);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.row.user-sign-in{
+    margin-bottom: 20px;
+}
+
+///////////////mypage//////////////////
+// .user.mypage {
+//     background: linear-gradient(transparent 70%, gray 70%);
+//     width: 100%;
+//     text-align: center;
+// }
+
+.user-status {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    background-color: white;
+    height: 20px;
+    color: black;
+}
+
+.user-mypage-box {
+    // text-align: center;
+    color: black;
+}
+
+.text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+// height: auto;
+}
+
+.user.mypage {
+  padding: 1rem 2rem;
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
+  text-align: center;
+}

@@ -1,0 +1,47 @@
+
+<div class="container user-sign-in">
+  
+ <div class="row form-title">
+   <h3>会員ログイン</h3> 
+ </div> 
+  <%= alert %>
+ <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "\uf007   メールアドレス", class:'fa' %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row user-sign-in">
+      <div class="field">
+        <div class="col-xs-12">
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "\uf084   パスワード6文字以上", class: 'fa' %>
+        </div>
+      </div>
+    </div>
+
+   <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+
+  <div class="row user-links">
+    <%#= f.submit "ログイン", class:"btn btn-secondary btn btn-lg w-80"%>
+    <%= f.submit "ログイン", class:"btn-lg w-80 btn_bk"%>
+
+  </div>
+<% end %>
+  <div class="row user-links">
+    <p>会員登録がまだの方は<a><%= link_to "こちら",  new_user_registration_path %></a></p>
+  </div>
+  <div class="row user-links">
+    <!--<p>パスワードを忘れてもうた方は-->
+    <%# link_to "こちら",  new_user_password_path %>
+    
+  </div>
+</div>

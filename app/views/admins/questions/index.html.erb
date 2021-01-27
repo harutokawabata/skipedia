@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <h3 class="midashi3">投稿履歴一覧</h3>
+        <div class="c-toparea">
+        <p><span class="underbar">このページの機能及び注意点</span></p>
+        <ul class="c-toparea-ul">
+            <li>ユーザーの投稿履歴一覧を表示しています</li>
+            <li>様々なデータを確認することができます</li>
+        </ul>
+        </div>
+    </div>
+    <div class="row">
+          <h4 class="midashi4">Skipediaに届いたすべての質問</h4>
+          <table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th class="col-lg-1 text-center">No.</th>
+        			<th class="col-lg-9 text-center">質問タイトルと内容</th>
+        			<th class="col-lg-2 text-center">参考リンク</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	    <% @questions.each do |question| %>
+        		<tr>
+        			<th class="text-center"><%= question.id %></th>
+        			<td>
+        			  <div class="">
+        			     [質問内容：<%= question.title %>]  
+        			  </div>
+        			  =><%= question.introduction.truncate(60, omission: '...') %>
+        			</td>
+        		  <%# event.event_entries.each do |eee| %>
+        	      <%# end %>
+        			<td><%= l question.created_at, format: :short %></td>
+        		</tr>
+        		<% end %>
+        	</tbody>
+          </table>
+          <div class="text-center">
+            <%# link_to "もっと見る", admins_questions_path, class:'text-center' %>
+          </div>
+    </div>
+</div>
