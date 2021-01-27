@@ -14,7 +14,7 @@ Admin.create(
    # email: 'yamada-tarou@gmail.com',
    # password: '123456',
    
-   name: 'tanaka',
-   email: 'tanaka-tarou@gmail.com',
-   password: '123456',
+   name: 'skipedia-admin',
+   email: 'skipedia@gmail.com',
+   password: 'skipedia-ls0125',
 )

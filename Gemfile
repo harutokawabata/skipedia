@@ -71,4 +71,8 @@ gem 'rails-i18n'
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rbenv'
 end
