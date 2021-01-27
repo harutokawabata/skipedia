@@ -45,14 +45,6 @@ ActiveRecord::Schema.define(version: 2021_01_23_071427) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "event_statuses", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "user_id"
-    t.integer "cancel", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.integer "user_id"
     t.string "date"
