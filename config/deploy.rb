@@ -8,8 +8,9 @@ set :deploy_to, "/home/ec2-user/skipedia"
 set :rbenv_ruby, '2.6.3'
 set :linked_files, %w{config/master.key .env}
 append :linked_dirs, "log", "public", "tmp"
+set :branch, 'main'
 
-Default branch is :main
+#Default branch is :main
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
