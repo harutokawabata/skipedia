@@ -48,7 +48,7 @@
     <div class="col-lg-6 user-top-event">
         <h3 class="midashi3"><i class="fas fa-skiing"></i>イベント一覧</h3>
           <% if @events.present? %>
-            <% @events.order(title: :desc).each do |event| %>
+            <% @events.order(name: :desc).each do |event| %>
               <%= l event.created_at, format: :short %><br>
               <%= link_to event.name, event_path(event.id) %>(<%= event.date%>)<br>
             <% end %>
