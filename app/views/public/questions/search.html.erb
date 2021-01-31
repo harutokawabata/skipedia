@@ -1,7 +1,6 @@
 <div class="container">
 　<h3 class="midashi3">質問一覧ページ</h3>
   <div class="row">
-    <!--<p>検索</p>-->
     <div class="c-toparea">
       <p><span class="underbar">このページについて</span></p>
       <ul class="c-toparea-ul">
@@ -25,6 +24,8 @@
         <%= link_to new_question_path, :method => :get do %>
           <i class="fas fa-plus-circle fa-3x"></i>
         <% end %>
+      <% else %>
+        <% link_to 'トップページ', root_path %>
       <% end %>
       </div>
     </div>
@@ -33,24 +34,29 @@
   <% @questions.order(created_at: :desc).each do |question| %>
   <div class="row">
     <div class="timeline">
-      <div class="col-lg-2 image-image">
-        <% if current_user.id == question.user.id %>
-          <p class="text-center c-color-red">自分の質問</p>
-        <% else %>
-          <p class="text-center">匿名さん</p>
-        <% end %>
+      <div class="col-lg-1 image-image col-xs-1">
         <div class="image-image-image">
           <i class="fas fa-user-circle fa-3x"></i>
         </div>
       </div>
-      <div class="col-lg-8 post-text-area">
+      <div class="col-lg-9 post-text-area col-xs-8">
           <ul class="c-ul">
-            <li class="c-left" style="font-size:20px;"><%= link_to question.title.truncate(60, omission: '...'), question_path(question.id) %><br>
+            <li class="c-left">
+                <% if user_signed_in? %>
+                  <% if current_user.id == question.user.id %>
+                    <p class="text-center c-color-red">質問</p>
+                  <% else %>
+                    <p class="text-center">匿名</p>
+                  <% end %>
+                <% else %>
+                    <p class="text-center">匿名</p>
+                <% end %>
+              <br>
             <li class="c-right">投稿日:<%= l question.created_at, format: :short %></li>
           </ul>
+          <p><%= link_to question.title.truncate(40, omission: '...'), question_path(question.id) %></p>
           <div class="post-introduction-area">
-            <%= question.introduction.truncate(60, omission: '...') %>
-           <div class="text-right">
+            <div class="text-right">
               <% if question.answers.present? %>
                 <%= link_to "回答表示", question_path(question.id), style:"color:red;"%>
               <% else %>
@@ -59,10 +65,10 @@
             </div>
           </div>
       </div>
-      <div class="col-lg-2 post-info-area">
+      <div class="col-lg-2 post-info-area col-xs-3">
         <ul>
-          <li><i class="fas fa-folder"></i><%= question.tag.genre.name %><br></li>
-          <li><i class="fas fa-tags"></i><%= question.tag.name %><br></li>
+          <li><i class="fas fa-folder"></i><%= question.tag.genre.name.truncate(6, omission: '') %><br></li>
+          <li><i class="fas fa-tags"></i><%= question.tag.name.truncate(8, omission: '...') %><br></li>
           <% if user_signed_in? %>
           <li>
             <div class="c-delete">
