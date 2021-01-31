@@ -52,27 +52,29 @@
     </div>
     <div class="row c-image text-center">
       <% if @event.post_image.present? %>
-        <%= attachment_image_tag(@event.post_image, :image, format: 'jpeg', size: "800x450") %>
+      <div class="c-r-image">
+        <%= attachment_image_tag(@event.post_image, :image, format: 'jpeg', size: "200x450/3") %>
+      </div>
       <% elsif @event.post_image.blank? %>
         <p>画像投稿はありません</p>
       <% end %>
     </div>
     
     <div class="row c-flex-box">
-    <table class="row table table-bordered c-width-800">
+    <table class="row table table-bordered">
       <tbody>
       	<tr>
-      		<th class="col-lg-2">イベント名</th>
-      		<td class="col-lg-10"><%= @event.name %></td>
+      		<th class="col-lg-2 col-xs-3">イベント名</th>
+      		<td class="col-lg-10 col-xs-9"><%= @event.name %></td>
       	</tr>
       	<tr>
-      	  <th class="col-lg-2">上限人数</th>
-      		<td class="col-lg-10"><%= @event.capacity %>名<br>
+      	  <th class="col-lg-2 col-xs-3">上限人数</th>
+      		<td class="col-lg-10 col-xs-9"><%= @event.capacity %>名<br>
       		（あと<%= @acceptable %>人のお申し込みが可能です)</td>
       	</tr>
       	<tr>
-      	  <th class="col-lg-2">開催日時</th>
-      	  <td class="col-lg-10">
+      	  <th class="col-lg-2 col-xs-3">開催日時</th>
+      	  <td class="col-lg-10 col-xs-9">
       	    <%= @event.date %>
       	    <div class="time">
       	      <%= @event.start %>〜<%= @event.finish %>
@@ -80,16 +82,16 @@
       	  </td>
       	</tr>
       	<tr>
-      	  <th class="col-lg-2">参加費</th>
-      	  <td class="col-lg-10"><%= @event.entry_fee %></td>
+      	  <th class="col-lg-2 col-xs-3">参加費</th>
+      	  <td class="col-lg-10 col-xs-9"><%= @event.entry_fee %></td>
       	</tr>
       	<tr>
-      	  <th class="col-lg-2">主催及び主管</th>
-      	  <td class="col-lg-10"><%= @event.organizer %></td>
+      	  <th class="col-lg-2 col-xs-3">主催及び主管</th>
+      	  <td class="col-lg-10 col-xs-9"><%= @event.organizer %></td>
       	</tr>
       	<tr>
-      	  <th class="col-lg-2">イベント詳細</th>
-      	  <td class="col-lg-10 overflow-auto">
+      	  <th class="col-lg-2 col-xs-3">イベント詳細</th>
+      	  <td class="col-lg-10 overflow-auto col-xs-9">
       	      <div class="c-margin-around">
           	    <%= @event.event_detail %>
         	    </div>

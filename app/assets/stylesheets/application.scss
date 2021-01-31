@@ -220,7 +220,7 @@ input[type="password"] {
   padding: 1rem 2rem;
 //   border-top: 3px dotted #000;
   border-bottom: 3px dotted #000;
-  width: 100%;
+  text-align: center;
 }
 
 
@@ -461,6 +461,7 @@ input[type="password"] {
  
  .c-ul{
    display: flex;
+   margin-bottom: -20px;
  }
  
 ///////幅の指定///////////
@@ -502,6 +503,7 @@ input[type="password"] {
     line-height: 40px;
     position: relative;
     margin-top: 35px;
+    margin: 25px 0px;
 }
 
 .c-point-area {
@@ -594,4 +596,59 @@ input[type="password"] {
     overflow-y: scroll;
     background: #FFFFFF;
     opacity: 0.8;
+}
+
+/* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+@media screen and (max-width:1024px) {
+  .test12{
+        color: pink;
+  }
+}
+/* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+@media screen and (max-width:768px) {
+  .test12 {
+    color: red;
+  }
+}
+/* スマートフォンサイズ（425px）以下の際に適用される設定 */
+@media screen and (max-width:425px) {
+ .user-top-text {
+     
+ }
+ .container {
+     max-width: 100%;
+    //  text-align: center;
+    //  display: flex;
+    //  justify-content: center;
+ }
+ .row.user-top {
+  width: 100% !important;
+  background: linear-gradient(gray, white);
+  height: 200px;
+  text-align: center;
+  margin: auto 0;
+ }
+ .user-topBox{
+    padding-top: 20px;
+    margin-top: -120px;
+ }
+ 
+ .btn-lg.w-80.btn_bk{
+    background: linear-gradient(gray, black);
+    font-size: 12px;
+    padding: 8px 8px;
+ }
+ 
+ .c-r-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  marign-left: auto
+ }
+ .timeline {
+   height: 125px;
+ }
+ .c-r-image img {
+    width: 375px; 
+ }
 }

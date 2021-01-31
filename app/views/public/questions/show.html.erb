@@ -46,17 +46,17 @@
         </div>
         <div class="col-lg-8 post-text-area">
           <ul class="ppp">
-            <li><%= answer.user.name %>さん</li>
-            <li>投稿日:<%= l answer.created_at, format: :short %></li>
+            <li class="c-left"><%= answer.user.name %>さん</li>
+            <li class="c-right">投稿日:<%= l answer.created_at, format: :short %></li>
           </ul>
           <div class="post-introduction-area">
-            <%=link_to answer.introduction.truncate(60, omission: '...'), answer_path(answer.id) %>
+            <%=link_to answer.introduction.truncate(40, omission: '...'), answer_path(answer.id) %>
           </div>
         </div>
         <div class="col-lg-2 post-info-area">
           <ul>
-            <li><i class="fas fa-folder"></i><%= answer.question.tag.genre.name %><br></li>
-            <li><i class="fas fa-tags"></i><%= answer.question.tag.name %><br></li>
+            <li><i class="fas fa-folder"></i><%= answer.question.tag.genre.name.truncate(6, omission: '...') %><br></li>
+            <li><i class="fas fa-tags"></i><%= answer.question.tag.name.truncate(6, omission: '...') %><br></li>
             <% if user_signed_in? %>
             <li>
               <div class="c-delete">

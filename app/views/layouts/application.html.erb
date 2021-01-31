@@ -4,9 +4,10 @@
     <title>Skipedia</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <script src="https://kit.fontawesome.com/beca0b28fa.js" crossorigin="anonymous"></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body data-spy="scroll" data-target="#sampleNavbar">
@@ -118,7 +119,7 @@
   </header>
     <%= yield %>
   <footer class="fixed-bottom footer">
-    <p>Copyright © 2020 〇〇 Inc. All Rights Reserved.</p>
+    <p>Copyright © 2020 Skipedia Inc. All Rights Reserved.</p>
   </footer>
   </div>
  </body>
