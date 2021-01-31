@@ -34,10 +34,10 @@
     </div>
     <div class="row question-btn c-margin-top" style="text-align:center;">
     <% if user_signed_in? %>
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-xs-6">
       <%= link_to '新規投稿', new_post_path, class:"btn-lg w-80 btn_bk" %>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-xs-6">
       <%= link_to '一覧へ戻る', posts_path, class:"btn-lg w-80 btn_bk" %>
     </div>
     <% else %>

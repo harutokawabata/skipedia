@@ -12,7 +12,7 @@
         <table class="table table-bordered">
         	<tbody>
         		<tr>
-        			<th class="col-xs-2 text-center">質問内容</th>
+        			<th class="col-lg-2 col-xs-3 text-center">質問内容</th>
         			<td class="text-center"><%= @answer.question.title %></td>
         		</tr>
         		<tr>
@@ -32,20 +32,20 @@
     </div>
     <div class="row text-center">
       <% if @answer.user == current_user %>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-xs-4">
           <%= link_to '回答一覧へ戻る', answers_path %>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-xs-4">
           <%= link_to '削除する', answer_path(@answer.id), data: {confirm:'本当に削除しますか？'}, method: :delete %>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-xs-4">
           <%= link_to '質問一覧へ戻る', questions_path %>
         </div>
       <% else %>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-xs-6">
           <%= link_to '回答一覧へ戻る', answers_path %>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-xs-6">
           <%= link_to '質問一覧へ戻る', questions_path %>
         </div>
       <% end %>
