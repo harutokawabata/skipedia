@@ -26,8 +26,7 @@
     </div>
   </div>
   <div class="row infomation-area">
-    <h4 class="midashi4">インフォメーション</h4>
-    <p><span class="infomation-area-new">新着</span>Skipedia ver.1.00リリースしました！</p>
+    <p class="col-xs-12">skipedia ver.1.00リリースしました！</p>
   </div>
   <div class="row">
     <div class="col-lg-6 user-top-question">
@@ -61,8 +60,10 @@
     </div>
   </div>
      <div class="row user-top-about">
+       <div class="col-lg-12 co-xs-6">
         <h3 class="midashi3"><i class="fas fa-skiing"></i>Skipediaとは？？</h3>
         <p class="text-center"><span class="underbar">スキーの専門用語を調べたり投稿したり質問できるありそうでなかったWebアプリケーションです！</span></p>
+       </div>
      </div>
      <h4 class="midashi4 c-font-size"><i class="fas fa-skiing"></i>こんな人へオススメ！</h4>
      <div class="row user-top-function">
@@ -123,7 +124,7 @@
             <h4 class="text-center">スキーに関する投稿ができる</h4>
             <p class="c-line-height">やっと覚えた専門用語、トレンドの技術、マテリアルの特性などなんでもOK!<br>スキーを始めた頃の自分自身へ向けて投稿してみよう</p>
             <div class="text-center c-margin-top">
-              <%= link_to "投稿する", new_post_path, class:"btn-lg w-80 btn_bk" %>
+              <%= link_to "投稿する", posts_path, class:"btn-lg w-80 btn_bk" %>
             </div>
           </div>
         </div>
@@ -141,7 +142,7 @@
             <h4 class="text-center">匿名で質問できます</h4>
             <p class="c-line-height">専門用語を間違えて覚えてしまったり、理解できないと成長の妨げになります。分からないことがあれば匿名で不特定多数の人に聞くことができます</p>
             <div class="text-center c-margin-top">
-              <%= link_to "質問する", new_question_path, class:"btn-lg w-80 btn_bk" %>
+              <%= link_to "質問する", questions_path, class:"btn-lg w-80 btn_bk" %>
             </div>
           </div>
         </div>
