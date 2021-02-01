@@ -46,6 +46,7 @@
               <li><%= link_to "質問一覧", questions_path %></li>
               <li><%= link_to "回答一覧", answers_path %></li>
               <li><%= link_to "イベント一覧", events_path %></li>
+              <li><%= link_to "お問い合わせ", "https://forms.gle/d45LkyrVVZ3ZnYmU7" %></li>
       			 <% elsif admin_signed_in? %>
               <li>管理者</li>
               <li><%= link_to "ジャンル管理", admins_genres_path %></li>
@@ -55,6 +56,7 @@
               <li><%= link_to "写真", admins_post_images_path %></li>
               <li><%= link_to "会員一覧", admins_users_path %></li>
               <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+              <li><%= link_to "お問い合わせ", "https://forms.gle/d45LkyrVVZ3ZnYmU7" %></li>
              <% else %>
               <li>ゲストユーザー</li>
               <li><%= link_to "会員登録", new_user_registration_path %></li>
@@ -64,6 +66,7 @@
               <li><%= link_to "質問一覧", questions_path %></li>
               <li><%= link_to "回答一覧", answers_path %></li>
               <li><%= link_to "イベント一覧", events_path %></li>
+              <li><%= link_to "お問い合わせ", "https://forms.gle/d45LkyrVVZ3ZnYmU7" %></li>
              <% end %>
               <p class="notice"><%# notice %></p>
               <p class="alert"><%#alert %></p>
