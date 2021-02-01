@@ -1,7 +1,7 @@
 <div class="container">
     <h3 class="midashi3">回答一覧</h3>
     <div class="row c-toparea">
-    <p><span class="underbar">このページについて</span></p>
+      <p><span class="underbar">このページについて</span></p>
       <ul class="c-toparea-ul">
         <li>質問に対する回答一覧ページです</li>
         <li>お困りの方がたくさんいらっしゃいます。<a><%= link_to "こちら", questions_path %></a>から確認してください</li>
@@ -10,33 +10,30 @@
     <div class="c-flex-box" style="justify-content: space-between">
       <div class="text-left c-search-area c-margin-bottom">
         <%= form_tag(answers_search_path, :method => 'get') do %>
-          <%= text_field_tag :search, "", {placeholder:"タイトル名で検索"} %>
+          <%= text_field_tag :search, "", {placeholder:'タイトル名で検索'} %>
           <%= submit_tag '検索', :name => nil %>
         <% end %>
       </div>
+      <div class="text-right c-margin-bottom" >
+      </div>  
     </div>
-  <% if @answers.present? %>
+
   <% @answers.order(created_at: :desc).each do |answer| %>
   <div class="row">
     <div class="timeline">
-      <div class="col-lg-2 image-image">
-        <div class="image-image-image">
-          <i class="fas fa-user-circle fa-3x"></i>
-        </div>
-      </div>
-      <div class="col-lg-8 post-text-area">
+      <div class="col-lg-9 col-xs-8 post-text-area">
         <ul class="ppp">
-          <li><%= answer.user.name %>さんの回答</li><br>
+          <li><%= answer.user.name %></li>
           <li>投稿日:<%= l answer.created_at, format: :short %></li>
         </ul>
+        <p>「<%= link_to answer.question.title.truncate(60, omission: '...'), question_path(answer.question.id) %>」に対する回答</p>
         <div class="post-introduction-area">
-          <%= answer.introduction.truncate(60, omission: '...') %>
             <div class="text-right">
               <%= link_to "全文表示", answer_path(answer.id) %>
             </div>
         </div>
       </div>
-      <div class="col-lg-2 post-info-area">
+      <div class="col-lg-3 col-xs-4 post-info-area">
         <ul>
           <li><i class="fas fa-folder"></i><%= answer.question.tag.genre.name %><br></li>
           <li><i class="fas fa-tags"></i><%= answer.question.tag.name %><br></li>
@@ -44,7 +41,7 @@
           <li>
             <div class="c-delete">
               <% if current_user.id == answer.user_id %>
-                <%= link_to answer_path(answer.id), data: {confirm:'本当に削除しますか？'}, :method => :delete do %>
+                <%= link_to answer_path(answer.id), data: {confirm:'本当に削除しますか？'},:method => :delete do %>
                   <i class="fas fa-trash-alt c-delete-icon">削除</i>
                 <% end %>
               <% end %>
@@ -55,9 +52,6 @@
       </div>
     </div>
     </div>
-   <% end %>
-   <% else %>
-   <p>該当なし、もう一度検索してみてください</p>
    <% end %>
 
 </div>

@@ -21,12 +21,7 @@
   <% @answers.order(created_at: :desc).each do |answer| %>
   <div class="row">
     <div class="timeline">
-      <div class="col-lg-2 image-image">
-        <div class="image-image-image">
-          <i class="fas fa-user-circle fa-3x"></i>
-        </div>
-      </div>
-      <div class="col-lg-8 post-text-area">
+      <div class="col-lg-9 col-xs-8 post-text-area">
         <ul class="ppp">
           <li><%= answer.user.name %></li>
           <li>投稿日:<%= l answer.created_at, format: :short %></li>
@@ -38,7 +33,7 @@
             </div>
         </div>
       </div>
-      <div class="col-lg-2 post-info-area">
+      <div class="col-lg-3 col-xs-4 post-info-area">
         <ul>
           <li><i class="fas fa-folder"></i><%= answer.question.tag.genre.name %><br></li>
           <li><i class="fas fa-tags"></i><%= answer.question.tag.name %><br></li>
