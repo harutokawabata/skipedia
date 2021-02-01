@@ -42,12 +42,12 @@
   <% @posts.order(created_at: :desc).each do |post| %>
   <div class="row">
     <div class="timeline">
-      <div class="image-image">
+      <div class="image-image col-lg-1 col-xs-1">
         <div class="image-image-image">
           <i class="fas fa-user-circle fa-3x"></i>
         </div>
       </div>
-      <div class="post-text-area">
+      <div class="post-text-area col-lg-8 col-xs-8">
         <ul class="ppp">
           <li><%= post.user.name %></li>
           <li class="c-right">投稿日:<%= l post.created_at, format: :short %></li>
@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-2 post-info-area">
+      <div class="col-lg-3 col-xs-3 post-info-area">
         <ul>
           <li><i class="fas fa-folder"></i><%= post.tag.genre.name %><br></li>
           <li><i class="fas fa-tags"></i><%= post.tag.name %><br></li>

@@ -31,7 +31,7 @@
           <li><%= answer.user.name %></li>
           <li>投稿日:<%= l answer.created_at, format: :short %></li>
         </ul>
-        <p>「<%= link_to answer.question.title.truncate(60, omission: '...'), question_path(answer.question.id) %>」に対する回答</p>
+        <p>「<%= link_to answer.question.title.truncate(60, omission: '...'), question_path(answer.question.id) %>」</p>
         <div class="post-introduction-area">
             <div class="text-right">
               <%= link_to "全文表示", answer_path(answer.id) %>
