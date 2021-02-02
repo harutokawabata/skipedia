@@ -11,25 +11,20 @@
     </div>
  <% @posts.order(created_at: :desc).each do |post| %>
   <div class="row">
-    <div class="timeline">
-      <div class="image-image">
-        <div class="image-image-image">
-          <i class="fas fa-user-circle fa-3x"></i>
-        </div>
-      </div>
-      <div class="post-text-area">
+    <div class="timeline history">
+      <div class="col-lg-8 col-xs-8 post-text-area">
         <ul class="ppp">
-          <li class="c-left" style="font-size:20px;"><%= link_to post.title, post_path(post.id) %></li>
+          <li class="c-left"><%= link_to post.title.truncate(40,omission: '...'), post_path(post.id) %></li>
           <li class="c-right">投稿日:<%= l post.created_at, format: :short %></li>
         </ul>
         <div class="post-introduction-area">
-          <%= post.introduction.truncate(60, omission: '...') %>
+          <%= post.introduction.truncate(35, omission: '...') %>
           <div class="text-right">
             <%= link_to "全文表示", post_path(post.id) %>
           </div>
         </div>
       </div>
-      <div class="col-lg-2 post-info-area">
+      <div class="col-lg-4 col-xs-4 post-info-area">
         <ul>
           <li><i class="fas fa-folder"></i><%= post.tag.genre.name %><br></li>
           <li><i class="fas fa-tags"></i><%= post.tag.name %><br></li>

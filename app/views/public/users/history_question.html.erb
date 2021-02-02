@@ -15,28 +15,23 @@
     </div>
      <% @questions.each do |question| %>
       <div class="row">
-        <div class="timeline">
-          <div class="image-image">
-            <div class="image-image-image">
-              <i class="fas fa-user-circle fa-3x"></i>
-            </div>
-          </div>
-          <div class="post-text-area">
-            <ul class="c-ul">
-              <li class="c-left" style="font-size:20px;"><%= link_to question.title, question_path(question.id) %></li>
+        <div class="timeline history">
+          <div class="col-lg-9 col-xs-8 post-text-area">
+            <ul class="ppp">
+              <li class="c-left"><%= link_to question.title.truncate(40, omission: '...'), question_path(question.id) %></li>
               <li class="c-right">投稿日:<%= l question.created_at, format: :short %></li>
             </ul>
             <div class="post-introduction-area">
-              <%= question.introduction.truncate(60, omission: '...') %>
+              <%= question.introduction.truncate(35, omission: '...') %>
               <div class="text-right">
                 <%= link_to "全文表示", question_path(question.id) %>
               </div>
             </div>
           </div>
-          <div class="col-lg-2 post-info-area">
+          <div class="col-lg- 3 col-xs-4 post-info-area">
             <ul>
               <li><i class="fas fa-folder"></i><%= question.tag.genre.name %><br></li>
-              <li><i class="fas fa-tags"></i><%= question.tag.name %><br></li>
+              <li><i class="fas fa-tags"><%= question.tag.name.truncate(10, omission: '...') %></i><br></li>
               <% if user_signed_in? %>
               <li>
                 <div class="c-delete">
@@ -54,5 +49,4 @@
       </div>
       <% end %>
     </div>
-</div>
 

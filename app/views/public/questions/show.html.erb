@@ -21,7 +21,8 @@
         <div class="tag">
           <i class="fas fa-tags"><%= @question.tag.name %></i>
         </div>
-        <p><%= @question.title %></p>
+        <p>[<%= @question.title %>]</p>
+        <p><%= @question.introduction %></p>
       </div>
     </div>
     <div class="row question-btn c-margin-top" style="text-align:center;">
@@ -39,21 +40,16 @@
   <% else %>
     <div class="row">
       <div class="timeline">
-        <div class="col-lg-2 image-image">
-          <div class="image-image-image">
-            <i class="fas fa-user-circle fa-3x"></i>
-          </div>
-        </div>
-        <div class="col-lg-8 post-text-area">
+        <div class="col-lg-8 col-xs-8 post-text-area">
           <ul class="ppp">
             <li class="c-left"><%= answer.user.name %>さん</li>
             <li class="c-right">投稿日:<%= l answer.created_at, format: :short %></li>
           </ul>
           <div class="post-introduction-area">
-            <%=link_to answer.introduction.truncate(40, omission: '...'), answer_path(answer.id) %>
+            <%= link_to answer.introduction.truncate(40, omission: '...'), answer_path(answer.id) %>
           </div>
         </div>
-        <div class="col-lg-2 post-info-area">
+        <div class="col-lg-4 col-xs-4 post-info-area">
           <ul>
             <li><i class="fas fa-folder"></i><%= answer.question.tag.genre.name.truncate(6, omission: '...') %><br></li>
             <li><i class="fas fa-tags"></i><%= answer.question.tag.name.truncate(6, omission: '...') %><br></li>
